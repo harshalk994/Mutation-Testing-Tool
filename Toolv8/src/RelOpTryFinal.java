@@ -15,7 +15,7 @@ public class RelOpTryFinal {
 		int pointer = 0;
 		
 		RelOpStorageFinal rs = new RelOpStorageFinal();
-		rs.processOp();
+		//rs.processOp();
 		opL = rs.returnRelOpList();
 		rs.processList(opL);
 		opP = rs.retriveRelProcessList();

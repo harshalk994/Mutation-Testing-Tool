@@ -27,15 +27,18 @@ public class Main {
 		RemoveComments rc = new RemoveComments();
 		rc.removeComments();
 		
+		OperatorMutation opm = new OperatorMutation();
+		opm.opMutationRules();
 		
-		ArithOpTry3 aot = new ArithOpTry3();
-		aot.generateArithOpMutantFiles();
 		
-		ConditionOpTry2 ct = new ConditionOpTry2();
-		ct.generateConditionMutantFiles();
-		
-		RelOpTryFinal rt = new RelOpTryFinal();
-		rt.generateRelOpMutantFiles();
+//		ArithOpTry3 aot = new ArithOpTry3();
+//		aot.generateArithOpMutantFiles();
+//		
+//		ConditionOpTry2 ct = new ConditionOpTry2();
+//		ct.generateConditionMutantFiles();
+//		
+//		RelOpTryFinal rt = new RelOpTryFinal();
+//		rt.generateRelOpMutantFiles();
 				
 
 		//MutantAOP muaop = new MutantAOP();

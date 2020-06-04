@@ -15,7 +15,7 @@ public class ConditionOpTry2 {
 		int pointer = 0;
 		
 		ConditionalOpStorage cos = new ConditionalOpStorage();
-		cos.processOp();
+		//cos.processOp();
 		opL = cos.returnOpList();
 		cos.processList(opL);
 		opP = cos.retriveProcessList();
