@@ -2,7 +2,7 @@ import java.io.File;
 
 public class FileDeletion {
 	
-	public static void main(String[] args) {
+	public void deleteFiles() {
 		
 		String file = "F:\\Java Projects\\Toolv1\\M9.java";
 		try  
