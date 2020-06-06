@@ -11,9 +11,15 @@ public class OperatorStorage {
 	
 	List<String> opList = new ArrayList<String>();
 	List<String> opP = new ArrayList<String>();
+	private static String mPath;
+	
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
  	
 	public void processOp() throws IOException{
-		FileReader fr = new FileReader("src/Temp.java");
+		String tempFileName = mPath+"\\Temp.java";
+		FileReader fr = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while((line = br.readLine()) != null) {

@@ -12,11 +12,16 @@ public class Cleaner{
 //        System.out.println(source.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)",""));    
 //
 //    }    
+	
+	private static String mPath;
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
 
 
     static String readFile() {    
-
-        File file = new File("src/Temp.java");    
+    	String tempFileName = mPath+"\\Temp.java";
+        File file = new File(tempFileName);    
 
         char[] buffer = null;    
 

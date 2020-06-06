@@ -8,7 +8,14 @@ import java.util.List;
 
 public class ConditionOpTry2 {
 	
+	private static String mPath;
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
+	
 	public void generateConditionMutantFiles() throws IOException {
+		String tempFileName = mPath+"\\Temp.java";
+		String mutantFileName = mPath+"\\MuConditionOp";
 		List<String> opL = new ArrayList<String>();
 		List<String> opP = new ArrayList<String>();
 		int count = 0;
@@ -40,9 +47,9 @@ public class ConditionOpTry2 {
 			}
 			String s = opL.get(pointer);
 			System.out.println(opL.get(pointer));
-			source = new FileReader("src/Temp.java");
+			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
-			targetFile = new FileWriter("src/MuConditionOp" + count + ".java");
+			targetFile = new FileWriter(mutantFileName + count + ".java");
 			bw = new BufferedWriter(targetFile);
 			String line; 
 			//String[] text = new String[opL.size()];
@@ -101,7 +108,7 @@ public class ConditionOpTry2 {
 
 		source.close();
 		targetFile.close();
-		System.out.println("Copying completed");
+		System.out.println("Conditional Op Mutants generated successfully!!");
 		
 	}
 	

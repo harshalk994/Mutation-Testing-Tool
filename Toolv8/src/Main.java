@@ -9,27 +9,55 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		String fileLocation;
-		System.out.println("Enter the location and filename you want to load:");
-		fileLocation = sc.nextLine();
-		JavaSyntaxChecker checker = new JavaSyntaxChecker();
-		List<String> logs = checker.check(fileLocation);
+		String mutantFileLocation;
 		
-		FileErrorLogPrintAndBreak fel = new FileErrorLogPrintAndBreak();
-		fel.printLogs(logs);
-		fel.breakCode(logs);
+		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
+		fileLocation = sc.nextLine();
+		
+		System.out.println("Enter the location where you want to store the generated mutants:");
+		mutantFileLocation = sc.nextLine();
+		
+//		JavaSyntaxChecker checker = new JavaSyntaxChecker();
+//		List<String> logs = checker.check(fileLocation);
+//		
+//		FileErrorLogPrintAndBreak fel = new FileErrorLogPrintAndBreak();
+//		fel.printLogs(logs);
+//		fel.breakCode(logs);
 		
 		//FileOpsTest fot = new FileOpsTest();
 		//fot.createCopies(fileLocation);
 		
+		ArithOpTry3 at = new ArithOpTry3();
+		at.getPath(mutantFileLocation);
+	
+		ConditionalOpStorage cs = new ConditionalOpStorage();
+		cs.getPath(mutantFileLocation);
+		
+		ConditionOpTry2 ct = new ConditionOpTry2();
+		ct.getPath(mutantFileLocation);
+		
+		OperatorStorage os = new OperatorStorage();
+		os.getPath(mutantFileLocation);
+		
+		RelOpStorageFinal rs = new RelOpStorageFinal();
+		rs.getPath(mutantFileLocation);
+		
+		RelOpTryFinal rt = new RelOpTryFinal();
+		rt.getPath(mutantFileLocation);
+		
+		Cleaner cc = new Cleaner();
+		cc.getPath(mutantFileLocation);
+		
 		TempFileGenerator temp = new TempFileGenerator();
+		temp.getPath(mutantFileLocation);
 		temp.createTempFile(fileLocation);
 		
 		RemoveComments rc = new RemoveComments();
+		rc.getPath(mutantFileLocation);
 		rc.removeComments();
 		
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
-		
 		
 //		ArithOpTry3 aot = new ArithOpTry3();
 //		aot.generateArithOpMutantFiles();

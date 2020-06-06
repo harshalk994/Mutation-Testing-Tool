@@ -10,10 +10,16 @@ import java.util.List;
 
 public class TempFileGenerator {
 	
+	private static String mPath;
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
+	
 	public void createTempFile(String file) throws IOException {
+		String tempFileName = mPath+"\\Temp.java";
 		FileReader source = new FileReader(file);
 		BufferedReader br = new BufferedReader(source);
-		FileWriter targetFile = new FileWriter("src/Temp.java");
+		FileWriter targetFile = new FileWriter(tempFileName);
 		BufferedWriter bw = new BufferedWriter(targetFile);
 		List<String> opList = new ArrayList<String>();
 		OperatorStorage op = new OperatorStorage();
@@ -85,6 +91,7 @@ public class TempFileGenerator {
 		bw.close();
 		source.close();
 		targetFile.close();
+		System.out.println("Temp.java generated successfully!!");
 		
 		//op.processOp(opList);
 		

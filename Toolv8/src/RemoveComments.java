@@ -7,14 +7,19 @@ import java.io.IOException;
 
 public class RemoveComments {
 	
+	private static String mPath;
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
+	
 	public void removeComments() throws IOException {
 		
-		
+		String tempFileName = mPath+"\\Temp.java";
 		Cleaner cleaner = new Cleaner();
 		String line = cleaner.readFile();
 		String newLine = line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");
 		//System.out.println(newLine);
-		FileWriter fw = new FileWriter("src/Temp.java");
+		FileWriter fw = new FileWriter(tempFileName);
 		fw.write(newLine);
 		fw.close();
 		
