@@ -85,6 +85,13 @@ public class Main {
 		
 //		BuffOpTry bot = new BuffOpTry();
 //		bot.createCopies(fileLocation);
+		System.out.println("All mutants were generated successfully!!");
+		
+		System.out.println("Do you want to quit? (Y/N)");
+		String qChoice = sc.nextLine();
+		if(qChoice.equalsIgnoreCase("Y") || qChoice.equalsIgnoreCase("y")) {
+			System.exit(1);
+		}
 
 	}
 	
