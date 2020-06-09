@@ -8,6 +8,7 @@ public class TestInputs {
 	
 	List<String> intInputs = new ArrayList<String>();
 	List<Integer> testInputs = new ArrayList<Integer>();
+	static String testPath;
 	
 //	public static void main(String[] args) throws IOException {
 //		TestInputs ti = new TestInputs();
@@ -15,8 +16,20 @@ public class TestInputs {
 //		ti.printInputs();
 //	}
 	
+	public void setTestPath(String tPath) {
+		testPath = tPath;
+		//System.out.println(testPath);
+//		System.out.println(methodName);
+	}
+//	
+//	public String retrieveMethodName() {
+//		System.out.println(methodName);
+//		return methodName;
+//	}
+	
 	public void getTestInputs() throws IOException {
-		FileReader fr = new FileReader("src/testinputs.txt");
+		FileReader fr = new FileReader(testPath);
+		//System.out.println(testPath);
 		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while((line = br.readLine()) != null) {

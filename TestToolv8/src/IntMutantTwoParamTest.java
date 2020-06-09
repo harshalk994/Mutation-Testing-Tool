@@ -12,6 +12,17 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
 public class IntMutantTwoParamTest {
+	
+	String mName, mutantPath;
+	public void setMethodName(String methodName) {
+		mName = methodName; 
+	}
+	
+	public void setMutantPath(String mPath) {
+		mutantPath = mPath; 
+	}
+	
+	
 
 	@Rule
     public ErrorCollector collector = new ErrorCollector();
@@ -21,10 +32,11 @@ public class IntMutantTwoParamTest {
 
 
 	@Test
-	
 	public void test() throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, IOException {
 		//fail("Not yet implemented");
 		TestInputs ti = new TestInputs();
+		//mName = ti.retrieveMethodName();
+		//System.out.println(mName);
 		ti.getTestInputs();
 		List<Integer> testInputs = new ArrayList<Integer>();
 		testInputs = ti.retrieveTestInputs();
@@ -34,7 +46,7 @@ public class IntMutantTwoParamTest {
 		String className = mu.getClass().getSimpleName();
 		List<String> removeNull = new ArrayList<String>();
 		//Creating a File object for directory
-	      File directoryPath = new File("F:\\Java Projects\\TestToolv8\\src");
+	      File directoryPath = new File(mutantPath);
 	      //List of all files and directories
 	      String contents[] = directoryPath.list();
 	      String trimmedStr[] = new String[contents.length-1];
@@ -71,10 +83,10 @@ public class IntMutantTwoParamTest {
 	      
 	      trimmedStr = removeNull.toArray(new String[removeNull.size()]);
 	      
-	      for(int j=0; j<trimmedStr.length; j++) {
-	    	  System.out.println(trimmedStr[j]);
-//	    	  
-	      }
+//	      for(int j=0; j<trimmedStr.length; j++) {
+//	    	  System.out.println(trimmedStr[j]);
+////	    	  
+//	      }
 	      
 //	      long start = System.currentTimeMillis();
 //    	  long end = start + 60*1000; // 60 seconds * 1000 ms/sec
@@ -103,11 +115,12 @@ public class IntMutantTwoParamTest {
 			        		int b = testInputs.get(m+1);
 			        		int result = testInputs.get(m+2);
 			        		m=m+3;
-			        		Method sumInstance = objName.getClass().getDeclaredMethod("add", int.class, int.class);
+			        		Method sumInstance = objName.getClass().getDeclaredMethod(mName, int.class, int.class);
+			        		
 			        		int newResult = (int) sumInstance.invoke(objName, a, b);
 			        		if(result!=newResult) {
 			        			System.out.println("Failure in method of " + objName.getClass());
-			        			System.out.println("Mutant " + objName.getClass() + " killed");
+			        			System.out.println("Mutant " + objName.getClass() + " killed with test " + numInputs);
 			        			break;
 			        		}else {
 			        			
