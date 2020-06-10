@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
 public class IntMutantTwoParamTest {
-	
+
 	String mName, mutantPath;
 	public void setMethodName(String methodName) {
 		mName = methodName; 
@@ -190,6 +190,7 @@ public class IntMutantTwoParamTest {
 
 	
 	}
+
 
 
 }
