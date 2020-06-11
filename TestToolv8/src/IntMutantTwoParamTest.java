@@ -47,8 +47,10 @@ public class IntMutantTwoParamTest {
 		List<String> removeNull = new ArrayList<String>();
 		//Creating a File object for directory
 	      File directoryPath = new File(mutantPath);
+	      System.out.println(mutantPath);
 	      //List of all files and directories
 	      String contents[] = directoryPath.list();
+	     
 	      String trimmedStr[] = new String[contents.length-1];
 	      //System.out.println("List of files and directories in the specified directory:");
 	      for(int i=0; i<contents.length; i++) {
@@ -62,8 +64,10 @@ public class IntMutantTwoParamTest {
 	         
 	      }
 	      
+	     
+	      
 	      for(int l=0, m=0; l<contents.length; l++) {
-	    	  if(contents[l].contains(className) || contents[l].contains("Main") || contents[l].contains("Menu") || contents[l].contains("TestInputs") || contents[l].contains("testinputs") ) 
+	    	  if(contents[l].contains(className) || contents[l].contains(".class") || contents[l].contains("Temp") || contents[l].contains("Main") || contents[l].contains("Menu") || contents[l].contains("TestInputs") || contents[l].contains("testinputs") || contents[l].contains("CustomCompiler") || contents[l].contains("Loader")) 
 	    		  continue;
 	    	  
 	    	 
@@ -75,6 +79,8 @@ public class IntMutantTwoParamTest {
 	    	  
 	      }
 	      
+	     
+	      
 	      for(String s : trimmedStr) {
 	    	  if(s!=null && s.length() > 0) {
 	    		  removeNull.add(s);
@@ -82,7 +88,9 @@ public class IntMutantTwoParamTest {
 	      }
 	      
 	      trimmedStr = removeNull.toArray(new String[removeNull.size()]);
-	      
+//	      for(int z=0;z<trimmedStr.length;z++) {
+//	    	  System.out.println(trimmedStr[z]);
+//	      }
 //	      for(int j=0; j<trimmedStr.length; j++) {
 //	    	  System.out.println(trimmedStr[j]);
 ////	    	  
@@ -93,15 +101,22 @@ public class IntMutantTwoParamTest {
 	      
     	 
 	      for(int k=0;k<trimmedStr.length;k++) {
-	    	 
+	    	// System.out.println("Here");
 	    	  //collector.addError(new Throwable("failed"));
 	    	  String source = trimmedStr[k];
+	    	  String classPath = mutantPath+"\\"+source;
+	    	  //System.out.println(classPath);
 	    	  int count = 1;
 	    	  Object objName = source.toLowerCase()+count;
 	    	  
 	    	  try {
-			        Class aClass = classLoader.loadClass(source);
-			        //System.out.println("aClass.getName() = " + aClass.getName());
+	    		    Class aClass;
+	    		
+	    		  Loader l = new Loader();
+	    		  aClass = (Class) l.loadClass(mutantPath, source);
+			         
+			        
+			        //System.out.println(aClass.getResource("MuArithOp1.class"));
 			        objName = aClass.newInstance();
 			        //System.out.println(objName.getClass());
 			        int pointer=0;

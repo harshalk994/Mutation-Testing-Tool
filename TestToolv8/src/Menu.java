@@ -63,6 +63,9 @@ public class Menu {
 			//System.out.println("I reached here!!");
 			TestInputs ti = new TestInputs();
 			ti.setTestPath(testPath);
+			CustomCompiler cc = new CustomCompiler();
+			cc.setMutantPath(mutantPath);
+			cc.compileFiles();
 //			ti.printInputs();
 //			System.out.println("Test inputs");
 			IntMutantTwoParamTest mutest = new IntMutantTwoParamTest();
