@@ -65,10 +65,13 @@ public class Menu {
 	//	System.out.println("Im here");
 	//	System.out.println(rType);
 	//	System.out.println(nParams);
+		Scanner sc = new Scanner(System.in);
 		if(rType.equalsIgnoreCase("a") && nParams == 2) {
 			//System.out.println("I reached here!!");
 			TestInputs ti = new TestInputs();
 			ti.setTestPath(testPath);
+			System.out.println("Im here: continue (Y/N)");
+			String choice = sc.nextLine();
 			CustomCompiler cc = new CustomCompiler();
 			cc.setMutantPath(mutantPath);
 			cc.compileFiles();

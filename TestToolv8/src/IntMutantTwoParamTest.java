@@ -24,9 +24,9 @@ public class IntMutantTwoParamTest {
 	
 	
 
-	@Rule
-    public ErrorCollector collector = new ErrorCollector();
-	
+//	@Rule
+//    public ErrorCollector collector = new ErrorCollector();
+//	
 //	@Rule
 //	public Timeout globalTimeout = Timeout.millis(30);
 
@@ -197,7 +197,7 @@ public class IntMutantTwoParamTest {
 				    
 				   
 			    } catch (Throwable t) {
-			        collector.addError(t);
+			       t.printStackTrace();
 			    }  
 	      }
     	  
