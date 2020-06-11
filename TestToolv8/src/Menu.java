@@ -52,6 +52,12 @@ public class Menu {
 		
 		//System.out.println("Here here");
 		initiateTest(returnType, numParameters, methodName, testFilePath, mutantPath);
+		
+		System.out.println("\nDo you want to quit? (Y/N)");
+		String choice = sc5.nextLine();
+		if(choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("Y")) {
+			System.exit(1);
+		}
 
 	}
 	
