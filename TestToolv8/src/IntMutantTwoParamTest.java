@@ -106,6 +106,7 @@ public class IntMutantTwoParamTest {
 	    	  String source = trimmedStr[k];
 	    	  String classPath = mutantPath+"\\"+source;
 	    	  //System.out.println(classPath);
+	    	  System.out.println("Currently Applying Test Suite to Mutant: " + source);
 	    	  int count = 1;
 	    	  Object objName = source.toLowerCase()+count;
 	    	  
@@ -135,11 +136,11 @@ public class IntMutantTwoParamTest {
 			        		int newResult = (int) sumInstance.invoke(objName, a, b);
 			        		if(result!=newResult) {
 			        			System.out.println("Failure in method of " + objName.getClass());
-			        			System.out.println("Mutant " + objName.getClass() + " killed with test " + numInputs);
+			        			System.out.println("Mutant " + objName.getClass() + " killed with test " + numInputs + "\n");
 			        			break;
 			        		}else {
 			        			
-						    	System.out.println("Mutant " + objName.getClass() + "survived for test " + numInputs);
+						    	System.out.println("Mutant " + objName.getClass() + " survived for test " + numInputs);
 						    	numInputs = numInputs+1;
 
 						    }

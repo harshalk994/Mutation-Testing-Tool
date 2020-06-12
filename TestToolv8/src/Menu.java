@@ -70,8 +70,8 @@ public class Menu {
 			//System.out.println("I reached here!!");
 			TestInputs ti = new TestInputs();
 			ti.setTestPath(testPath);
-			System.out.println("Im here: continue (Y/N)");
-			String choice = sc.nextLine();
+//			System.out.println("Im here: continue (Y/N)");
+//			String choice = sc.nextLine();
 			CustomCompiler cc = new CustomCompiler();
 			cc.setMutantPath(mutantPath);
 			cc.compileFiles();
