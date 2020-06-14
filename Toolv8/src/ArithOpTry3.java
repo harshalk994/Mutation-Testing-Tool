@@ -84,6 +84,7 @@ public class ArithOpTry3 {
 						
 						
 						String newLine = line.replace(line, opP.get(i));
+						System.out.println("Mutated to: " + newLine + "\n");
 						bw.write(newLine);
 						bw.newLine();
 //						if(i!=0 && i % 3 == 0) {
