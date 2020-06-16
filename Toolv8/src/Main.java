@@ -11,11 +11,16 @@ public class Main {
 		String fileLocation;
 		String mutantFileLocation;
 		
-		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
-		fileLocation = sc.nextLine();
+//		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
+//		fileLocation = sc.nextLine();
+//		
+//		System.out.println("Enter the location where you want to store the generated mutants:");
+//		mutantFileLocation = sc.nextLine();
 		
-		System.out.println("Enter the location where you want to store the generated mutants:");
-		mutantFileLocation = sc.nextLine();
+		UserInputs ui = new UserInputs();
+		ui.readProperties();
+		fileLocation = ui.returnOPath();
+		mutantFileLocation = ui.returnMPath();
 		
 //		JavaSyntaxChecker checker = new JavaSyntaxChecker();
 //		List<String> logs = checker.check(fileLocation);
@@ -87,11 +92,11 @@ public class Main {
 //		bot.createCopies(fileLocation);
 		System.out.println("All mutants were generated successfully!!");
 		
-		System.out.println("Do you want to quit? (Y/N)");
-		String qChoice = sc.nextLine();
-		if(qChoice.equalsIgnoreCase("Y") || qChoice.equalsIgnoreCase("y")) {
-			System.exit(1);
-		}
+//		System.out.println("Do you want to quit? (Y/N)");
+//		String qChoice = sc.nextLine();
+//		if(qChoice.equalsIgnoreCase("Y") || qChoice.equalsIgnoreCase("y")) {
+//			System.exit(1);
+//		}
 
 	}
 	
