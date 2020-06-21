@@ -50,6 +50,12 @@ public class Main {
 		RelOpTryFinal rt = new RelOpTryFinal();
 		rt.getPath(mutantFileLocation);
 		
+		ShiftOpStorage ss = new ShiftOpStorage();
+		ss.getPath(mutantFileLocation);
+		
+		ShiftOpTry st = new ShiftOpTry();
+		st.getPath(mutantFileLocation);
+		
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
 		

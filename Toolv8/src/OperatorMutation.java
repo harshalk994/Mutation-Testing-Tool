@@ -57,6 +57,7 @@ public class OperatorMutation {
 		List<String> arithOpList = new ArrayList<String>();
 		List<String> conditionalOpList = new ArrayList<String>();
 		List<String> relationalOpList = new ArrayList<String>();
+		List<String> shiftOpList = new ArrayList<String>();
 		
 		OperatorStorage ops = new OperatorStorage();
 		ops.processOp();
@@ -86,6 +87,11 @@ public class OperatorMutation {
 		if(relationalOpList.isEmpty() == false) {
 			RelOpTryFinal rop = new RelOpTryFinal();
 			rop.generateRelOpMutantFiles();
+		}
+		
+		if(shiftOpList.isEmpty() == false) {
+			ShiftOpTry sot = new ShiftOpTry();
+			sot.generateShiftOpMutantFiles();
 		}
 	}
 

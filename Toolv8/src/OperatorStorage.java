@@ -23,7 +23,7 @@ public class OperatorStorage {
 		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while((line = br.readLine()) != null) {
-			if(line.contains("System.out.println"))
+			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 			if(line.contains("=")) {
 				if(line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/")) {
