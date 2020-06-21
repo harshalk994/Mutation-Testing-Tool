@@ -32,9 +32,9 @@ public class RelOpStorageFinal {
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 			
-				if(line.contains(">")){
+				if(line.contains(">") && !(line.contains(">>")) && !(line.contains(">>>"))){
 					conditionOpL.add(line);
-				}else if(line.contains("<")) {
+				}else if(line.contains("<") && !(line.contains("<<"))) {
 					conditionOpL.add(line);
 				}else if(line.contains("==")) {
 					conditionOpL.add(line);

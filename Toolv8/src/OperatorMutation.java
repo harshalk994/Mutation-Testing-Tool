@@ -70,6 +70,11 @@ public class OperatorMutation {
 		RelOpStorageFinal rs = new RelOpStorageFinal();
 		rs.processOp();
 		relationalOpList = rs.returnRelOpList();
+		
+		ShiftOpStorage ss = new ShiftOpStorage();
+		ss.processOp();
+		shiftOpList = ss.returnShiftOpList();
+		
 	
 		
 		if(arithOpList.isEmpty() == false) {
