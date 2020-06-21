@@ -56,6 +56,12 @@ public class Main {
 		ShiftOpTry st = new ShiftOpTry();
 		st.getPath(mutantFileLocation);
 		
+		BitwiseOpStorage bw = new BitwiseOpStorage();
+		bw.getPath(mutantFileLocation);
+		
+		BitwiseOpTry bt = new BitwiseOpTry();
+		bt.getPath(mutantFileLocation);
+		
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
 		
