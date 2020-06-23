@@ -1,13 +1,19 @@
 import java.io.File;
 
-public class FileDeletion {
+public class DeleteTempFile {
 	
-	public void deleteFiles() {
+	private static String mPath;
+	public void getPath(String mutantFilePath) {
+		mPath = mutantFilePath;
+	}
+	
+	public void deleteTempFile() {
 		
-		String file = "F:\\Java Projects\\Toolv1\\M9.java";
+		String file = mPath+"\\FirstTemp.java";
+		System.out.println(file);
 		try  
 		{         
-		File f= new File(file);           //file to be delete  
+		File f= new File(file);           //file to be delete
 		if(f.delete())                      //returns Boolean value  
 		{  
 		System.out.println(f.getName() + " deleted");   //getting and printing the file name  

@@ -73,6 +73,14 @@ public class Main {
 		rc.getPath(mutantFileLocation);
 		rc.removeComments();
 		
+		TempFileProcessor tfp = new TempFileProcessor();
+		tfp.getPath(mutantFileLocation);
+		tfp.processTempFile();
+		
+		DeleteTempFile dtf = new DeleteTempFile();
+		dtf.getPath(mutantFileLocation);
+		dtf.deleteTempFile();
+		
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
 		

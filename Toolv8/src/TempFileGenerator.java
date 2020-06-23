@@ -16,7 +16,22 @@ public class TempFileGenerator {
 	}
 	
 	public void createTempFile(String file) throws IOException {
-		String tempFileName = mPath+"\\Temp.java";
+//		List<String> paths = new ArrayList<String>();
+//    	FileDetailsStorage fds3 = new FileDetailsStorage();
+//    	paths = fds3.returnPaths();
+//    	for(int i=0;i<paths.size();i++) {
+//    		System.out.println(paths.get(i));
+//    	}
+//    	String mPath = null;
+//    	
+//    	for(int i=0;i<paths.size();) {
+//    		i++;
+//    		mPath = paths.get(i);
+//    		break;		
+//    	}
+//    	
+//    	System.out.println(mPath);
+    	String tempFileName = mPath+"\\FirstTemp.java";
 		FileReader source = new FileReader(file);
 		BufferedReader br = new BufferedReader(source);
 		FileWriter targetFile = new FileWriter(tempFileName);
@@ -47,7 +62,7 @@ public class TempFileGenerator {
 							//System.out.println(replaceW);
 							//words[j].replaceAll(newW, "M"+count);
 							
-							String temp = "Temp";
+							String temp = "FirstTemp";
 							words[j] = temp;
 							//System.out.println(words[j]);
 						}
@@ -57,27 +72,43 @@ public class TempFileGenerator {
 					bw.write(newLine);
 					bw.newLine();
 				
-				}else if(line.contains("&&") || line.contains("||")){
-					String[] words = line.split("");
-					for(int k=0;k<words.length;k++) {
-						String replaceA = "&" + System.lineSeparator();
-						String replaceO = "|" + System.lineSeparator();
- 						if(words[k].contains("&") && words[k+1].contains("&")) {
-							String temp = replaceA;
-							words[k+1] = temp;
-						}
- 						
- 						if(words[k].contains("|") && words[k+1].contains("|")) {
-							String temp = replaceO;
-							words[k+1] = temp;
-						}
-						
-					}
-					String newLine = String.join("", words);
-					
-					bw.write(newLine);
-					bw.newLine();
 				}
+//				else if(line.contains("&&") || line.contains("||")){
+//					String[] words = line.split("");
+//					for(int k=0;k<words.length;k++) {
+//						String replaceA = "&" + System.lineSeparator();
+//						String replaceO = "|" + System.lineSeparator();
+// 						if(words[k].contains("&") && words[k+1].contains("&")) {
+//							String temp = replaceA;
+//							words[k+1] = temp;
+//						}
+// 						
+// 						if(words[k].contains("|") && words[k+1].contains("|")) {
+//							String temp = replaceO;
+//							words[k+1] = temp;
+//						}
+//						
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("System.out.println") && line.contains("+") && !(line.contains("+="))){
+//					String[] words = line.split("");
+//					for(int k=0;k<words.length;k++) {
+//						String replaceA = "+" + System.lineSeparator();
+//						
+// 						if(words[k].contains("+")) {
+//							String temp = replaceA;
+//							words[k] = temp;
+//						}	
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
 				
 				else {
 				bw.write(line);
@@ -91,7 +122,6 @@ public class TempFileGenerator {
 		bw.close();
 		source.close();
 		targetFile.close();
-		System.out.println("Temp.java generated successfully!!");
 		
 		//op.processOp(opList);
 		

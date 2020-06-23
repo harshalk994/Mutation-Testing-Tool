@@ -14,7 +14,7 @@ public class RemoveComments {
 	
 	public void removeComments() throws IOException {
 		
-		String tempFileName = mPath+"\\Temp.java";
+		String tempFileName = mPath+"\\FirstTemp.java";
 		Cleaner cleaner = new Cleaner();
 		String line = cleaner.readFile();
 		String newLine = line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");

@@ -19,22 +19,28 @@ public class OperatorStorage {
  	
 	public void processOp() throws IOException{
 		String tempFileName = mPath+"\\Temp.java";
+		//String mutantFileName = mPath+"\\MuArithOp";
 		FileReader fr = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(fr);
 		String line;
+		String check = "+"+System.lineSeparator();
 		while((line = br.readLine()) != null) {
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
-			if(line.contains("=")) {
-				if(line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/")) {
+			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
+				if((line.contains("+") && !(line.contains("+="))) || (line.contains("-") && !(line.contains("-=")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
 					String newLine = line.trim();
 					opList.add(newLine);
 				}
-			}
+//				if(line.contains(check)) {
+//					opList.add(line);
+//				}
+			//}
 		}
 		br.close();
 		fr.close();
 		
+	
 		
 	}
 	

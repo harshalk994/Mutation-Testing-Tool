@@ -20,7 +20,7 @@ public class Cleaner{
 
 
     static String readFile() {    
-    	String tempFileName = mPath+"\\Temp.java";
+    	String tempFileName = mPath+"\\FirstTemp.java";
         File file = new File(tempFileName);    
 
         char[] buffer = null;    
@@ -36,7 +36,9 @@ public class Cleaner{
                 while (c != -1) {    
                     buffer[i++] = (char)c;    
                     c = bufferedReader.read();    
-                }    
+                }
+                
+                bufferedReader.close();
 
         } catch (IOException e) {    
             e.printStackTrace();    
