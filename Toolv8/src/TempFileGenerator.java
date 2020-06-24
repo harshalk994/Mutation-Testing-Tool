@@ -51,7 +51,7 @@ public class TempFileGenerator {
 			
 			
 //				
-				if(line.contains("class")) {
+				if(line.contains("class") && !(line.contains("classify"))) {
 					String[] words = line.split(" ");
 					for(int j=0; j<words.length; j++) {
 						//String replaceW = word.substring(word.indexOf("s ") +1, word.indexOf('{'));
