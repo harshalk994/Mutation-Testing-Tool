@@ -58,7 +58,7 @@ public class ShiftOpTry {
 
 				while((line = br.readLine()) != null) {
 				//	System.out.println("Here1");
-					if(line.contains("class")) {
+					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
 						String[] words = line.split(" ");
 						for(int k=0; k<words.length; k++) {
 							

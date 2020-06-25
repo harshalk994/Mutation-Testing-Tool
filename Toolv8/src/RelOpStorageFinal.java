@@ -24,27 +24,30 @@ public class RelOpStorageFinal {
 	}
 	
 	public void processOp() throws IOException{
+		
 		String tempFileName = mPath+"\\Temp.java";
+		//String mutantFileName = mPath+"\\MuArithOp";
 		FileReader fr = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(fr);
 		String line;
+	
 		while((line = br.readLine()) != null) {
-			if(line.contains("System.out.println") && line.contains("+"))
-				continue;
+			if(line.contains("System.out.println"))
+				continue; 
 			
-				if(line.contains(">") && !(line.contains(">>")) && !(line.contains(">>>"))){
-					conditionOpL.add(line);
-				}else if(line.contains("<") && !(line.contains("<<"))) {
-					conditionOpL.add(line);
-				}else if(line.contains("==")) {
-					conditionOpL.add(line);
-				}else if(line.contains("!=")) {
-					conditionOpL.add(line);
-				}else if(line.contains(">=")) {
-					conditionOpL.add(line);
-				}else if(line.contains("<=")) {
-					conditionOpL.add(line);
-				}
+			if(line.contains(">") && !(line.contains(">=")) && !(line.contains(">>")) && !(line.contains(">>=")) && !(line.contains(">>>"))){
+				conditionOpL.add(line);
+			}else if(line.contains("<") && !(line.contains("<=")) && !(line.contains("<<=")) && !(line.contains("<<"))) {
+				conditionOpL.add(line);
+			}else if(line.contains("==")) {
+				conditionOpL.add(line);
+			}else if(line.contains("!=")) {
+				conditionOpL.add(line);
+			}else if(line.contains(">=") && !(line.contains(">>="))) {
+				conditionOpL.add(line);
+			}else if(line.contains("<=") && !(line.contains("<<="))) {
+				conditionOpL.add(line);
+			}
 			
 		}
 		
@@ -58,17 +61,17 @@ public class RelOpStorageFinal {
 		return conditionOpL;
 	}
 	
-//	public void printOp() {
-//		
-//		for(int i=0;i<conditionOpL.size();i++) {
-//			System.out.println(conditionOpL.get(i));
-//		}
-//	}
+	public void printOp() {
+		System.out.println("Original Operators Stored are: \n");
+		for(int i=0;i<conditionOpL.size();i++) {
+			System.out.println(conditionOpL.get(i));
+		}
+	}
 	
 	
 	public void processList(List<String> conditionOpL ) {
 		for(String s : conditionOpL) {
-			if(s.contains(">")) {
+			if(s.contains(">") && !(s.contains(">="))) {
 				//s.replace("-", "+");
 				conditionOpP.add(s.replace(">", "<"));
 				conditionOpP.add(s.replace(">", "=="));
@@ -76,7 +79,7 @@ public class RelOpStorageFinal {
 				conditionOpP.add(s.replace(">", ">="));
 				conditionOpP.add(s.replace(">", "<="));
 			}
-			if(s.contains("<")) {
+			if(s.contains("<") && !(s.contains("<="))) {
 				//s.replace("-", "+");
 				conditionOpP.add(s.replace("<", ">"));
 				conditionOpP.add(s.replace("<", "=="));
