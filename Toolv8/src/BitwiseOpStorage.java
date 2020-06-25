@@ -23,15 +23,19 @@ public void processOp() throws IOException{
 		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while((line = br.readLine()) != null) {
-				if(line.contains("&") && !(line.contains("&&"))){
+			if(line.contains("System.out.println") && line.contains("+"))
+				continue;
+			
+				if(line.contains("&") && !(line.contains("&&")) && !(line.contains("&="))){
 					bitwiseOpL.add(line);
-				}else if(line.contains("|") && !(line.contains("||"))) {
+				}else if(line.contains("|") && !(line.contains("||")) && !(line.contains("|="))) {
 					bitwiseOpL.add(line);
-				}else if(line.contains("^")) {
-					bitwiseOpL.add(line);
-				}else if(line.contains("~")) {
+				}else if(line.contains("^") && !(line.contains("^="))) {
 					bitwiseOpL.add(line);
 				}
+//				else if(line.contains("~")) {
+//					bitwiseOpL.add(line);
+//				}
 			
 		}
 		
@@ -59,25 +63,26 @@ public void processOp() throws IOException{
 				//s.replace("-", "+");
 				bitwiseOpP.add(s.replace("&", "|"));
 				bitwiseOpP.add(s.replace("&", "^"));
-				bitwiseOpP.add(s.replace("&", "~"));
+				//bitwiseOpP.add(s.replace("&", "~"));
 			}
 			if(s.contains("|")) {
 				//s.replace("-", "+");
 				bitwiseOpP.add(s.replace("|", "&"));
 				bitwiseOpP.add(s.replace("|", "^"));
-				bitwiseOpP.add(s.replace("|", "~"));
+				//bitwiseOpP.add(s.replace("|", "~"));
 			}
 			if(s.contains("^")) {
 				//s.replace("-", "+");
 				bitwiseOpP.add(s.replace("^", "|"));
 				bitwiseOpP.add(s.replace("^", "&"));
-				bitwiseOpP.add(s.replace("^", "~"));
-			}if(s.contains("~")) {
-				//s.replace("-", "+");
-				bitwiseOpP.add(s.replace("~", "^"));
-				bitwiseOpP.add(s.replace("~", "&"));
-				bitwiseOpP.add(s.replace("~", "|"));
+				//bitwiseOpP.add(s.replace("^", "~"));
 			}
+//			if(s.contains("~")) {
+//				//s.replace("-", "+");
+//				bitwiseOpP.add(s.replace("~", "^"));
+//				bitwiseOpP.add(s.replace("~", "&"));
+//				bitwiseOpP.add(s.replace("~", "|"));
+//			}
 				
 		}
 	}
@@ -85,6 +90,8 @@ public void processOp() throws IOException{
 	public List<String> retriveBitwiseProcessList(){
 		return bitwiseOpP;
 	}
+
+	
 
 	
 

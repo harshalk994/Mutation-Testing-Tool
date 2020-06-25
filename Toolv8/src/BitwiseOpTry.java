@@ -41,7 +41,7 @@ public class BitwiseOpTry {
 
 		for(int i=0;i<opP.size();i++) {
 			count++;
-			if(i!=0 && i % 3 == 0) {
+			if(i!=0 && i % 2 == 0) {
 				System.out.println(i);
 				pointer++;
 				System.out.println(pointer);
