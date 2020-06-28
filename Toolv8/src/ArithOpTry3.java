@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ArithOpTry3 {
 	
@@ -16,18 +17,32 @@ public class ArithOpTry3 {
 	
 	
 	public void generateArithOpMutantFiles() throws IOException {
+		
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuArithOp";
 		List<String> opL = new ArrayList<String>();
 		List<String> opP = new ArrayList<String>();
+		
+		List<String> opTwoL = new ArrayList<String>();
+		List<String> opTwoP = new ArrayList<String>();
+		
 		int count = 0;
 		int pointer = 0;
+		int pointerTwo = 0;
+		String classKeyword = "class";
+		String regex = ".*\\class" + Pattern.quote(classKeyword) + "\\class.*";
 		
 		OperatorStorage os = new OperatorStorage();
 		os.processOp();
+		
 		opL = os.returnOpList();
 		os.processList(opL);
 		opP = os.retriveProcessList();
+		
+		opTwoL = os.returnOpTwoList();
+		os.printOp();
+		os.processTwoList(opTwoL);
+		opTwoP = os.retriveProcessTwoList();
 //		ArithOpTry3 aop = new ArithOpTry3();
 //		aop.buildList(opL);
 //		aop.processList(opL);
@@ -43,12 +58,12 @@ public class ArithOpTry3 {
 		for(int i=0;i<opP.size();i++) {
 			count++;
 			if(i!=0 && i % 4 == 0) {
-				System.out.println(i);
+				//System.out.println(i);
 				pointer++;
-				System.out.println(pointer);
+				//System.out.println(pointer);
 			}
 			String s = opL.get(pointer);
-			System.out.println(opL.get(pointer));
+			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -70,7 +85,7 @@ public class ArithOpTry3 {
 																
 								String temp = "MuArithOp"+count;
 								words[k] = temp;
-								System.out.println(words[k]);
+								//System.out.println(words[k]);
 							}
 						}
 						String newLine = String.join(" ", words);
@@ -84,9 +99,9 @@ public class ArithOpTry3 {
 						
 						
 						String newLine = line.replace(line, opP.get(i));
-						System.out.println("Mutated to: " + newLine + "\n");
 						bw.write(newLine);
 						bw.newLine();
+						continue;
 //						if(i!=0 && i % 3 == 0) {
 //							pointer++;
 //							System.out.println(i);
@@ -106,10 +121,78 @@ public class ArithOpTry3 {
 				br.close();
 				bw.close();	
 		}
+		
+		for(int k=0;k<opTwoP.size();k++) {
+			count++;
+			if(k!=0 && k % 1 == 0) {
+				//System.out.println(i);
+				pointerTwo++;
+				//System.out.println(pointer);
+			}
+			String s = opTwoL.get(pointerTwo);
+			//System.out.println(opL.get(pointer));
+			source = new FileReader(tempFileName);
+			br = new BufferedReader(source);
+			targetFile = new FileWriter(mutantFileName + count + ".java");
+			bw = new BufferedWriter(targetFile);
+			String line; 
+			//String[] text = new String[opL.size()];
+			
+
+				while((line = br.readLine()) != null) {
+				//	System.out.println("Here1");
+					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+						String[] words = line.split(" ");
+						for(int a=0; a<words.length; a++) {
+							
+							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+							String newW = replaceW.trim();
+							
+							if(words[a].contains(newW)) {
+																
+								String temp = "MuArithOp"+count;
+								words[a] = temp;
+								//System.out.println(words[k]);
+							}
+						}
+						String newLine = String.join(" ", words);
+						
+						
+						
+						bw.write(newLine);
+						bw.newLine();
+					
+					}else if(line.contains(s)) {
+						
+						
+						String newLine = line.replace(line, opTwoP.get(k));
+						bw.write(newLine);
+						bw.newLine();
+						continue;
+//						if(i!=0 && i % 3 == 0) {
+//							pointer++;
+//							System.out.println(i);
+//						//	System.out.println(pointer);
+//						}
+				}
+					
+					
+					
+				
+					else {
+						bw.write(line);
+						bw.newLine();
+					}
+
+			}
+				br.close();
+				bw.close();	
+			
+		}
 
 		source.close();
 		targetFile.close();
-		System.out.println("Arithmetic Op Mutants generated successfully!!");
+		System.out.println(count + " Arithmetic Op Mutants generated successfully!!");
 		
 	}
 	

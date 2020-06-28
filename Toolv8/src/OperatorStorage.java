@@ -11,6 +11,9 @@ public class OperatorStorage {
 	
 	List<String> opList = new ArrayList<String>();
 	List<String> opP = new ArrayList<String>();
+	List<String> opTwoL = new ArrayList<String>();
+	List<String> opTwoP = new ArrayList<String>();
+	
 	private static String mPath;
 	
 	public void getPath(String mutantFilePath) {
@@ -52,10 +55,20 @@ public class OperatorStorage {
 			}
 			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
-			if((line.contains("+") && !(line.contains("+="))) || (line.contains("-") && !(line.contains("-=")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
+			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
 					String newLine = line.trim();
 					opList.add(newLine);
 				}
+			
+			if(line.contains("=+") || line.contains("= +")) {
+				//String newLine = line.trim();
+				//System.out.println(line);
+				opTwoL.add(line);
+			}
+			
+			if(line.contains("=-") || line.contains("= -")) {
+				opTwoL.add(line);
+			}
 //				if(line.contains(check)) {
 //					opList.add(line);
 //				}
@@ -67,20 +80,25 @@ public class OperatorStorage {
 	
 		
 	}
+
 	
 	public List<String> returnOpList(){
 		return opList;
 	}
 	
-//	public void printOp() {
-//		
-//		for(int i=0;i<opList.size();i++) {
-//			System.out.println(opList.get(i));
-//		}
-//	}
+	public List<String> returnOpTwoList(){
+		return opTwoL;
+	}
+	
+	public void printOp() {		
+		for(int i=0;i<opTwoL.size();i++) {
+			System.out.println(opTwoL.get(i));
+		}
+	}
 	
 	
 	public void processList(List<String> opL ) {
+		//String check = "+"+System.lineSeparator();
 		for(String s : opL) {
 			if(s.contains("-")) {
 				//s.replace("-", "+");
@@ -96,6 +114,9 @@ public class OperatorStorage {
 				opP.add(s.replace("+", "/"));
 				opP.add(s.replace("+", "%"));
 			}
+//			if(s.contains(check)) {
+//				opP.add(s.replace(check, "-"));
+//			}
 			if(s.contains("*")) {
 				//s.replace("-", "+");
 				opP.add(s.replace("*", "+"));
@@ -121,9 +142,28 @@ public class OperatorStorage {
 		}
 	}
 	
+	public void processTwoList(List<String> opTwoL ) {
+		//String check = "+"+System.lineSeparator();
+		for(String s : opTwoL) {
+			if(s.contains("-")) {
+				//s.replace("-", "+");
+				opTwoP.add(s.replace("-", "+"));
+			}
+			if(s.contains("+")) {
+				//s.replace("-", "+");
+				opTwoP.add(s.replace("+", "-"));
+			}	
+		}
+	}
+	
 	public List<String> retriveProcessList(){
 		return opP;
 	}
+	
+	public List<String> retriveProcessTwoList(){
+		return opTwoP;
+	}
+	
 	
 
 }

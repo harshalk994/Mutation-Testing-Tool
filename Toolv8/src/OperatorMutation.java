@@ -55,6 +55,7 @@ public class OperatorMutation {
 	
 	public void opMutationRules() throws IOException {
 		List<String> arithOpList = new ArrayList<String>();
+		List<String> arithTwoList = new ArrayList<String>();
 		List<String> conditionalOpList = new ArrayList<String>();
 		List<String> relationalOpList = new ArrayList<String>();
 		List<String> shiftOpList = new ArrayList<String>();
@@ -63,6 +64,7 @@ public class OperatorMutation {
 		OperatorStorage ops = new OperatorStorage();
 		ops.processOp();
 		arithOpList = ops.returnOpList();
+		arithTwoList = ops.returnOpTwoList();
 		
 		ConditionalOpStorage cs = new ConditionalOpStorage();
 		cs.processOp();
@@ -82,7 +84,7 @@ public class OperatorMutation {
 		
 	
 		
-		if(arithOpList.isEmpty() == false) {
+		if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
 			ArithOpTry3 aop = new ArithOpTry3();
 			aop.generateArithOpMutantFiles();
 		}
