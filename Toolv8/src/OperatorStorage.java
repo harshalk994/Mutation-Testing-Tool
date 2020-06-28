@@ -28,7 +28,7 @@ public class OperatorStorage {
 		String line;
 		String check = "+"+System.lineSeparator();
 		while((line = br.readLine()) != null) {
-			if(line.contains("System.out.println") && line.contains("+"))
+			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")))
 				continue;
 			
 			if(line.contains("return")) {
