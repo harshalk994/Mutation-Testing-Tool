@@ -191,5 +191,4 @@ public void processOp() throws IOException{
 		return assignmentShiftOpP;
 	}
 
-
 }
