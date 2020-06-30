@@ -19,7 +19,6 @@ public class OperatorStorage {
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
- 	
 	public void processOp() throws IOException{
 		String tempFileName = mPath+"\\Temp.java";
 		//String mutantFileName = mPath+"\\MuArithOp";
@@ -44,28 +43,37 @@ public class OperatorStorage {
 //					
 //				}
 //				
+//				for(int j=0;j<words.length;j++) {
+//					if((words[j].contains("r") && words[j+1].contains("e") && words[j+2].contains("t") && words[j+3].contains("u") && words[j+4].contains("r") && words[j+5].contains("n") && words[j+6].contains("+"))) {
+//						//System.out.println("Found return");
+//						flag=true;
+//					}else if((words[j].contains("r") && words[j+1].contains("e") && words[j+2].contains("t") && words[j+3].contains("u") && words[j+4].contains("r") && words[j+5].contains("n") && words[j+7].contains("+"))) {
+//						flag=true;
+//					}
+//					
+//				}
+//				
 //				
 //				if(flag==true) {
 //					continue;
 //				}
-////					else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))){
-////						continue;
-////					}
-////				}
+//					else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))){
+//						continue;
+//					}
+//				}
 //			}
 			
 			if(line.contains("return")) {
-				if(line.contains("return-") || line.contains("return -") || line.contains("return+") || line.contains("return +")) {
+				if((line.contains("return-") || line.contains("return -") || line.contains("return+") || line.contains("return +")) && (!(line.contains("return--")) && !(line.contains("return --")) && !(line.contains("return++")) && !(line.contains("return ++")))) {
 					opTwoL.add(line);
 				}
 			}
 			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
-			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("return+")) && !(line.contains("return +"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
+			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
 					String newLine = line.trim();
 					opList.add(newLine);
 				}
-			
 			
 			if(line.contains("=+") || line.contains("= +")) {
 				//String newLine = line.trim();
@@ -97,11 +105,11 @@ public class OperatorStorage {
 		return opTwoL;
 	}
 	
-	public void printOp() {		
-		for(int i=0;i<opTwoL.size();i++) {
-			System.out.println(opTwoL.get(i));
-		}
-	}
+//	public void printOp() {		
+//		for(int i=0;i<opTwoL.size();i++) {
+//			System.out.println(opTwoL.get(i));
+//		}
+//	}
 	
 	
 	public void processList(List<String> opL ) {

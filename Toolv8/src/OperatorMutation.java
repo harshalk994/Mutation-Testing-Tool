@@ -63,6 +63,7 @@ public class OperatorMutation {
 		List<String> arithAssignmentOpList = new ArrayList<String>();
 		List<String> bitwiseAssignmentOpList = new ArrayList<String>();
 		List<String> shiftAssignmentOpList = new ArrayList<String>();
+		List<String> incDecOpList = new ArrayList<String>();
 		
 		OperatorStorage ops = new OperatorStorage();
 		ops.processOp();
@@ -90,6 +91,10 @@ public class OperatorMutation {
 		arithAssignmentOpList = aos.returnArithAssignOpList();
 		bitwiseAssignmentOpList = aos.returnBitwiseAssignOpList();
 		shiftAssignmentOpList = aos.returnShiftAssignOpList();
+		
+		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
+		ios.processOp();
+		incDecOpList = ios.returnOpList();
 	
 		
 		if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
@@ -122,6 +127,11 @@ public class OperatorMutation {
 		if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignmentOpList.isEmpty() == false || shiftAssignmentOpList.isEmpty() == false) {
 			AssignmentOpTry at = new AssignmentOpTry();
 			at.generateAssignmentOpMutantFiles();
+		}
+		
+		if(incDecOpList.isEmpty() == false) {
+			IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
+			idt.generateIncDecOpMutantFiles();
 		}
 	}
 

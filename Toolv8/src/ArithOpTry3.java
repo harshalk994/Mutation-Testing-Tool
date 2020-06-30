@@ -40,7 +40,7 @@ public class ArithOpTry3 {
 		opP = os.retriveProcessList();
 		
 		opTwoL = os.returnOpTwoList();
-		os.printOp();
+		//os.printOp();
 		os.processTwoList(opTwoL);
 		opTwoP = os.retriveProcessTwoList();
 //		ArithOpTry3 aop = new ArithOpTry3();

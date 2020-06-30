@@ -68,6 +68,12 @@ public class Main {
 		AssignmentOpTry aot = new AssignmentOpTry();
 		aot.getPath(mutantFileLocation);
 		
+		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
+		ios.getPath(mutantFileLocation);
+		
+		IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
+		idt.getPath(mutantFileLocation);
+		
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
 		
@@ -116,7 +122,7 @@ public class Main {
 		
 //		BuffOpTry bot = new BuffOpTry();
 //		bot.createCopies(fileLocation);
-		System.out.println("All mutants were generated successfully!!");
+	//	System.out.println("All mutants were generated successfully!!");
 		
 //		System.out.println("Do you want to quit? (Y/N)");
 //		String qChoice = sc.nextLine();
