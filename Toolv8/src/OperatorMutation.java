@@ -60,6 +60,9 @@ public class OperatorMutation {
 		List<String> relationalOpList = new ArrayList<String>();
 		List<String> shiftOpList = new ArrayList<String>();
 		List<String> bitwiseOpList = new ArrayList<String>();
+		List<String> arithAssignmentOpList = new ArrayList<String>();
+		List<String> bitwiseAssignmentOpList = new ArrayList<String>();
+		List<String> shiftAssignmentOpList = new ArrayList<String>();
 		
 		OperatorStorage ops = new OperatorStorage();
 		ops.processOp();
@@ -82,6 +85,11 @@ public class OperatorMutation {
 		bos.processOp();
 		bitwiseOpList = bos.returnBitwiseOpList();
 		
+		AssignmentOpStorage aos = new AssignmentOpStorage();
+		aos.processOp();
+		arithAssignmentOpList = aos.returnArithAssignOpList();
+		bitwiseAssignmentOpList = aos.returnBitwiseAssignOpList();
+		shiftAssignmentOpList = aos.returnShiftAssignOpList();
 	
 		
 		if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
@@ -109,6 +117,11 @@ public class OperatorMutation {
 		if(bitwiseOpList.isEmpty() == false) {
 			BitwiseOpTry bt = new BitwiseOpTry();
 			bt.generateBitwiseOpMutantFiles();
+		}
+		
+		if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignmentOpList.isEmpty() == false || shiftAssignmentOpList.isEmpty() == false) {
+			AssignmentOpTry at = new AssignmentOpTry();
+			at.generateAssignmentOpMutantFiles();
 		}
 	}
 

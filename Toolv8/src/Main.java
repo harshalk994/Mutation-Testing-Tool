@@ -62,6 +62,12 @@ public class Main {
 		BitwiseOpTry bt = new BitwiseOpTry();
 		bt.getPath(mutantFileLocation);
 		
+		AssignmentOpStorage aos = new AssignmentOpStorage();
+		aos.getPath(mutantFileLocation);
+		
+		AssignmentOpTry aot = new AssignmentOpTry();
+		aot.getPath(mutantFileLocation);
+		
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
 		
