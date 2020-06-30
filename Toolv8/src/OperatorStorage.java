@@ -31,34 +31,41 @@ public class OperatorStorage {
 			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")))
 				continue;
 			
-			if(line.contains("return")) {
-				boolean flag=false;
-				String[] words = line.split("");
-				for(int i=0;i<words.length;i++) {
-					if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+6].contains("-"))) {
-						//System.out.println("Found return");
-						flag=true;
-					}else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))) {
-						flag=true;
-					}
-					
-				}
-				
-				
-				if(flag==true) {
-					continue;
-				}
-//					else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))){
-//						continue;
+//			if(line.contains("return")) {
+//				boolean flag=false;
+//				String[] words = line.split("");
+//				for(int i=0;i<words.length;i++) {
+//					if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+6].contains("-"))) {
+//						//System.out.println("Found return");
+//						flag=true;
+//					}else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))) {
+//						flag=true;
 //					}
+//					
 //				}
+//				
+//				
+//				if(flag==true) {
+//					continue;
+//				}
+////					else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))){
+////						continue;
+////					}
+////				}
+//			}
+			
+			if(line.contains("return")) {
+				if(line.contains("return-") || line.contains("return -") || line.contains("return+") || line.contains("return +")) {
+					opTwoL.add(line);
+				}
 			}
 			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
-			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
+			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("return+")) && !(line.contains("return +"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
 					String newLine = line.trim();
 					opList.add(newLine);
 				}
+			
 			
 			if(line.contains("=+") || line.contains("= +")) {
 				//String newLine = line.trim();
