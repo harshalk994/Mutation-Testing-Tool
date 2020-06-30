@@ -55,144 +55,149 @@ public class ArithOpTry3 {
 		FileWriter targetFile = null;
 		BufferedWriter bw = null;
 
-		for(int i=0;i<opP.size();i++) {
-			count++;
-			if(i!=0 && i % 4 == 0) {
-				//System.out.println(i);
-				pointer++;
-				//System.out.println(pointer);
-			}
-			String s = opL.get(pointer);
-			//System.out.println(opL.get(pointer));
-			source = new FileReader(tempFileName);
-			br = new BufferedReader(source);
-			targetFile = new FileWriter(mutantFileName + count + ".java");
-			bw = new BufferedWriter(targetFile);
-			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-						String[] words = line.split(" ");
-						for(int k=0; k<words.length; k++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[k].contains(newW)) {
-																
-								String temp = "MuArithOp"+count;
-								words[k] = temp;
-								//System.out.println(words[k]);
-							}
-						}
-						String newLine = String.join(" ", words);
-						
-						
-						
-						bw.write(newLine);
-						bw.newLine();
-					
-					}else if(line.contains(s)) {
-						
-						
-						String newLine = line.replace(line, opP.get(i));
-						bw.write(newLine);
-						bw.newLine();
-						continue;
-//						if(i!=0 && i % 3 == 0) {
-//							pointer++;
-//							System.out.println(i);
-//						//	System.out.println(pointer);
-//						}
+		if(opL.isEmpty() == false) {
+			for(int i=0;i<opP.size();i++) {
+				count++;
+				if(i!=0 && i % 4 == 0) {
+					//System.out.println(i);
+					pointer++;
+					//System.out.println(pointer);
 				}
-					
-					
-					
+				String s = opL.get(pointer);
+				//System.out.println(opL.get(pointer));
+				source = new FileReader(tempFileName);
+				br = new BufferedReader(source);
+				targetFile = new FileWriter(mutantFileName + count + ".java");
+				bw = new BufferedWriter(targetFile);
+				String line; 
+				//String[] text = new String[opL.size()];
 				
-					else {
-						bw.write(line);
-						bw.newLine();
-					}
 
+					while((line = br.readLine()) != null) {
+					//	System.out.println("Here1");
+						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+							String[] words = line.split(" ");
+							for(int k=0; k<words.length; k++) {
+								
+								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+								String newW = replaceW.trim();
+								
+								if(words[k].contains(newW)) {
+																	
+									String temp = "MuArithOp"+count;
+									words[k] = temp;
+									//System.out.println(words[k]);
+								}
+							}
+							String newLine = String.join(" ", words);
+							
+							
+							
+							bw.write(newLine);
+							bw.newLine();
+						
+						}else if(line.contains(s)) {
+							
+							
+							String newLine = line.replace(line, opP.get(i));
+							bw.write(newLine);
+							bw.newLine();
+							continue;
+//							if(i!=0 && i % 3 == 0) {
+//								pointer++;
+//								System.out.println(i);
+//							//	System.out.println(pointer);
+//							}
+					}
+						
+						
+						
+					
+						else {
+							bw.write(line);
+							bw.newLine();
+						}
+
+				}
+					br.close();
+					bw.close();	
 			}
-				br.close();
-				bw.close();	
 		}
 		
-		for(int k=0;k<opTwoP.size();k++) {
-			count++;
-			if(k!=0 && k % 1 == 0) {
-				//System.out.println(i);
-				pointerTwo++;
-				//System.out.println(pointer);
-			}
-			String s = opTwoL.get(pointerTwo);
-			//System.out.println(opL.get(pointer));
-			source = new FileReader(tempFileName);
-			br = new BufferedReader(source);
-			targetFile = new FileWriter(mutantFileName + count + ".java");
-			bw = new BufferedWriter(targetFile);
-			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-						String[] words = line.split(" ");
-						for(int a=0; a<words.length; a++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[a].contains(newW)) {
-																
-								String temp = "MuArithOp"+count;
-								words[a] = temp;
-								//System.out.println(words[k]);
-							}
-						}
-						String newLine = String.join(" ", words);
-						
-						
-						
-						bw.write(newLine);
-						bw.newLine();
-					
-					}else if(line.contains(s)) {
-						
-						
-						String newLine = line.replace(line, opTwoP.get(k));
-						bw.write(newLine);
-						bw.newLine();
-						continue;
-//						if(i!=0 && i % 3 == 0) {
-//							pointer++;
-//							System.out.println(i);
-//						//	System.out.println(pointer);
-//						}
+		if(opTwoL.isEmpty() == false) {
+			for(int k=0;k<opTwoP.size();k++) {
+				count++;
+				if(k!=0 && k % 1 == 0) {
+					//System.out.println(i);
+					pointerTwo++;
+					//System.out.println(pointer);
 				}
-					
-					
-					
+				String s = opTwoL.get(pointerTwo);
+				//System.out.println(opL.get(pointer));
+				source = new FileReader(tempFileName);
+				br = new BufferedReader(source);
+				targetFile = new FileWriter(mutantFileName + count + ".java");
+				bw = new BufferedWriter(targetFile);
+				String line; 
+				//String[] text = new String[opL.size()];
 				
-					else {
-						bw.write(line);
-						bw.newLine();
-					}
 
+					while((line = br.readLine()) != null) {
+					//	System.out.println("Here1");
+						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+							String[] words = line.split(" ");
+							for(int a=0; a<words.length; a++) {
+								
+								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+								String newW = replaceW.trim();
+								
+								if(words[a].contains(newW)) {
+																	
+									String temp = "MuArithOp"+count;
+									words[a] = temp;
+									//System.out.println(words[k]);
+								}
+							}
+							String newLine = String.join(" ", words);
+							
+							
+							
+							bw.write(newLine);
+							bw.newLine();
+						
+						}else if(line.contains(s)) {
+							
+							
+							String newLine = line.replace(line, opTwoP.get(k));
+							bw.write(newLine);
+							bw.newLine();
+							continue;
+//							if(i!=0 && i % 3 == 0) {
+//								pointer++;
+//								System.out.println(i);
+//							//	System.out.println(pointer);
+//							}
+					}
+						
+						
+						
+					
+						else {
+							bw.write(line);
+							bw.newLine();
+						}
+
+				}
+					br.close();
+					bw.close();	
+				
 			}
-				br.close();
-				bw.close();	
-			
 		}
+		
 
 		source.close();
 		targetFile.close();
-		System.out.println(count + " Arithmetic Op Mutants generated successfully!!");
+		System.out.println("Arithmetic Op Mutants generated: " + count);
 		
 	}
 	

@@ -42,12 +42,12 @@ public class ShiftOpTry {
 		for(int i=0;i<opP.size();i++) {
 			count++;
 			if(i!=0 && i % 2 == 0) {
-				System.out.println(i);
+				//System.out.println(i);
 				pointer++;
-				System.out.println(pointer);
+				//System.out.println(pointer);
 			}
 			String s = opL.get(pointer);
-			System.out.println(opL.get(pointer));
+			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -58,7 +58,7 @@ public class ShiftOpTry {
 
 				while((line = br.readLine()) != null) {
 				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+					if(line.contains("class")) {
 						String[] words = line.split(" ");
 						for(int k=0; k<words.length; k++) {
 							
@@ -69,7 +69,7 @@ public class ShiftOpTry {
 																
 								String temp = "MuShiftOp"+count;
 								words[k] = temp;
-								System.out.println(words[k]);
+								//System.out.println(words[k]);
 							}
 						}
 						String newLine = String.join(" ", words);
@@ -107,7 +107,7 @@ public class ShiftOpTry {
 
 		source.close();
 		targetFile.close();
-		System.out.println("Shift Op Mutants generated successfully!!");
+		System.out.println("Shift Op Mutants generated: " + count);
 		
 	}
 

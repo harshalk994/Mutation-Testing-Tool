@@ -33,7 +33,7 @@ public class AssignmentOpTry {
 		int shiftPointer = 0;
 		
 		AssignmentOpStorage aos = new AssignmentOpStorage();
-		//rs.processOp();
+		//aos.processOp();
 		arithOpL = aos.returnArithAssignOpList();
 		//aos.printArithAssignmentList();
 		aos.processArithAssignList(arithOpL);
@@ -58,221 +58,229 @@ public class AssignmentOpTry {
 		BufferedReader br = null;
 		FileWriter targetFile = null;
 		BufferedWriter bw = null;
-
-		for(int i=0;i<arithOpP.size();i++) {
-			count++;
-			if(i!=0 && i % 5 == 0) {
-				System.out.println(i);
-				arithPointer++;
-				System.out.println(arithPointer);
-			}
-			String s = arithOpL.get(arithPointer);
-			System.out.println(arithOpL.get(arithPointer));
-			source = new FileReader(tempFileName);
-			br = new BufferedReader(source);
-			targetFile = new FileWriter(mutantFileName + count + ".java");
-			bw = new BufferedWriter(targetFile);
-			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-//				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-						String[] words = line.split(" ");
-						for(int k=0; k<words.length; k++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[k].contains(newW)) {
-																
-								String temp = "MuAssignmentOp"+count;
-								words[k] = temp;
-								System.out.println(words[k]);
-							}
-						}
-						String newLine = String.join(" ", words);
-						
-						
-						
-						bw.write(newLine);
-						bw.newLine();
-					
-					}else if(line.contains(s)) {
-						
-						
-						String newLine = line.replace(line, arithOpP.get(i));
-						bw.write(newLine);
-						bw.newLine();
-////						if(i!=0 && i % 3 == 0) {
-////							pointer++;
-////							System.out.println(i);
-////						//	System.out.println(pointer);
-////						}
+		
+		if(arithOpL.isEmpty() == false) {
+			for(int i=0;i<arithOpP.size();i++) {
+				count++;
+				if(i!=0 && i % 5 == 0) {
+					System.out.println(i);
+					arithPointer++;
+					System.out.println(arithPointer);
 				}
-					
-					
-					
+				String s = arithOpL.get(arithPointer);
+				System.out.println(arithOpL.get(arithPointer));
+				source = new FileReader(tempFileName);
+				br = new BufferedReader(source);
+				targetFile = new FileWriter(mutantFileName + count + ".java");
+				bw = new BufferedWriter(targetFile);
+				String line; 
+				//String[] text = new String[opL.size()];
 				
-					else {
-						bw.write(line);
-						bw.newLine();
+
+					while((line = br.readLine()) != null) {
+//					//	System.out.println("Here1");
+						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+							String[] words = line.split(" ");
+							for(int k=0; k<words.length; k++) {
+								
+								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+								String newW = replaceW.trim();
+								
+								if(words[k].contains(newW)) {
+																	
+									String temp = "MuAssignmentOp"+count;
+									words[k] = temp;
+									System.out.println(words[k]);
+								}
+							}
+							String newLine = String.join(" ", words);
+							
+							
+							
+							bw.write(newLine);
+							bw.newLine();
+						
+						}else if(line.contains(s)) {
+							
+							
+							String newLine = line.replace(line, arithOpP.get(i));
+							bw.write(newLine);
+							bw.newLine();
+////							if(i!=0 && i % 3 == 0) {
+////								pointer++;
+////								System.out.println(i);
+////							//	System.out.println(pointer);
+////							}
 					}
+						
+						
+						
+					
+						else {
+							bw.write(line);
+							bw.newLine();
+						}
 
+				}
+					br.close();
+					bw.close();	
 			}
-				br.close();
-				bw.close();	
-		}
 
+//			source.close();
+//			targetFile.close();
+//			System.out.println("ArithAssignment Op Mutants generated successfully!!");
+		}
+		
+		
+		if(bitwiseOpL.isEmpty()==false) {
+			for(int i=0;i<bitwiseOpP.size();i++) {
+				count++;
+				if(i!=0 && i % 2 == 0) {
+					System.out.println(i);
+					bitwisePointer++;
+					System.out.println(bitwisePointer);
+				}
+				String s = bitwiseOpL.get(bitwisePointer);
+				System.out.println(bitwiseOpL.get(bitwisePointer));
+				source = new FileReader(tempFileName);
+				br = new BufferedReader(source);
+				targetFile = new FileWriter(mutantFileName + count + ".java");
+				bw = new BufferedWriter(targetFile);
+				String line; 
+				//String[] text = new String[opL.size()];
+				
+
+					while((line = br.readLine()) != null) {
+					//	System.out.println("Here1");
+						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+							String[] words = line.split(" ");
+							for(int k=0; k<words.length; k++) {
+								
+								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+								String newW = replaceW.trim();
+								
+								if(words[k].contains(newW)) {
+																	
+									String temp = "MuAssignmentOp"+count;
+									words[k] = temp;
+									System.out.println(words[k]);
+								}
+							}
+							String newLine = String.join(" ", words);
+							
+							
+							
+							bw.write(newLine);
+							bw.newLine();
+						
+						}else if(line.contains(s)) {
+							
+							
+							String newLine = line.replace(line, bitwiseOpP.get(i));
+							bw.write(newLine);
+							bw.newLine();
+//							if(i!=0 && i % 3 == 0) {
+//								pointer++;
+//								System.out.println(i);
+//							//	System.out.println(pointer);
+//							}
+					}
+						
+						
+						
+					
+						else {
+							bw.write(line);
+							bw.newLine();
+						}
+
+				}
+					br.close();
+					bw.close();	
+			}
+
+//			source.close();
+//			targetFile.close();
+//			System.out.println("BitwiseAssignment Op Mutants generated successfully!!");
+		}
+		
+		
+		if(shiftOpL.isEmpty() == false) {
+			for(int i=0;i<shiftOpP.size();i++) {
+				count++;
+				if(i!=0 && i % 1 == 0) {
+					System.out.println(i);
+					shiftPointer++;
+					System.out.println(shiftPointer);
+				}
+				String s = shiftOpL.get(shiftPointer);
+				System.out.println(shiftOpL.get(shiftPointer));
+				source = new FileReader(tempFileName);
+				br = new BufferedReader(source);
+				targetFile = new FileWriter(mutantFileName + count + ".java");
+				bw = new BufferedWriter(targetFile);
+				String line; 
+				//String[] text = new String[opL.size()];
+				
+
+					while((line = br.readLine()) != null) {
+//					//	System.out.println("Here1");
+						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+							String[] words = line.split(" ");
+							for(int k=0; k<words.length; k++) {
+								
+								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+								String newW = replaceW.trim();
+								
+								if(words[k].contains(newW)) {
+																	
+									String temp = "MuAssignmentOp"+count;
+									words[k] = temp;
+									System.out.println(words[k]);
+								}
+							}
+							String newLine = String.join(" ", words);
+							
+							
+							
+							bw.write(newLine);
+							bw.newLine();
+						
+						}else if(line.contains(s)) {
+							
+							
+							String newLine = line.replace(line, shiftOpP.get(i));
+							bw.write(newLine);
+							bw.newLine();
+////							if(i!=0 && i % 3 == 0) {
+////								pointer++;
+////								System.out.println(i);
+////							//	System.out.println(pointer);
+////							}
+					}
+						
+						
+						
+					
+						else {
+							bw.write(line);
+							bw.newLine();
+						}
+
+				}
+					br.close();
+					bw.close();	
+			}
+
+			
+		}
+		
+		System.out.println("Assignment Op Mutants generated: " + count);
 		source.close();
 		targetFile.close();
-		System.out.println("ArithAssignment Op Mutants generated successfully!!");
 		
-		
-		for(int i=0;i<bitwiseOpP.size();i++) {
-			count++;
-			if(i!=0 && i % 2 == 0) {
-				System.out.println(i);
-				bitwisePointer++;
-				System.out.println(bitwisePointer);
-			}
-			String s = bitwiseOpL.get(bitwisePointer);
-			System.out.println(bitwiseOpL.get(bitwisePointer));
-			source = new FileReader(tempFileName);
-			br = new BufferedReader(source);
-			targetFile = new FileWriter(mutantFileName + count + ".java");
-			bw = new BufferedWriter(targetFile);
-			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-						String[] words = line.split(" ");
-						for(int k=0; k<words.length; k++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[k].contains(newW)) {
-																
-								String temp = "MuAssignmentOp"+count;
-								words[k] = temp;
-								System.out.println(words[k]);
-							}
-						}
-						String newLine = String.join(" ", words);
-						
-						
-						
-						bw.write(newLine);
-						bw.newLine();
-					
-					}else if(line.contains(s)) {
-						
-						
-						String newLine = line.replace(line, bitwiseOpP.get(i));
-						bw.write(newLine);
-						bw.newLine();
-//						if(i!=0 && i % 3 == 0) {
-//							pointer++;
-//							System.out.println(i);
-//						//	System.out.println(pointer);
-//						}
-				}
-					
-					
-					
-				
-					else {
-						bw.write(line);
-						bw.newLine();
-					}
-
-			}
-				br.close();
-				bw.close();	
-		}
-
-		source.close();
-		targetFile.close();
-		System.out.println("BitwiseAssignment Op Mutants generated successfully!!");
-		
-		
-		for(int i=0;i<shiftOpP.size();i++) {
-			count++;
-			if(i!=0 && i % 1 == 0) {
-				System.out.println(i);
-				shiftPointer++;
-				System.out.println(shiftPointer);
-			}
-			String s = shiftOpL.get(shiftPointer);
-			System.out.println(shiftOpL.get(shiftPointer));
-			source = new FileReader(tempFileName);
-			br = new BufferedReader(source);
-			targetFile = new FileWriter(mutantFileName + count + ".java");
-			bw = new BufferedWriter(targetFile);
-			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-//				//	System.out.println("Here1");
-					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-						String[] words = line.split(" ");
-						for(int k=0; k<words.length; k++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[k].contains(newW)) {
-																
-								String temp = "MuAssignmentOp"+count;
-								words[k] = temp;
-								System.out.println(words[k]);
-							}
-						}
-						String newLine = String.join(" ", words);
-						
-						
-						
-						bw.write(newLine);
-						bw.newLine();
-					
-					}else if(line.contains(s)) {
-						
-						
-						String newLine = line.replace(line, shiftOpP.get(i));
-						bw.write(newLine);
-						bw.newLine();
-////						if(i!=0 && i % 3 == 0) {
-////							pointer++;
-////							System.out.println(i);
-////						//	System.out.println(pointer);
-////						}
-				}
-					
-					
-					
-				
-					else {
-						bw.write(line);
-						bw.newLine();
-					}
-
-			}
-				br.close();
-				bw.close();	
-		}
-
-		source.close();
-		targetFile.close();
-		System.out.println("ShiftAssignment Op Mutants generated successfully!!");
 		
 	}
-
 
 
 

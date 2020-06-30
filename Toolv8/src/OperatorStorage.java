@@ -13,12 +13,127 @@ public class OperatorStorage {
 	List<String> opP = new ArrayList<String>();
 	List<String> opTwoL = new ArrayList<String>();
 	List<String> opTwoP = new ArrayList<String>();
-	
+ 	
 	private static String mPath;
-	
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
+	
+//	public void processOp() throws IOException{
+//		List<String> removeNull = new ArrayList<String>();
+//		String tempFileName = mPath+"\\Temp.java";
+//		//String mutantFileName = mPath+"\\MuArithOp";
+//		FileReader fr = new FileReader(tempFileName);
+//		BufferedReader br = new BufferedReader(fr);
+//		String line;
+//		String check = "+"+System.lineSeparator();
+//		while((line = br.readLine()) != null) {
+//			if(line.contains("System.out.println") && line.contains("+"))
+//				continue;
+//			
+//			if(line.contains("return")) {
+//				boolean flag=false;
+//				String[] words = line.split("");
+//				for(int i=0;i<words.length;i++) {
+//					if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+6].contains("-"))) {
+//						//System.out.println("Found return");
+//						flag=true;
+//					}else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))) {
+//						flag=true;
+//					}
+//					
+//				}
+//				
+//				
+//				if(flag==true) {
+//					continue;
+//				}
+////					else if((words[i].contains("r") && words[i+1].contains("e") && words[i+2].contains("t") && words[i+3].contains("u") && words[i+4].contains("r") && words[i+5].contains("n") && words[i+7].contains("-"))){
+////						continue;
+////					}
+////				}
+//			}
+//			
+////			if(line.contains("=") && line.contains("+")) {
+////				boolean flag=false;
+////				String[] words = line.split("");
+////				for(int i=0;i<words.length;i++) {
+////					if(words[i].contains("=") && words[i+1].contains("+")) {
+////						flag=true;
+////					}
+////				}
+////				
+////				if(flag==true) {
+////					continue;
+////				}
+////			} 
+//			
+////			if((line.contains("+") && !(line.contains("+="))) || (line.contains("-") && !(line.contains("-=")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
+////				String[] words = line.split("");
+////				for(int i=0;i<words.length;i++) {
+////					if(words[i].contains("=") && words[i+2].contains("+")) {
+////						continue;
+////						
+////							
+////					}else {
+////						
+////					}
+////				}
+//////				String newLine = line.trim();
+//////				opList.add(newLine);
+////			}
+//			
+//			if(line.contains("=") && line.contains("-") && !(line.contains("=+"))) {
+//				String[] words = line.split("");
+//				String[] newWords = new String[words.length-1];
+//				for(int i=0, j=0;i<words.length;i++) {
+//					if(words[i].contains("=") && !(words[i+2].contains("-"))) 
+//						continue;
+//						
+////					String newLine = String.join("", words);
+////					newLine = line.trim();
+////					opList.add(newLine);
+//						newWords[j++]=words[i];
+//					}
+//				
+//				for(String s : newWords) {
+//			    	  if(s!=null && s.length() > 0) {
+//			    		  removeNull.add(s);
+//			    	  }
+//			      }
+//				
+//			      
+//			      newWords = removeNull.toArray(new String[removeNull.size()]);
+//			      
+//			      System.out.println("Found\n");
+//			      for(int i=0;i<newWords.length;i++) {
+//			    	  
+//			    	  System.out.println(newWords[i]);
+//			      }
+//			      
+//			      String newLine = String.join("", newWords);
+//					newLine = line.trim();
+//					opList.add(newLine);
+////					else {
+////						
+////					}
+//				}
+//				
+////			}
+////			if(line.contains(check)) {
+////				opList.add(line);
+////			}
+//		//}
+//	}
+//
+//			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
+//			
+//		br.close();
+//		fr.close();
+//		
+//		
+//	}
+	
 	public void processOp() throws IOException{
 		String tempFileName = mPath+"\\Temp.java";
 		//String mutantFileName = mPath+"\\MuArithOp";
@@ -178,7 +293,6 @@ public class OperatorStorage {
 	public List<String> retriveProcessTwoList(){
 		return opTwoP;
 	}
-	
 	
 
 }

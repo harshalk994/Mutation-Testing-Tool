@@ -107,7 +107,7 @@ public class BitwiseOpTry {
 
 		source.close();
 		targetFile.close();
-		System.out.println("Bitwise Op Mutants generated successfully!!");
+		System.out.println("Bitwise Op Mutants generated: " + count);
 		
 	}
 
