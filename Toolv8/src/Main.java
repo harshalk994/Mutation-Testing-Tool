@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 
 	private static Scanner sc = new Scanner(System.in);
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		String fileLocation;
 		String mutantFileLocation;
@@ -93,7 +93,8 @@ public class Main {
 		dtf.getPath(mutantFileLocation);
 		dtf.deleteTempFile();
 		
-		System.out.println("Mutant Generation Started\n");
+		System.out.println("Generating Mutants . . . . . \n");
+		Thread.sleep(2000);
 		
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
