@@ -61,8 +61,8 @@ public class OperatorMutation {
 		List<String> shiftOpList = new ArrayList<String>();
 		List<String> bitwiseOpList = new ArrayList<String>();
 		List<String> arithAssignmentOpList = new ArrayList<String>();
-		List<String> bitwiseAssignmentOpList = new ArrayList<String>();
-		List<String> shiftAssignmentOpList = new ArrayList<String>();
+		List<String> bitwiseAssignOpList = new ArrayList<String>();
+		List<String> shiftAssignOpList = new ArrayList<String>();
 		List<String> incDecOpList = new ArrayList<String>();
 		
 		OperatorStorage ops = new OperatorStorage();
@@ -81,57 +81,74 @@ public class OperatorMutation {
 		ShiftOpStorage ss = new ShiftOpStorage();
 		ss.processOp();
 		shiftOpList = ss.returnShiftOpList();
+		//ss.printShiftOps();
 		
 		BitwiseOpStorage bos = new BitwiseOpStorage();
 		bos.processOp();
 		bitwiseOpList = bos.returnBitwiseOpList();
 		
-		AssignmentOpStorage aos = new AssignmentOpStorage();
-		aos.processOp();
-		arithAssignmentOpList = aos.returnArithAssignOpList();
-		bitwiseAssignmentOpList = aos.returnBitwiseAssignOpList();
-		shiftAssignmentOpList = aos.returnShiftAssignOpList();
+		AssignmentOpStorage as = new AssignmentOpStorage();
+		as.processOp();
+		arithAssignmentOpList = as.returnArithAssignOpList();
+		bitwiseAssignOpList = as.returnBitwiseAssignOpList();
+		shiftAssignOpList = as.returnShiftAssignOpList();
 		
-		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
-		ios.processOp();
-		incDecOpList = ios.returnOpList();
+		
+		IncrementDecrementOpStorage ids = new IncrementDecrementOpStorage();
+		ids.processOp();
+		incDecOpList = ids.returnOpList();
+		
 	
 		
 		if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
 			ArithOpTry3 aop = new ArithOpTry3();
 			aop.generateArithOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateArithOpTable();
 		}
 		
 
 		if(conditionalOpList.isEmpty() == false) {
 			ConditionOpTry2 cop = new ConditionOpTry2();
 			cop.generateConditionMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateConditionalOpTable();
 		}
 		
 		
 		if(relationalOpList.isEmpty() == false) {
 			RelOpTryFinal rop = new RelOpTryFinal();
 			rop.generateRelOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateRelationalOpTable();
 		}
 		
 		if(shiftOpList.isEmpty() == false) {
 			ShiftOpTry sot = new ShiftOpTry();
 			sot.generateShiftOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateShiftOpTable();
 		}
 		
 		if(bitwiseOpList.isEmpty() == false) {
 			BitwiseOpTry bt = new BitwiseOpTry();
 			bt.generateBitwiseOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateBitwiseOpTable();
 		}
 		
-		if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignmentOpList.isEmpty() == false || shiftAssignmentOpList.isEmpty() == false) {
+		if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
 			AssignmentOpTry at = new AssignmentOpTry();
 			at.generateAssignmentOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateAssignmentOpTable();
 		}
 		
 		if(incDecOpList.isEmpty() == false) {
 			IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
 			idt.generateIncDecOpMutantFiles();
+			PrintHtmlTable pht = new PrintHtmlTable();
+			pht.generateIncDecOpTable();
 		}
 	}
 

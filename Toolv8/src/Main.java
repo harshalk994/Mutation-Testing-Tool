@@ -93,8 +93,13 @@ public class Main {
 		dtf.getPath(mutantFileLocation);
 		dtf.deleteTempFile();
 		
+		System.out.println("Mutant Generation Started\n");
+		
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
+		
+		System.out.println("\nMutant Generation Ended\n");
+		System.out.println("Please check the html report to view the mutations.");
 		
 //		ArithOpTry3 aot = new ArithOpTry3();
 //		aot.generateArithOpMutantFiles();

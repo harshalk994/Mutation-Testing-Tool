@@ -41,12 +41,12 @@ public class RelOpTryFinal {
 		for(int i=0;i<opP.size();i++) {
 			count++;
 			if(i!=0 && i % 5 == 0) {
-				System.out.println(i);
+				//System.out.println(i);
 				pointer++;
-				System.out.println(pointer);
+				//System.out.println(pointer);
 			}
 			String s = opL.get(pointer);
-			System.out.println(opL.get(pointer));
+			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -68,7 +68,7 @@ public class RelOpTryFinal {
 																
 								String temp = "MuRelOp"+count;
 								words[k] = temp;
-								System.out.println(words[k]);
+								//System.out.println(words[k]);
 							}
 						}
 						String newLine = String.join(" ", words);
@@ -106,7 +106,7 @@ public class RelOpTryFinal {
 
 		source.close();
 		targetFile.close();
-		System.out.println("Relational Op Mutants generated successfully!!");
+		System.out.println("Relational Op Mutants generated: " + count);
 		
 	}
 	

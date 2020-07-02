@@ -41,12 +41,12 @@ public class ConditionOpTry2 {
 		for(int i=0;i<opP.size();i++) {
 			count++;
 			if(i!=0 && i % 1 == 0) {
-				System.out.println(i);
+				//System.out.println(i);
 				pointer++;
-				System.out.println(pointer);
+				//System.out.println(pointer);
 			}
 			String s = opL.get(pointer);
-			System.out.println(opL.get(pointer));
+			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -68,7 +68,7 @@ public class ConditionOpTry2 {
 																
 								String temp = "MuConditionOp"+count;
 								words[k] = temp;
-								System.out.println(words[k]);
+								//System.out.println(words[k]);
 							}
 						}
 						String newLine = String.join(" ", words);
@@ -108,7 +108,7 @@ public class ConditionOpTry2 {
 
 		source.close();
 		targetFile.close();
-		System.out.println("Conditional Op Mutants generated successfully!!");
+		System.out.println("Conditional Op Mutants generated: " + count);
 		
 	}
 	

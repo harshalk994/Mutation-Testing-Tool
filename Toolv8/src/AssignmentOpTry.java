@@ -63,12 +63,12 @@ public class AssignmentOpTry {
 			for(int i=0;i<arithOpP.size();i++) {
 				count++;
 				if(i!=0 && i % 5 == 0) {
-					System.out.println(i);
+					//System.out.println(i);
 					arithPointer++;
-					System.out.println(arithPointer);
+					//System.out.println(arithPointer);
 				}
 				String s = arithOpL.get(arithPointer);
-				System.out.println(arithOpL.get(arithPointer));
+				//System.out.println(arithOpL.get(arithPointer));
 				source = new FileReader(tempFileName);
 				br = new BufferedReader(source);
 				targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -90,7 +90,7 @@ public class AssignmentOpTry {
 																	
 									String temp = "MuAssignmentOp"+count;
 									words[k] = temp;
-									System.out.println(words[k]);
+									//System.out.println(words[k]);
 								}
 							}
 							String newLine = String.join(" ", words);
@@ -136,12 +136,12 @@ public class AssignmentOpTry {
 			for(int i=0;i<bitwiseOpP.size();i++) {
 				count++;
 				if(i!=0 && i % 2 == 0) {
-					System.out.println(i);
+					//System.out.println(i);
 					bitwisePointer++;
-					System.out.println(bitwisePointer);
+					//System.out.println(bitwisePointer);
 				}
 				String s = bitwiseOpL.get(bitwisePointer);
-				System.out.println(bitwiseOpL.get(bitwisePointer));
+				//System.out.println(bitwiseOpL.get(bitwisePointer));
 				source = new FileReader(tempFileName);
 				br = new BufferedReader(source);
 				targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -163,7 +163,7 @@ public class AssignmentOpTry {
 																	
 									String temp = "MuAssignmentOp"+count;
 									words[k] = temp;
-									System.out.println(words[k]);
+									//System.out.println(words[k]);
 								}
 							}
 							String newLine = String.join(" ", words);
@@ -209,12 +209,12 @@ public class AssignmentOpTry {
 			for(int i=0;i<shiftOpP.size();i++) {
 				count++;
 				if(i!=0 && i % 1 == 0) {
-					System.out.println(i);
+					//System.out.println(i);
 					shiftPointer++;
-					System.out.println(shiftPointer);
+					//System.out.println(shiftPointer);
 				}
 				String s = shiftOpL.get(shiftPointer);
-				System.out.println(shiftOpL.get(shiftPointer));
+				//System.out.println(shiftOpL.get(shiftPointer));
 				source = new FileReader(tempFileName);
 				br = new BufferedReader(source);
 				targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -236,7 +236,7 @@ public class AssignmentOpTry {
 																	
 									String temp = "MuAssignmentOp"+count;
 									words[k] = temp;
-									System.out.println(words[k]);
+									//System.out.println(words[k]);
 								}
 							}
 							String newLine = String.join(" ", words);

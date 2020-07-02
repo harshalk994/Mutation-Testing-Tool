@@ -42,12 +42,12 @@ public class BitwiseOpTry {
 		for(int i=0;i<opP.size();i++) {
 			count++;
 			if(i!=0 && i % 2 == 0) {
-				System.out.println(i);
+				//System.out.println(i);
 				pointer++;
-				System.out.println(pointer);
+				//System.out.println(pointer);
 			}
 			String s = opL.get(pointer);
-			System.out.println(opL.get(pointer));
+			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
@@ -69,7 +69,7 @@ public class BitwiseOpTry {
 																
 								String temp = "MuBitwiseOp"+count;
 								words[k] = temp;
-								System.out.println(words[k]);
+								//System.out.println(words[k]);
 							}
 						}
 						String newLine = String.join(" ", words);
