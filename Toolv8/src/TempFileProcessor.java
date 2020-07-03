@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TempFileProcessor {
 	
@@ -23,6 +24,8 @@ public class TempFileProcessor {
 		FileWriter targetFile = new FileWriter(newTempFile);
 		BufferedWriter bw = new BufferedWriter(targetFile);
 		
+		String classKeyword = "class";
+		String regex = ".*\\class" + Pattern.quote(classKeyword) + "\\class.*";
 		String line;
 		while((line = br.readLine()) != null) {
 				
@@ -87,6 +90,99 @@ public class TempFileProcessor {
 					bw.write(newLine);
 					bw.newLine();
 				}
+				else if((line.contains("+") && line.contains("*")) || (line.contains("+") && line.contains("-")) || (line.contains("+") && line.contains("/")) || (line.contains("+") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "+" + System.lineSeparator();
+						
+ 						if(words[k].contains("+")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((line.contains("-") && line.contains("*")) || (line.contains("-") && line.contains("+")) || (line.contains("-") && line.contains("/")) || (line.contains("-") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "-" + System.lineSeparator();
+						
+ 						if(words[k].contains("-")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((line.contains("*") && line.contains("+")) || (line.contains("*") && line.contains("-")) || (line.contains("*") && line.contains("/")) || (line.contains("*") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "*" + System.lineSeparator();
+						
+ 						if(words[k].contains("*")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((line.contains("/") && line.contains("*")) || (line.contains("/") && line.contains("-")) || (line.contains("/") && line.contains("+")) || (line.contains("/") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "/" + System.lineSeparator();
+						
+ 						if(words[k].contains("/")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((line.contains("%") && line.contains("*")) || (line.contains("%") && line.contains("-")) || (line.contains("%") && line.contains("/")) || (line.contains("%") && line.contains("+"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "%" + System.lineSeparator();
+						
+ 						if(words[k].contains("%")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+//				else if(line.contains("+") && line.contains("\"")){
+//					String[] words = line.split("");
+//					for(int k=0;k<words.length;k++) {
+//						String replaceA = "+" + System.lineSeparator();
+//						
+// 						if((words[k].contains("\"") && words[k-1].contains("+"))) {
+//							String temp = replaceA;
+//							words[k-1] = temp;
+//						}else if((words[k].contains("\"") && words[k-2].contains("+")))	{
+//							String temp = replaceA;
+//							words[k-2] = temp;
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
 				
 				else {
 				bw.write(line);
