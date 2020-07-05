@@ -14,6 +14,7 @@ public class RelOpTryFinal {
 	}
 	
 	public void generateRelOpMutantFiles() throws IOException {
+
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuRelOp";
 		List<String> opL = new ArrayList<String>();
@@ -24,6 +25,7 @@ public class RelOpTryFinal {
 		RelOpStorageFinal rs = new RelOpStorageFinal();
 		//rs.processOp();
 		opL = rs.returnRelOpList();
+		//rs.printOp();
 		rs.processList(opL);
 		opP = rs.retriveRelProcessList();
 //		ArithOpTry3 aop = new ArithOpTry3();
@@ -72,13 +74,10 @@ public class RelOpTryFinal {
 							}
 						}
 						String newLine = String.join(" ", words);
-						
-						
-						
 						bw.write(newLine);
 						bw.newLine();
 					
-					}else if(line.contains(s)) {
+					}else if(line.equalsIgnoreCase(s)) {
 						
 						
 						String newLine = line.replace(line, opP.get(i));

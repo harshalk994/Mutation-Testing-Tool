@@ -10,18 +10,27 @@ public class DeleteTempFile {
 	public void deleteTempFile() {
 		
 		String file = mPath+"\\FirstTemp.java";
-		//System.out.println(file);
+		String file2 = mPath+"\\SecondTemp.java";
+		System.out.println(file);
+		//System.out.println(file2);
 		try  
 		{         
 		File f= new File(file);           //file to be delete
+		File f2= new File(file2);
 		if(f.delete())                      //returns Boolean value  
 		{  
-		//System.out.println(f.getName() + " deleted");   //getting and printing the file name  
+		System.out.println(f.getName() + " deleted");   //getting and printing the file name  
 		}  
 		else  
 		{  
-		System.out.println("FirstTemp.java file deletion failed");  
-		}  
+		System.out.println("failed");  
+		}
+		if(f2.delete()) {
+			System.out.println(f2.getName() + " deleted");
+		}
+		else {
+			System.out.println("failed");
+		}
 		}  
 		catch(Exception e)  
 		{  

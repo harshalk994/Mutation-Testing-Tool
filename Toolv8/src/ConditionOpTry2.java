@@ -14,6 +14,7 @@ public class ConditionOpTry2 {
 	}
 	
 	public void generateConditionMutantFiles() throws IOException {
+		
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuConditionOp";
 		List<String> opL = new ArrayList<String>();
@@ -72,15 +73,12 @@ public class ConditionOpTry2 {
 							}
 						}
 						String newLine = String.join(" ", words);
-						
-						
-						
 						bw.write(newLine);
 						bw.newLine();
 					
 					}
 					
-					else if(line.contains(s)) {
+					else if(line.equalsIgnoreCase(s)) {
 						
 						
 						String newLine = line.replace(line, opP.get(i));

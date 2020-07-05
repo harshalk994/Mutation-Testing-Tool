@@ -71,13 +71,10 @@ public void generateIncDecOpMutantFiles() throws IOException {
 							}
 						}
 						String newLine = String.join(" ", words);
-						
-						
-						
 						bw.write(newLine);
 						bw.newLine();
 					
-					}else if(line.contains(s)) {
+					}else if(line.equalsIgnoreCase(s)) {
 						
 						
 						String newLine = line.replace(line, incDecOpP.get(i));

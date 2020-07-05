@@ -61,12 +61,12 @@ public class RelOpStorageFinal {
 		return conditionOpL;
 	}
 	
-	public void printOp() {
-		System.out.println("Original Operators Stored are: \n");
-		for(int i=0;i<conditionOpL.size();i++) {
-			System.out.println(conditionOpL.get(i));
-		}
-	}
+//	public void printOp() {
+//		System.out.println("Original Operators Stored are: \n");
+//		for(int i=0;i<conditionOpL.size();i++) {
+//			System.out.println(conditionOpL.get(i));
+//		}
+//	}
 	
 	
 	public void processList(List<String> conditionOpL ) {

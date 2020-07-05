@@ -142,7 +142,16 @@ public class OperatorStorage {
 		String line;
 		String check = "+"+System.lineSeparator();
 		while((line = br.readLine()) != null) {
-			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")))
+			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")) || (line.contains("\"") && line.contains("*")) || (line.contains("\"") && line.contains("/")) || (line.contains("\"") && line.contains("-")) || (line.contains("\"") && line.contains("%")))
+				continue;
+			
+			if(line.contains("case"))
+				continue;
+			
+			if(line.contains("\""))
+				continue;
+			
+			if(line.contains("switch"))
 				continue;
 			
 //			if(line.contains("return")) {
@@ -185,9 +194,9 @@ public class OperatorStorage {
 			}
 			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
-			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++"))) || (line.contains("-") && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")))  || (line.contains("*") && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("/=")) || ((line.contains("%")) && !(line.contains("%=")))) {
-					String newLine = line.trim();
-					opList.add(newLine);
+			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("--")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++"))) || (line.contains("-") && !(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")))  || (line.contains("*") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("/=")) || (line.contains("%") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("%=")))) {
+					//String newLine = line.trim();
+					opList.add(line);
 				}
 			
 			if(line.contains("=+") || line.contains("= +")) {
@@ -221,6 +230,14 @@ public class OperatorStorage {
 	}
 	
 //	public void printOp() {		
+//		System.out.println("\n -----------Pre List----------------");
+//		for(int i=0;i<opList.size();i++) {
+//			System.out.println(opList.get(i));
+//		}
+//	}
+	
+//	public void printOpTwo() {		
+//		System.out.println("\n -----------Pre Two List----------------");
 //		for(int i=0;i<opTwoL.size();i++) {
 //			System.out.println(opTwoL.get(i));
 //		}
@@ -293,6 +310,20 @@ public class OperatorStorage {
 	public List<String> retriveProcessTwoList(){
 		return opTwoP;
 	}
+	
+//	public void printPostOp() {		
+//		System.out.println("\n -----------Post List----------------");
+//		for(int i=0;i<opP.size();i++) {
+//			System.out.println(opP.get(i));
+//		}
+//	}
+	
+//	public void printPostOpTwo() {		
+//		System.out.println("\n -----------Post Two List----------------");
+//		for(int i=0;i<opTwoP.size();i++) {
+//			System.out.println(opTwoP.get(i));
+//		}
+//	}
 	
 
 }

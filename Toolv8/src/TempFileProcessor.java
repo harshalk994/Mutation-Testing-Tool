@@ -18,7 +18,7 @@ public class TempFileProcessor {
 	public void processTempFile() throws IOException {
 
     	String tempFileName = mPath+"\\FirstTemp.java";
-    	String newTempFile = mPath+"\\Temp.java";
+    	String newTempFile = mPath+"\\SecondTemp.java";
 		FileReader source = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(source);
 		FileWriter targetFile = new FileWriter(newTempFile);
@@ -40,7 +40,7 @@ public class TempFileProcessor {
 							//System.out.println(replaceW);
 							//words[j].replaceAll(newW, "M"+count);
 							
-							String temp = "Temp";
+							String temp = "SecondTemp";
 							words[j] = temp;
 							//System.out.println(words[j]);
 						}
@@ -74,74 +74,54 @@ public class TempFileProcessor {
 				}
 				else if(line.contains("System.out.println") && line.contains("+") && !(line.contains("+="))){
 					String[] words = line.split("");
+					
 					for(int k=0;k<words.length;k++) {
-						String replaceA = "+" + System.lineSeparator();
+//						boolean contains = words[k].matches(".*\\\"+\"\\b.*");
+//						System.out.println(words[k].matches(".*\\\"+\"\\b.*"));
+						//if(!contains) {
+							String replaceA = "+" + System.lineSeparator();
+							
+	 						if((words[k].contains("\"") && words[k+1].contains("+"))) {
+								String temp = replaceA;
+								words[k+1] = temp;
+							}else if((words[k].contains("\"") && words[k+2].contains("+")))	{
+								String temp = replaceA;
+								words[k+2] = temp;
+							}
+						//}
 						
- 						if((words[k].contains("\"") && words[k+1].contains("+"))) {
-							String temp = replaceA;
-							words[k+1] = temp;
-						}else if((words[k].contains("\"") && words[k+2].contains("+")))	{
-							String temp = replaceA;
-							words[k+2] = temp;
-						}
 					}
 					String newLine = String.join("", words);
 					
 					bw.write(newLine);
 					bw.newLine();
 				}
-				else if((line.contains("+") && line.contains("*")) || (line.contains("+") && line.contains("-")) || (line.contains("+") && line.contains("/")) || (line.contains("+") && line.contains("%"))){
+				else if((!(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("\"")) && line.contains("+") && line.contains("*")) || (!(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("\"")) && line.contains("+") && line.contains("-")) || (!(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("\"")) && line.contains("+") && line.contains("/")) || (!(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("\"")) && line.contains("+") && line.contains("%"))){
 					String[] words = line.split("");
 					for(int k=0;k<words.length;k++) {
 						String replaceA = "+" + System.lineSeparator();
-						
+						String replaceB = "-" + System.lineSeparator();
+						String replaceC = "*" + System.lineSeparator();
+						String replaceD = "/" + System.lineSeparator();
+						String replaceE = "%" + System.lineSeparator();
  						if(words[k].contains("+")) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-					}
-					String newLine = String.join("", words);
-					
-					bw.write(newLine);
-					bw.newLine();
-				}
-				else if((line.contains("-") && line.contains("*")) || (line.contains("-") && line.contains("+")) || (line.contains("-") && line.contains("/")) || (line.contains("-") && line.contains("%"))){
-					String[] words = line.split("");
-					for(int k=0;k<words.length;k++) {
-						String replaceA = "-" + System.lineSeparator();
-						
  						if(words[k].contains("-")) {
-							String temp = replaceA;
+							String temp = replaceB;
 							words[k] = temp;
 						}
-					}
-					String newLine = String.join("", words);
-					
-					bw.write(newLine);
-					bw.newLine();
-				}
-				else if((line.contains("*") && line.contains("+")) || (line.contains("*") && line.contains("-")) || (line.contains("*") && line.contains("/")) || (line.contains("*") && line.contains("%"))){
-					String[] words = line.split("");
-					for(int k=0;k<words.length;k++) {
-						String replaceA = "*" + System.lineSeparator();
-						
  						if(words[k].contains("*")) {
-							String temp = replaceA;
+							String temp = replaceC;
 							words[k] = temp;
 						}
-					}
-					String newLine = String.join("", words);
-					
-					bw.write(newLine);
-					bw.newLine();
-				}
-				else if((line.contains("/") && line.contains("*")) || (line.contains("/") && line.contains("-")) || (line.contains("/") && line.contains("+")) || (line.contains("/") && line.contains("%"))){
-					String[] words = line.split("");
-					for(int k=0;k<words.length;k++) {
-						String replaceA = "/" + System.lineSeparator();
-						
  						if(words[k].contains("/")) {
-							String temp = replaceA;
+							String temp = replaceD;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("%")) {
+							String temp = replaceE;
 							words[k] = temp;
 						}
 					}
@@ -150,12 +130,148 @@ public class TempFileProcessor {
 					bw.write(newLine);
 					bw.newLine();
 				}
-				else if((line.contains("%") && line.contains("*")) || (line.contains("%") && line.contains("-")) || (line.contains("%") && line.contains("/")) || (line.contains("%") && line.contains("+"))){
+				else if((!(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("\"")) && line.contains("-") && line.contains("*")) || (!(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("\"")) && line.contains("-") && line.contains("+")) || (!(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("\"")) && line.contains("-") && line.contains("/")) || (!(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("\"")) && line.contains("-") && line.contains("%"))){
 					String[] words = line.split("");
 					for(int k=0;k<words.length;k++) {
-						String replaceA = "%" + System.lineSeparator();
-						
+						String replaceA = "+" + System.lineSeparator();
+						String replaceB = "-" + System.lineSeparator();
+						String replaceC = "*" + System.lineSeparator();
+						String replaceD = "/" + System.lineSeparator();
+						String replaceE = "%" + System.lineSeparator();
+ 						if(words[k].contains("+")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("-")) {
+							String temp = replaceB;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("*")) {
+							String temp = replaceC;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("/")) {
+							String temp = replaceD;
+							words[k] = temp;
+						}
  						if(words[k].contains("%")) {
+							String temp = replaceE;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((!(line.contains("++")) && !(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("+")) || (!(line.contains("++")) && !(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("-")) || (!(line.contains("++")) && !(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("/")) || (!(line.contains("++")) && !(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) &&  !(line.contains("\"")) && line.contains("*") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "+" + System.lineSeparator();
+						String replaceB = "-" + System.lineSeparator();
+						String replaceC = "*" + System.lineSeparator();
+						String replaceD = "/" + System.lineSeparator();
+						String replaceE = "%" + System.lineSeparator();
+ 						if(words[k].contains("+")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("-")) {
+							String temp = replaceB;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("*")) {
+							String temp = replaceC;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("/")) {
+							String temp = replaceD;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("%")) {
+							String temp = replaceE;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((!(line.contains("++")) && !(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("*")) || (!(line.contains("++")) && !(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("-")) || (!(line.contains("++")) && !(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("+")) || (!(line.contains("++")) && !(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("%"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "+" + System.lineSeparator();
+						String replaceB = "-" + System.lineSeparator();
+						String replaceC = "*" + System.lineSeparator();
+						String replaceD = "/" + System.lineSeparator();
+						String replaceE = "%" + System.lineSeparator();
+ 						if(words[k].contains("+")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("-")) {
+							String temp = replaceB;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("*")) {
+							String temp = replaceC;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("/")) {
+							String temp = replaceD;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("%")) {
+							String temp = replaceE;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((!(line.contains("++")) && !(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("*")) || (!(line.contains("++")) && !(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("-")) || (!(line.contains("++")) && !(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("/")) || (!(line.contains("++")) && !(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("+"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = "+" + System.lineSeparator();
+						String replaceB = "-" + System.lineSeparator();
+						String replaceC = "*" + System.lineSeparator();
+						String replaceD = "/" + System.lineSeparator();
+						String replaceE = "%" + System.lineSeparator();
+ 						if(words[k].contains("+")) {
+							String temp = replaceA;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("-")) {
+							String temp = replaceB;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("*")) {
+							String temp = replaceC;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("/")) {
+							String temp = replaceD;
+							words[k] = temp;
+						}
+ 						if(words[k].contains("%")) {
+							String temp = replaceE;
+							words[k] = temp;
+						}
+					}
+					String newLine = String.join("", words);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if((line.contains("case") && line.contains(":"))){
+					String[] words = line.split("");
+					for(int k=0;k<words.length;k++) {
+						String replaceA = ":" + System.lineSeparator();
+						
+ 						if(words[k].contains(":")) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
@@ -165,6 +281,150 @@ public class TempFileProcessor {
 					bw.write(newLine);
 					bw.newLine();
 				}
+//				else if(line.contains("+")){
+//					String[] words = line.split("");
+//					String replaceA = "+" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("+")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("+")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("-")){
+//					String[] words = line.split("");
+//					String replaceA = "-" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("-")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("-")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("*")){
+//					String[] words = line.split("");
+//					String replaceA = "*" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("*")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("*")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("/")){
+//					String[] words = line.split("");
+//					String replaceA = "/" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("/")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("/")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("%")){
+//					String[] words = line.split("");
+//					String replaceA = "%" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("%")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("%")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("&")){
+//					String[] words = line.split("");
+//					String replaceA = "&" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("&")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("&")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("|")){
+//					String[] words = line.split("");
+//					String replaceA = "|" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("|")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("|")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+//				else if(line.contains("^")){
+//					String[] words = line.split("");
+//					String replaceA = "^" + System.lineSeparator();
+//					for(int i=0;i<words.length;i++) {
+//						if(words[i].contains("^")) {
+//							for(int j=i+2;j<words.length;j++) {
+//								if(words[j].contains("^")) {
+//									String temp = replaceA;
+//									words[i] = temp;
+//								}
+//							}
+//						}
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
 //				else if(line.contains("+") && line.contains("\"")){
 //					String[] words = line.split("");
 //					for(int k=0;k<words.length;k++) {

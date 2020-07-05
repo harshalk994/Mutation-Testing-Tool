@@ -94,13 +94,10 @@ public class AssignmentOpTry {
 								}
 							}
 							String newLine = String.join(" ", words);
-							
-							
-							
 							bw.write(newLine);
 							bw.newLine();
 						
-						}else if(line.contains(s)) {
+						}else if(line.equalsIgnoreCase(s)) {
 							
 							
 							String newLine = line.replace(line, arithOpP.get(i));
@@ -167,13 +164,10 @@ public class AssignmentOpTry {
 								}
 							}
 							String newLine = String.join(" ", words);
-							
-							
-							
 							bw.write(newLine);
 							bw.newLine();
 						
-						}else if(line.contains(s)) {
+						}else if(line.equalsIgnoreCase(s)) {
 							
 							
 							String newLine = line.replace(line, bitwiseOpP.get(i));
@@ -240,13 +234,10 @@ public class AssignmentOpTry {
 								}
 							}
 							String newLine = String.join(" ", words);
-							
-							
-							
 							bw.write(newLine);
 							bw.newLine();
 						
-						}else if(line.contains(s)) {
+						}else if(line.equalsIgnoreCase(s)) {
 							
 							
 							String newLine = line.replace(line, shiftOpP.get(i));

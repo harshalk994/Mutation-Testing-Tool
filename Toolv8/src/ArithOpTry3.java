@@ -38,11 +38,14 @@ public class ArithOpTry3 {
 		opL = os.returnOpList();
 		os.processList(opL);
 		opP = os.retriveProcessList();
+		//os.printPostOp();
 		
 		opTwoL = os.returnOpTwoList();
 		//os.printOp();
 		os.processTwoList(opTwoL);
 		opTwoP = os.retriveProcessTwoList();
+		//os.printPostOpTwo();
+		
 //		ArithOpTry3 aop = new ArithOpTry3();
 //		aop.buildList(opL);
 //		aop.processList(opL);
@@ -64,6 +67,9 @@ public class ArithOpTry3 {
 					//System.out.println(pointer);
 				}
 				String s = opL.get(pointer);
+//				if(s.contains("(")) {
+//					s.replace("(", "\\(");
+//				}
 				//System.out.println(opL.get(pointer));
 				source = new FileReader(tempFileName);
 				br = new BufferedReader(source);
@@ -96,7 +102,7 @@ public class ArithOpTry3 {
 							bw.write(newLine);
 							bw.newLine();
 						
-						}else if(line.contains(s)) {
+						}else if(line.equalsIgnoreCase(s)) {
 							
 							
 							String newLine = line.replace(line, opP.get(i));
@@ -165,7 +171,7 @@ public class ArithOpTry3 {
 							bw.write(newLine);
 							bw.newLine();
 						
-						}else if(line.contains(s)) {
+						}else if(line.equalsIgnoreCase(s)) {
 							
 							
 							String newLine = line.replace(line, opTwoP.get(k));
@@ -256,7 +262,6 @@ public class ArithOpTry3 {
 //			System.out.println(opP.get(i));
 //		}
 //	}
-	
 	
 
 }

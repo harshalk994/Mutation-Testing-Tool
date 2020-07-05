@@ -89,9 +89,14 @@ public class Main {
 		tfp.getPath(mutantFileLocation);
 		tfp.processTempFile();
 		
+		FinalTempProcessor ftp = new FinalTempProcessor();
+		ftp.getPath(mutantFileLocation);
+		ftp.processTempFile();
+		
 		DeleteTempFile dtf = new DeleteTempFile();
 		dtf.getPath(mutantFileLocation);
 		dtf.deleteTempFile();
+		
 		
 		System.out.println("Generating Mutants . . . . . \n");
 		Thread.sleep(2000);
