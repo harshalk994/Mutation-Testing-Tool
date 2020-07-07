@@ -22,7 +22,7 @@ public class UserInputs {
 		 
 		    String oPath = props.getProperty("originalprogrampath");
 		    String mPath = props.getProperty("mutantdestination");
-		    String pName = props.getProperty("packagename");
+		    String pName = props.getProperty("originalprogrampackagename");
 		    setProperties(oPath, mPath, pName);
 		} catch (Exception e) {
 		    e.printStackTrace();

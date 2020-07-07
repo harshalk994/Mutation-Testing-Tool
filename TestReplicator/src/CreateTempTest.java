@@ -71,7 +71,7 @@ public class CreateTempTest {
 							if(words[s].contains("(") && words[s+1].contains(")")){
 								String temp = replaceBrackets;
 								words[s-1] = temp;
-								System.out.println(words[s-1]);
+								//System.out.println(words[s-1]);
 								
 							}
 						}
@@ -89,7 +89,7 @@ public class CreateTempTest {
 		bw.close();
 		source.close();
 		fw.close();
-		System.out.println("TempTest.java generated successfully!!");
+		//System.out.println("TempTest.java generated successfully!!");
 
 	}
 

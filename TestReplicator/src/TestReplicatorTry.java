@@ -184,7 +184,7 @@ public class TestReplicatorTry {
 	}
 		source.close();
 		fw.close();
-		System.out.println("DONE!!");
+		System.out.println("Test Copies generated in the specified folder.");
 
 }
 }
