@@ -12,7 +12,7 @@ public class DeleteTempFile {
 		String file = mPath+"\\FirstTemp.java";
 		String file2 = mPath+"\\SecondTemp.java";
 		String file3 = mPath+"\\OriginalTempCopy.java";
-		System.out.println(file);
+		//System.out.println(file);
 		//System.out.println(file2);
 		try  
 		{         
@@ -21,20 +21,20 @@ public class DeleteTempFile {
 		File f3 = new File(file3);
 		if(f.delete())                      //returns Boolean value  
 		{  
-		System.out.println(f.getName() + " deleted");   //getting and printing the file name  
+		//System.out.println(f.getName() + " deleted");   //getting and printing the file name  
 		}  
 		else  
 		{  
 		System.out.println("failed");  
 		}
 		if(f2.delete()) {
-			System.out.println(f2.getName() + " deleted");
+			//System.out.println(f2.getName() + " deleted");
 		}
 		else {
 			System.out.println("failed");
 		}
 		if(f3.delete()) {
-			System.out.println(f3.getName() + " deleted");
+			//System.out.println(f3.getName() + " deleted");
 		}
 		else {
 			System.out.println("failed");

@@ -9,12 +9,17 @@ import java.util.List;
 public class ShiftOpTry {
 	
 	private static String mPath;
+	private static String className;
+	
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
 	public void generateShiftOpMutantFiles() throws IOException {
 
+		SetClassNameProperty scp = new SetClassNameProperty();
+		className = scp.getCName();
+		
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuShiftOp";
 		List<String> opL = new ArrayList<String>();
@@ -58,25 +63,46 @@ public class ShiftOpTry {
 
 				while((line = br.readLine()) != null) {
 				//	System.out.println("Here1");
-					if(line.contains("class")) {
+					
+					if(line.contains(className)) {
 						String[] words = line.split(" ");
-						for(int k=0; k<words.length; k++) {
-							
-							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-							String newW = replaceW.trim();
-							
-							if(words[k].contains(newW)) {
-																
+						//String[] brackets = line.split("");
+						for(int k=0;k<words.length;k++) {
+							if(words[k].contains(className)) {
 								String temp = "MuShiftOp"+count;
 								words[k] = temp;
-								//System.out.println(words[k]);
+								//scp.setCName(temp);
+//								System.out.println("Final Class Name is: " + scp.getClassName());
 							}
 						}
 						String newLine = String.join(" ", words);
+						//String secondLine = String.join("", brackets);
+						
 						bw.write(newLine);
+						//bw.write(secondLine);
 						bw.newLine();
+					}
 					
-					}else if(line.equalsIgnoreCase(s)) {
+//					if(line.contains("class")) {
+//						String[] words = line.split(" ");
+//						for(int k=0; k<words.length; k++) {
+//							
+//							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+//							String newW = replaceW.trim();
+//							
+//							if(words[k].contains(newW)) {
+//																
+//								String temp = "MuShiftOp"+count;
+//								words[k] = temp;
+//								//System.out.println(words[k]);
+//							}
+//						}
+//						String newLine = String.join(" ", words);
+//						bw.write(newLine);
+//						bw.newLine();
+//					
+//					}
+					else if(line.equalsIgnoreCase(s)) {
 						
 						
 						String newLine = line.replace(line, opP.get(i));
