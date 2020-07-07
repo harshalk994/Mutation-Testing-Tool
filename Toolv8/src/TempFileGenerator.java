@@ -7,15 +7,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TempFileGenerator {
 	
 	private static String mPath;
+	private static String fPath;
+	private static String className;
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
-	public void createTempFile(String file) throws IOException {
+	public void getFPath(String originalFilePath) {
+		fPath = originalFilePath;
+	}
+	public void createTempFile() throws IOException {
 //		List<String> paths = new ArrayList<String>();
 //    	FileDetailsStorage fds3 = new FileDetailsStorage();
 //    	paths = fds3.returnPaths();
@@ -31,8 +37,25 @@ public class TempFileGenerator {
 //    	}
 //    	
 //    	System.out.println(mPath);
+		
+//		String[] locatewords = fPath.split("\\\\");
+//		for(int i=0;i<locatewords.length;i++) {
+//			if(locatewords[i].contains(".java")) {
+//				String newW = locatewords[i].replace(".java", "");
+//				className = newW;
+//				
+//			}
+//		}
+		//System.out.println("Classname is : " + className);
+		SetClassNameProperty scp = new SetClassNameProperty();
+		//scp.setCName("FirstTemp");
+		//TempFileGenerator tfg = new TempFileGenerator();
+		className = scp.getCName();
+		String sourceFileName = mPath+"\\OriginalTempCopy.java";
     	String tempFileName = mPath+"\\FirstTemp.java";
-		FileReader source = new FileReader(file);
+    	
+    	//System.out.println("In TempFileGenerator Class name was set to: " + scp.getCName());
+		FileReader source = new FileReader(sourceFileName);
 		BufferedReader br = new BufferedReader(source);
 		FileWriter targetFile = new FileWriter(tempFileName);
 		BufferedWriter bw = new BufferedWriter(targetFile);
@@ -41,90 +64,35 @@ public class TempFileGenerator {
 		
 		String line;
 		while((line = br.readLine()) != null) {
-//			String singleLineComment = line.substring(line.indexOf("//"));
-//			System.out.println(singleLineComment);
-//			String multiLineComment = line.substring(line.indexOf("/*"), line.indexOf("*/"));
-//			System.out.println(multiLineComment);
-//			
-//			
-//			if(!line.contains(singleLineComment)) {
-			
-			
-//				
-				if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-					String[] words = line.split(" ");
-					for(int j=0; j<words.length; j++) {
-						//String replaceW = word.substring(word.indexOf("s ") +1, word.indexOf('{'));
-						String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-						String newW = replaceW.trim();
-						//System.out.println(newW);
-						if(words[j].contains(newW)) {
-							//System.out.println(replaceW);
-							//words[j].replaceAll(newW, "M"+count);
-							
-							String temp = "FirstTemp";
-							words[j] = temp;
-							//System.out.println(words[j]);
-						}
+				
+			if(line.contains(className) && line.contains("(")) {
+				//System.out.println("I found bracket line");
+				String[] brackets = line.split("");
+				for(int j=0;j<brackets.length;j++) {
+					if(brackets[j].contains("(")) {
+						String replaceBrackets = brackets[j-1]+System.lineSeparator();
+						String temp = replaceBrackets;
+						brackets[j-1] = temp;
+						//System.out.println("HERE: " + brackets[j-1]);
 					}
-					String newLine = String.join(" ", words);
-		
-					bw.write(newLine);
-					bw.newLine();
+			}
+				String newLine = String.join("", brackets);
+				bw.write(newLine);
+				bw.newLine();
 				
-				}
-//				else if(line.contains("&&") || line.contains("||")){
-//					String[] words = line.split("");
-//					for(int k=0;k<words.length;k++) {
-//						String replaceA = "&" + System.lineSeparator();
-//						String replaceO = "|" + System.lineSeparator();
-// 						if(words[k].contains("&") && words[k+1].contains("&")) {
-//							String temp = replaceA;
-//							words[k+1] = temp;
-//						}
-// 						
-// 						if(words[k].contains("|") && words[k+1].contains("|")) {
-//							String temp = replaceO;
-//							words[k+1] = temp;
-//						}
-//						
-//					}
-//					String newLine = String.join("", words);
-//					
-//					bw.write(newLine);
-//					bw.newLine();
-//				}
-//				else if(line.contains("System.out.println") && line.contains("+") && !(line.contains("+="))){
-//					String[] words = line.split("");
-//					for(int k=0;k<words.length;k++) {
-//						String replaceA = "+" + System.lineSeparator();
-//						
-// 						if(words[k].contains("+")) {
-//							String temp = replaceA;
-//							words[k] = temp;
-//						}	
-//					}
-//					String newLine = String.join("", words);
-//					
-//					bw.write(newLine);
-//					bw.newLine();
-//				}
-				
+			}
+
 				else {
 				bw.write(line);
 				bw.newLine();
 				}
-//			}
 			
 		}
 		
 		br.close();
 		bw.close();
 		source.close();
-		targetFile.close();
-		
-		//op.processOp(opList);
-		
+		targetFile.close();		
 	}
 
 }

@@ -8,11 +8,15 @@ import java.util.regex.Pattern;
 public class FinalTempProcessor {
 	
 	private static String mPath;
+	private static String className;
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
 	public void processTempFile() throws IOException {
+		
+		SetClassNameProperty scp = new SetClassNameProperty();
+		className = scp.getCName();
 
     	String tempFileName = mPath+"\\SecondTemp.java";
     	String newTempFile = mPath+"\\Temp.java";
@@ -23,30 +27,51 @@ public class FinalTempProcessor {
 		
 		String line;
 		while((line = br.readLine()) != null) {
-				
-				if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-					String[] words = line.split(" ");
-					for(int j=0; j<words.length; j++) {
-						//String replaceW = word.substring(word.indexOf("s ") +1, word.indexOf('{'));
-						String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-						String newW = replaceW.trim();
-						//System.out.println(newW);
-						if(words[j].contains(newW)) {
-							//System.out.println(replaceW);
-							//words[j].replaceAll(newW, "M"+count);
-							
-							String temp = "Temp";
-							words[j] = temp;
-							//System.out.println(words[j]);
-						}
+			
+			if(line.contains(className)) {
+				String[] words = line.split(" ");
+				//String[] brackets = line.split("");
+				for(int i=0;i<words.length;i++) {
+					if(words[i].contains(className)) {
+						String temp = "Temp";
+						words[i] = temp;
+						scp.setCName(temp);
+//						System.out.println("Final Class Name is: " + scp.getClassName());
 					}
-					String newLine = String.join(" ", words);
-		
-					bw.write(newLine);
-					bw.newLine();
-				
 				}
-				else if(line.contains("+") && !(line.contains("\"")) && !(line.contains("+="))){
+
+				String newLine = String.join(" ", words);
+				//String secondLine = String.join("", brackets);
+				
+				bw.write(newLine);
+				//bw.write(secondLine);
+				bw.newLine();
+			}
+				
+//				if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
+//					String[] words = line.split(" ");
+//					for(int j=0; j<words.length; j++) {
+//						//String replaceW = word.substring(word.indexOf("s ") +1, word.indexOf('{'));
+//						String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
+//						String newW = replaceW.trim();
+//						//System.out.println(newW);
+//						if(words[j].contains(newW)) {
+//							//System.out.println(replaceW);
+//							//words[j].replaceAll(newW, "M"+count);
+//							
+//							String temp = "Temp";
+//							words[j] = temp;
+//							//System.out.println(words[j]);
+//						}
+//					}
+//					String newLine = String.join(" ", words);
+//		
+//					bw.write(newLine);
+//					bw.newLine();
+//				
+//				}
+				
+			else if(line.contains("+") && !(line.contains("\"")) && !(line.contains("+="))){
 					String[] words = line.split("");
 					String replaceA = "+" + System.lineSeparator();
 					for(int i=0;i<words.length;i++) {

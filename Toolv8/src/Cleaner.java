@@ -20,7 +20,7 @@ public class Cleaner{
 
 
     static String readFile() {    
-    	String tempFileName = mPath+"\\FirstTemp.java";
+    	String tempFileName = mPath+"\\OriginalTempCopy.java";
         File file = new File(tempFileName);    
 
         char[] buffer = null;    

@@ -77,13 +77,19 @@ public class Main {
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
 		
-		TempFileGenerator temp = new TempFileGenerator();
-		temp.getPath(mutantFileLocation);
-		temp.createTempFile(fileLocation);
-		
+		OriginalClassCopyFile ocp = new OriginalClassCopyFile();
+		ocp.getPath(mutantFileLocation);
+		ocp.getFPath(fileLocation);
+		ocp.createTempFile(fileLocation);
+
 		RemoveComments rc = new RemoveComments();
 		rc.getPath(mutantFileLocation);
 		rc.removeComments();
+		
+		TempFileGenerator temp = new TempFileGenerator();
+		temp.getPath(mutantFileLocation);
+		temp.createTempFile();
+		
 		
 		TempFileProcessor tfp = new TempFileProcessor();
 		tfp.getPath(mutantFileLocation);

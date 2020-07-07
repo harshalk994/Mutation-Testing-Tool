@@ -8,13 +8,20 @@ import java.io.IOException;
 public class RemoveComments {
 	
 	private static String mPath;
+	//private static String fPath;
+	
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
+//	public void getFPath(String originalFilePath) {
+//		fPath = originalFilePath;
+//	}
+	
 	public void removeComments() throws IOException {
+
+    	String tempFileName = mPath+"\\OriginalTempCopy.java";
 		
-		String tempFileName = mPath+"\\FirstTemp.java";
 		Cleaner cleaner = new Cleaner();
 		String line = cleaner.readFile();
 		String newLine = line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");
@@ -22,6 +29,8 @@ public class RemoveComments {
 		FileWriter fw = new FileWriter(tempFileName);
 		fw.write(newLine);
 		fw.close();
+		
+		//System.out.println("Temp File generated successfully!!");
 		
 		
 		
