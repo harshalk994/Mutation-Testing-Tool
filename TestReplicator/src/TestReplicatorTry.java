@@ -14,6 +14,8 @@ public class TestReplicatorTry {
 	private static String tmPath;
 	private static String nameOfTestClass;
 	private static String nameOfClassUnderTest;
+	private static String mPath;
+	private static String fPath;
 	
 	private static String className;
 	
@@ -29,9 +31,29 @@ public class TestReplicatorTry {
 		nameOfClassUnderTest = cName;
 	}
 	
+	public void getPath(String testFilePath) {
+		mPath = testFilePath;
+	}
+	
+	public void getFPath(String originalTestPath) {
+		fPath = originalTestPath;
+	}
+	
 	public void testReplicator() throws IOException {
 		SetClassNameProperty scp = new SetClassNameProperty();
-		nameOfTestClass = scp.getCName();
+		String mLocation=mPath;
+		String[] locatewords = fPath.split("\\\\");
+		for(int i=0;i<locatewords.length;i++) {
+			if(locatewords[i].contains(".java")) {
+				String newW = locatewords[i].replace(".java", "");
+				className = newW;
+//				scp.setCName(className);
+//				System.out.println("ClassName was set to: " + className);
+			}
+		}
+		
+		
+		nameOfTestClass = className;
 			File directoryPath = new File(mutantsPath);
 			List<String> removeNull = new ArrayList<String>();
 	      //List of all files and directories
@@ -95,7 +117,7 @@ public class TestReplicatorTry {
 		//String nameOfClassUnderTest = "OriginalProgram";
 		
 		for(int k=0, p=0;k<trimmedStr.length;k++,p++) {
-			source = new FileReader(location+"\\TempTest.java");
+			source = new FileReader(fPath);
 			br = new BufferedReader(source);
 			fw = new FileWriter(location+"\\"+className[p]+".java");
 			bw = new BufferedWriter(fw);

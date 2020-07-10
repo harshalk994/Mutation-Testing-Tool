@@ -21,13 +21,15 @@ public class Main {
 		nameOfClassUnderTest = ui.returnOriginalCName();
 		mutantPath = ui.returnMutantPath();
 		
-		CreateTempTest ct = new CreateTempTest();
-		ct.getFPath(originalTestLocation);
-		ct.getPath(testCopyLocation);
-		ct.getClassName(nameOfClassUnderTest);
-		ct.createTempCopy();
+//		CreateTempTest ct = new CreateTempTest();
+//		ct.getFPath(originalTestLocation);
+//		ct.getPath(testCopyLocation);
+//		ct.getClassName(nameOfClassUnderTest);
+//		ct.createTempCopy();
 		
 		TestReplicatorTry tr = new TestReplicatorTry();
+		tr.getPath(testCopyLocation);
+		tr.getFPath(originalTestLocation);
 		tr.getTMPath(testCopyLocation);
 		tr.getMPath(mutantPath);
 		tr.getClassName(nameOfClassUnderTest);

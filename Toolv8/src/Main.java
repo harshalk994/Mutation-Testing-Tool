@@ -21,6 +21,7 @@ public class Main {
 		ui.readProperties();
 		fileLocation = ui.returnOPath();
 		mutantFileLocation = ui.returnMPath();
+		System.out.println("MPath is: " + mutantFileLocation);
 		
 //		JavaSyntaxChecker checker = new JavaSyntaxChecker();
 //		List<String> logs = checker.check(fileLocation);

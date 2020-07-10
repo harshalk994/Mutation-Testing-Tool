@@ -23,6 +23,7 @@ public class UserInputs {
 		    String oPath = props.getProperty("originalprogrampath");
 		    String mPath = props.getProperty("mutantdestination");
 		    String pName = props.getProperty("originalprogrampackagename");
+		    System.out.println("pName is: " + pName);
 		    setProperties(oPath, mPath, pName);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -32,6 +33,7 @@ public class UserInputs {
 	public void setProperties(String oPath, String mPath, String pName) throws IOException {
 		originalpath = oPath;
 		mutantpath = mPath;
+		
 		String appendPath;
 		if(pName!=null) {
 			if(pName.contains(".")) {
