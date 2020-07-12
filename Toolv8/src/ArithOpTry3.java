@@ -12,16 +12,12 @@ public class ArithOpTry3 {
 	
 	private static String mPath;
 	private static String className;
-	
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
 	
 	public void generateArithOpMutantFiles() throws IOException {
-		
-		SetClassNameProperty scp = new SetClassNameProperty();
-		className = scp.getCName();
 		
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuArithOp";
@@ -37,6 +33,7 @@ public class ArithOpTry3 {
 		String classKeyword = "class";
 		String regex = ".*\\class" + Pattern.quote(classKeyword) + "\\class.*";
 		
+		
 		OperatorStorage os = new OperatorStorage();
 		os.processOp();
 		
@@ -50,6 +47,9 @@ public class ArithOpTry3 {
 		os.processTwoList(opTwoL);
 		opTwoP = os.retriveProcessTwoList();
 		//os.printPostOpTwo();
+		
+		SetClassNameProperty scp = new SetClassNameProperty();
+		className = scp.getCName();
 		
 //		ArithOpTry3 aop = new ArithOpTry3();
 //		aop.buildList(opL);
@@ -88,29 +88,43 @@ public class ArithOpTry3 {
 					//	System.out.println("Here1");
 						
 						if(line.contains(className)) {
-							String[] words = line.split(" ");
-							//String[] brackets = line.split("");
-							for(int k=0;k<words.length;k++) {
-								if(words[k].contains(className)) {
-									String temp = "MuArithOp"+count;
-									words[k] = temp;
-									//scp.setCName(temp);
-//									System.out.println("Final Class Name is: " + scp.getClassName());
-								}
-							}
-							String newLine = String.join(" ", words);
-							//String secondLine = String.join("", brackets);
 							
+							
+							String newLine = line.replaceAll(className, "MuArithOp"+count);
+							//scp.setCName(updateCName);
 							bw.write(newLine);
-							//bw.write(secondLine);
 							bw.newLine();
-						}
+							
+					}
+						
+//						if(line.contains(className)) {
+//							String[] words = line.split(" ");
+//							//String[] brackets = line.split("");
+//							for(int k=0;k<words.length;k++) {
+//								if(words[k].contains(className)) {
+//									String temp = "MuArithOp"+count;
+//									words[k] = temp;
+//									//scp.setCName(temp);
+////									System.out.println("Final Class Name is: " + scp.getClassName());
+//								}
+//							}
+//							String newLine = String.join(" ", words);
+//							//String secondLine = String.join("", brackets);
+//							
+//							bw.write(newLine);
+//							//bw.write(secondLine);
+//							bw.newLine();
+//						}
+						
 //						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
 //							String[] words = line.split(" ");
 //							for(int k=0; k<words.length; k++) {
 //								
 //								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
 //								String newW = replaceW.trim();
+//								//System.out.println(newW);
+//								setProperties(newW);
+//								//System.out.println("Class name is: " + className);
 //								
 //								if(words[k].contains(newW)) {
 //																	
@@ -140,6 +154,34 @@ public class ArithOpTry3 {
 //							//	System.out.println(pointer);
 //							}
 					}
+//						else if(line.contains(className)) {
+//							String[] words = line.split(" ");
+//							for(int k=0;k<words.length;k++) {
+//								if(words[k].contains(className)) {
+//									String temp = "MuArithOp"+count;
+//									words[k] = temp;
+//								}
+//							}
+//							String newLine = String.join(" ", words);
+//							
+//							bw.write(newLine);
+//							bw.newLine();
+//						}
+//						else if(line.contains(className)) {
+//							String[] words = line.split(" ");
+//							for(int c=0;c<words.length;c++) {
+//								if(words[c].contains(className)) {
+//									String temp = "MuArithOp"+count;
+//									words[c] = temp;
+//								}
+//							}
+//							String newLine = String.join(" ", words);
+//							
+//							
+//							
+//							bw.write(newLine);
+//							bw.newLine();
+//						}
 						
 						
 						
@@ -170,6 +212,7 @@ public class ArithOpTry3 {
 				targetFile = new FileWriter(mutantFileName + count + ".java");
 				bw = new BufferedWriter(targetFile);
 				String line; 
+				
 				//String[] text = new String[opL.size()];
 				
 
@@ -177,23 +220,33 @@ public class ArithOpTry3 {
 					//	System.out.println("Here1");
 						
 						if(line.contains(className)) {
-							String[] words = line.split(" ");
-							//String[] brackets = line.split("");
-							for(int i=0;i<words.length;i++) {
-								if(words[i].contains(className)) {
-									String temp = "MuArithOp"+count;
-									words[i] = temp;
-									//scp.setCName(temp);
-//									System.out.println("Final Class Name is: " + scp.getClassName());
-								}
-							}
-							String newLine = String.join(" ", words);
-							//String secondLine = String.join("", brackets);
 							
+							
+							String newLine = line.replaceAll(className, "MuArithOp"+count);
+							//scp.setCName(updateCName);
 							bw.write(newLine);
-							//bw.write(secondLine);
 							bw.newLine();
+							
 						}
+						
+//						if(line.contains(className)) {
+//							String[] words = line.split(" ");
+//							//String[] brackets = line.split("");
+//							for(int i=0;i<words.length;i++) {
+//								if(words[i].contains(className)) {
+//									String temp = "MuArithOp"+count;
+//									words[i] = temp;
+//									//scp.setCName(temp);
+////									System.out.println("Final Class Name is: " + scp.getClassName());
+//								}
+//							}
+//							String newLine = String.join(" ", words);
+//							//String secondLine = String.join("", brackets);
+//							
+//							bw.write(newLine);
+//							//bw.write(secondLine);
+//							bw.newLine();
+//						}
 						
 //						if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
 //							String[] words = line.split(" ");
@@ -201,6 +254,7 @@ public class ArithOpTry3 {
 //								
 //								String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
 //								String newW = replaceW.trim();
+//								setProperties(newW);
 //								
 //								if(words[a].contains(newW)) {
 //																	
@@ -217,6 +271,7 @@ public class ArithOpTry3 {
 //							bw.newLine();
 //						
 //						}
+						
 						else if(line.equalsIgnoreCase(s)) {
 							
 							
@@ -230,7 +285,21 @@ public class ArithOpTry3 {
 //							//	System.out.println(pointer);
 //							}
 					}
-						
+//						else if(line.contains(className)) {
+//							String[] words = line.split(" ");
+//							for(int c=0;c<words.length;c++) {
+//								if(words[c].contains(className)) {
+//									String temp = "MuArithOp"+count;
+//									words[c] = temp;
+//								}
+//							}
+//							String newLine = String.join(" ", words);
+//							
+//							
+//							
+//							bw.write(newLine);
+//							bw.newLine();
+//						}
 						
 						
 					
@@ -252,6 +321,10 @@ public class ArithOpTry3 {
 		System.out.println("Arithmetic Op Mutants generated: " + count);
 		
 	}
+	
+//	public void setProperties(String cName){
+//		className = cName;	
+//	}
 	
 	
 //	public void buildList(List<String> opL ) {
@@ -308,6 +381,7 @@ public class ArithOpTry3 {
 //			System.out.println(opP.get(i));
 //		}
 //	}
+	
 	
 
 }

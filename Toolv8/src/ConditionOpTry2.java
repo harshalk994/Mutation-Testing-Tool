@@ -65,24 +65,33 @@ public class ConditionOpTry2 {
 				//	System.out.println("Here1");
 					
 					if(line.contains(className)) {
-						String[] words = line.split(" ");
-						//String[] brackets = line.split("");
-						for(int k=0;k<words.length;k++) {
-							if(words[k].contains(className)) {
-								String temp = "MuConditionOp"+count;
-								words[k] = temp;
-								//scp.setCName(temp);
-//								System.out.println("Final Class Name is: " + scp.getClassName());
-							}
-						}
-						String newLine = String.join(" ", words);
-						//String secondLine = String.join("", brackets);
 						
+						
+						String newLine = line.replaceAll(className, "MuConditionOp"+count);
+						//scp.setCName(updateCName);
 						bw.write(newLine);
-						//bw.write(secondLine);
 						bw.newLine();
+						
 					}
 					
+//					if(line.contains(className)) {
+//						String[] words = line.split(" ");
+//						//String[] brackets = line.split("");
+//						for(int k=0;k<words.length;k++) {
+//							if(words[k].contains(className)) {
+//								String temp = "MuConditionOp"+count;
+//								words[k] = temp;
+//								//scp.setCName(temp);
+////								System.out.println("Final Class Name is: " + scp.getClassName());
+//							}
+//						}
+//						String newLine = String.join(" ", words);
+//						//String secondLine = String.join("", brackets);
+//						
+//						bw.write(newLine);
+//						//bw.write(secondLine);
+//						bw.newLine();
+//					}
 //					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
 //						String[] words = line.split(" ");
 //						for(int k=0; k<words.length; k++) {
@@ -94,10 +103,13 @@ public class ConditionOpTry2 {
 //																
 //								String temp = "MuConditionOp"+count;
 //								words[k] = temp;
-//								//System.out.println(words[k]);
+//								System.out.println(words[k]);
 //							}
 //						}
 //						String newLine = String.join(" ", words);
+//						
+//						
+//						
 //						bw.write(newLine);
 //						bw.newLine();
 //					

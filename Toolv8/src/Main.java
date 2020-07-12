@@ -10,6 +10,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		String fileLocation;
 		String mutantFileLocation;
+		String originalClassName;
 		
 //		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
 //		fileLocation = sc.nextLine();
@@ -21,6 +22,8 @@ public class Main {
 		ui.readProperties();
 		fileLocation = ui.returnOPath();
 		mutantFileLocation = ui.returnMPath();
+		originalClassName = ui.returnCName();
+		
 		System.out.println("MPath is: " + mutantFileLocation);
 		
 //		JavaSyntaxChecker checker = new JavaSyntaxChecker();
@@ -87,14 +90,25 @@ public class Main {
 		rc.getPath(mutantFileLocation);
 		rc.removeComments();
 		
-		TempFileGenerator temp = new TempFileGenerator();
-		temp.getPath(mutantFileLocation);
-		temp.createTempFile();
-		
+//		TempFileGenerator temp = new TempFileGenerator();
+//		temp.getPath(mutantFileLocation);
+//		temp.createTempFile();
 		
 		TempFileProcessor tfp = new TempFileProcessor();
+		tfp.getCName(originalClassName);
 		tfp.getPath(mutantFileLocation);
+		//tfp.getFPath(fileLocation);
 		tfp.processTempFile();
+		
+		SecondTempProcessor stp = new SecondTempProcessor();
+		stp.getCName(originalClassName);
+		stp.getPath(mutantFileLocation);
+		stp.processTempFile();
+		
+		
+//		TempFileProcessor tfp = new TempFileProcessor();
+//		tfp.getPath(mutantFileLocation);
+//		tfp.processTempFile();
 		
 		FinalTempProcessor ftp = new FinalTempProcessor();
 		ftp.getPath(mutantFileLocation);

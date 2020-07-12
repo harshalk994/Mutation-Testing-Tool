@@ -22,20 +22,22 @@ public class OriginalClassCopyFile {
 	}
 	public void createTempFile(String file) throws IOException {
 	
-		String[] locatewords = fPath.split("\\\\");
-		for(int i=0;i<locatewords.length;i++) {
-			if(locatewords[i].contains(".java")) {
-				String newW = locatewords[i].replace(".java", "");
-				className = newW;
-				
-			}
-		}
-		System.out.println("Classname is : " + className);
-		SetClassNameProperty scp = new SetClassNameProperty();
-		scp.setCName(className);
+////		String[] locatewords = fPath.split("\\\\");
+////		for(int i=0;i<locatewords.length;i++) {
+////			if(locatewords[i].contains(".java")) {
+////				String newW = locatewords[i].replace(".java", "");
+////				className = newW;
+////				
+////			}
+////		}
+//		System.out.println("Classname is : " + className);
+//		SetClassNameProperty scp = new SetClassNameProperty();
+		//scp.setCName(className);
 		//System.out.println("In original class copy name was set to : " + scp.getCName());
 		//TempFileGenerator tfg = new TempFileGenerator();
 		
+//		String updateCName = "OriginalTempCopy";
+//		scp.setCName(updateCName);
     	String tempFileName = mPath+"\\OriginalTempCopy.java";
     	
 //    	System.out.println("In Original Class Copy name was set to: " + scp.getCName());

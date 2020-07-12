@@ -8,9 +8,10 @@ import java.util.Properties;
 
 public class UserInputs {
 	
-	String originalpath;
-	String mutantpath;
-	String finalPath;
+	private static String originalpath;
+	private static String mutantpath;
+	private static String finalPath;
+	private static String originalClassName; 
 	
 	public void readProperties() {
 		File configFile = new File("config.properties");
@@ -23,16 +24,18 @@ public class UserInputs {
 		    String oPath = props.getProperty("originalprogrampath");
 		    String mPath = props.getProperty("mutantdestination");
 		    String pName = props.getProperty("originalprogrampackagename");
+		    String cName = props.getProperty("originalclassname");
 		    System.out.println("pName is: " + pName);
-		    setProperties(oPath, mPath, pName);
+		    setProperties(oPath, mPath, pName, cName);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String oPath, String mPath, String pName) throws IOException {
+	public void setProperties(String oPath, String mPath, String pName, String oCName) throws IOException {
 		originalpath = oPath;
 		mutantpath = mPath;
+		originalClassName = oCName;
 		
 		String appendPath;
 		if(pName!=null) {
@@ -68,5 +71,9 @@ public class UserInputs {
 	
 	public String returnMPath() {
 		return mutantpath;
+	}
+	
+	public String returnCName() {
+		return originalClassName;
 	}
 }

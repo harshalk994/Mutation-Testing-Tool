@@ -20,7 +20,7 @@ public void generateIncDecOpMutantFiles() throws IOException {
 	
 		SetClassNameProperty scp = new SetClassNameProperty();
 		className = scp.getCName();
-		
+			
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuIncDecOp";
 		List<String> incDecOpL = new ArrayList<String>();
@@ -63,24 +63,33 @@ public void generateIncDecOpMutantFiles() throws IOException {
 				//	System.out.println("Here1");
 					
 					if(line.contains(className)) {
-						String[] words = line.split(" ");
-						//String[] brackets = line.split("");
-						for(int k=0;k<words.length;k++) {
-							if(words[k].contains(className)) {
-								String temp = "MuIncDecOp"+count;
-								words[k] = temp;
-								//scp.setCName(temp);
-//								System.out.println("Final Class Name is: " + scp.getClassName());
-							}
-						}
-						String newLine = String.join(" ", words);
-						//String secondLine = String.join("", brackets);
 						
+						
+						String newLine = line.replaceAll(className, "MuIncDecOp"+count);
+						//scp.setCName(updateCName);
 						bw.write(newLine);
-						//bw.write(secondLine);
 						bw.newLine();
+						
 					}
 					
+//					if(line.contains(className)) {
+//						String[] words = line.split(" ");
+//						//String[] brackets = line.split("");
+//						for(int k=0;k<words.length;k++) {
+//							if(words[k].contains(className)) {
+//								String temp = "MuIncDecOp"+count;
+//								words[k] = temp;
+//								//scp.setCName(temp);
+////								System.out.println("Final Class Name is: " + scp.getClassName());
+//							}
+//						}
+//						String newLine = String.join(" ", words);
+//						//String secondLine = String.join("", brackets);
+//						
+//						bw.write(newLine);
+//						//bw.write(secondLine);
+//						bw.newLine();
+//					}
 //					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
 //						String[] words = line.split(" ");
 //						for(int k=0; k<words.length; k++) {
@@ -96,6 +105,9 @@ public void generateIncDecOpMutantFiles() throws IOException {
 //							}
 //						}
 //						String newLine = String.join(" ", words);
+//						
+//						
+//						
 //						bw.write(newLine);
 //						bw.newLine();
 //					

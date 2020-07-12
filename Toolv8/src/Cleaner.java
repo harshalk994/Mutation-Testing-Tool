@@ -1,6 +1,8 @@
 import java.io.File;    
 import java.io.FileReader;    
-import java.io.IOException;    
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;    
 
 public class Cleaner{    
@@ -12,14 +14,23 @@ public class Cleaner{
 //        System.out.println(source.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)",""));    
 //
 //    }    
-	
+
 	private static String mPath;
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 
-
-    static String readFile() {    
+    public String readFile() {    
+//    	List<String> paths = new ArrayList<String>();
+//    	FileDetailsStorage fds3 = new FileDetailsStorage();
+//    	paths = fds3.returnPaths();
+//    	String mPath = null;
+//    	
+//    	for(int i=0;i<paths.size();) {
+//    		i++;
+//    		mPath = paths.get(i);
+//    		break;		
+//    	}
     	String tempFileName = mPath+"\\OriginalTempCopy.java";
         File file = new File(tempFileName);    
 
@@ -42,7 +53,9 @@ public class Cleaner{
 
         } catch (IOException e) {    
             e.printStackTrace();    
-        }    
+        } 
+        
+        
 
         return new String(buffer);    
     }    
