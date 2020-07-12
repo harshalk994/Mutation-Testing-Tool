@@ -65,6 +65,28 @@ public class OperatorMutation {
 		List<String> shiftAssignOpList = new ArrayList<String>();
 		List<String> incDecOpList = new ArrayList<String>();
 		
+		boolean allops = false;
+		char arithop;
+		char assignmentop;
+		char bitwiseop;
+		char conditionalop;
+		char incdecop;
+		char relationalop;
+		char shiftop;
+		
+		UserInputs ui = new UserInputs();
+		arithop = ui.returnArithOp();
+		assignmentop = ui.returnAssignOp();
+		bitwiseop = ui.returnBitwiseOp();
+		conditionalop = ui.returnConditionalOp();
+		incdecop = ui.returnIncDecOp();
+		relationalop = ui.returnRelationalOp();
+		shiftop = ui.returnShiftOp();
+		
+		System.out.println("received arithop value as: " + arithop);
+//		char convertedarith = arithop.charAt(0);
+//		System.out.println("Converted to char for arith, value is : " + convertedarith);
+		
 		OperatorStorage ops = new OperatorStorage();
 		ops.processOp();
 		arithOpList = ops.returnOpList();
@@ -99,57 +121,130 @@ public class OperatorMutation {
 		incDecOpList = ids.returnOpList();
 		
 	
-		
-		if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
-			ArithOpTry3 aop = new ArithOpTry3();
-			aop.generateArithOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateArithOpTable();
+		if((arithop == 'n' || arithop==' ') && (assignmentop=='n' || assignmentop==' ') && (bitwiseop=='n' || bitwiseop==' ')
+				&& (conditionalop=='n' || conditionalop==' ') && (incdecop=='n' || incdecop==' ') && (relationalop=='n' || relationalop==' ')
+				&& (shiftop=='n' || shiftop==' ')) {
+			allops=true;
 		}
 		
+		if(allops==true) {
+			if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
+				ArithOpTry3 aop = new ArithOpTry3();
+				aop.generateArithOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateArithOpTable();
+			}
+			
 
-		if(conditionalOpList.isEmpty() == false) {
-			ConditionOpTry2 cop = new ConditionOpTry2();
-			cop.generateConditionMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateConditionalOpTable();
+			if(conditionalOpList.isEmpty() == false) {
+				ConditionOpTry2 cop = new ConditionOpTry2();
+				cop.generateConditionMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateConditionalOpTable();
+			}
+			
+			
+			if(relationalOpList.isEmpty() == false) {
+				RelOpTryFinal rop = new RelOpTryFinal();
+				rop.generateRelOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateRelationalOpTable();
+			}
+			
+			if(shiftOpList.isEmpty() == false) {
+				ShiftOpTry sot = new ShiftOpTry();
+				sot.generateShiftOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateShiftOpTable();
+			}
+			
+			if(bitwiseOpList.isEmpty() == false) {
+				BitwiseOpTry bt = new BitwiseOpTry();
+				bt.generateBitwiseOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateBitwiseOpTable();
+			}
+			
+			if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
+				AssignmentOpTry at = new AssignmentOpTry();
+				at.generateAssignmentOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateAssignmentOpTable();
+			}
+			
+			if(incDecOpList.isEmpty() == false) {
+				IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
+				idt.generateIncDecOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateIncDecOpTable();
+			}
+		}
+		
+		if(arithop=='y') {
+			if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
+				ArithOpTry3 aop = new ArithOpTry3();
+				aop.generateArithOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateArithOpTable();
+			}
+		}
+		
+		if(assignmentop=='y') {
+			if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
+				AssignmentOpTry at = new AssignmentOpTry();
+				at.generateAssignmentOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateAssignmentOpTable();
+			}
+		}
+		
+		if(bitwiseop=='y') {
+			if(bitwiseOpList.isEmpty() == false) {
+				BitwiseOpTry bt = new BitwiseOpTry();
+				bt.generateBitwiseOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateBitwiseOpTable();
+			}
+		}
+		
+		if(conditionalop=='y') {
+			if(conditionalOpList.isEmpty() == false) {
+				ConditionOpTry2 cop = new ConditionOpTry2();
+				cop.generateConditionMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateConditionalOpTable();
+			}
+		}
+		
+		if(incdecop=='y') {
+			if(incDecOpList.isEmpty() == false) {
+				IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
+				idt.generateIncDecOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateIncDecOpTable();
+			}
+		}
+		
+		if(relationalop=='y') {
+			if(relationalOpList.isEmpty() == false) {
+				RelOpTryFinal rop = new RelOpTryFinal();
+				rop.generateRelOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateRelationalOpTable();
+			}
+		}
+		
+		if(shiftop=='y') {
+			if(shiftOpList.isEmpty() == false) {
+				ShiftOpTry sot = new ShiftOpTry();
+				sot.generateShiftOpMutantFiles();
+				PrintHtmlTable pht = new PrintHtmlTable();
+				pht.generateShiftOpTable();
+			}
 		}
 		
 		
-		if(relationalOpList.isEmpty() == false) {
-			RelOpTryFinal rop = new RelOpTryFinal();
-			rop.generateRelOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateRelationalOpTable();
-		}
 		
-		if(shiftOpList.isEmpty() == false) {
-			ShiftOpTry sot = new ShiftOpTry();
-			sot.generateShiftOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateShiftOpTable();
-		}
-		
-		if(bitwiseOpList.isEmpty() == false) {
-			BitwiseOpTry bt = new BitwiseOpTry();
-			bt.generateBitwiseOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateBitwiseOpTable();
-		}
-		
-		if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
-			AssignmentOpTry at = new AssignmentOpTry();
-			at.generateAssignmentOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateAssignmentOpTable();
-		}
-		
-		if(incDecOpList.isEmpty() == false) {
-			IncrementDecrementOpTry idt = new IncrementDecrementOpTry();
-			idt.generateIncDecOpMutantFiles();
-			PrintHtmlTable pht = new PrintHtmlTable();
-			pht.generateIncDecOpTable();
-		}
 	}
 
 }
