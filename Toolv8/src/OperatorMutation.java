@@ -121,9 +121,9 @@ public class OperatorMutation {
 		incDecOpList = ids.returnOpList();
 		
 	
-		if((arithop == 'n' || arithop==' ') && (assignmentop=='n' || assignmentop==' ') && (bitwiseop=='n' || bitwiseop==' ')
-				&& (conditionalop=='n' || conditionalop==' ') && (incdecop=='n' || incdecop==' ') && (relationalop=='n' || relationalop==' ')
-				&& (shiftop=='n' || shiftop==' ')) {
+		if((arithop==' ') && (assignmentop==' ') && (bitwiseop==' ')
+				&& (conditionalop==' ') && (incdecop==' ') && (relationalop==' ')
+				&& (shiftop==' ')) {
 			allops=true;
 		}
 		
