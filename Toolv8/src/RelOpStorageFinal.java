@@ -35,19 +35,22 @@ public class RelOpStorageFinal {
 			if(line.contains("System.out.println"))
 				continue; 
 			
-			if(line.contains(">") && !(line.contains(">=")) && !(line.contains(">>")) && !(line.contains(">>=")) && !(line.contains(">>>"))){
-				conditionOpL.add(line);
-			}else if(line.contains("<") && !(line.contains("<=")) && !(line.contains("<<=")) && !(line.contains("<<"))) {
-				conditionOpL.add(line);
-			}else if(line.contains("==")) {
-				conditionOpL.add(line);
-			}else if(line.contains("!=")) {
-				conditionOpL.add(line);
-			}else if(line.contains(">=") && !(line.contains(">>="))) {
-				conditionOpL.add(line);
-			}else if(line.contains("<=") && !(line.contains("<<="))) {
-				conditionOpL.add(line);
+			if(line.contains("if") || line.contains("else if") || line.contains("for") || line.contains("while")) {
+				if(line.contains(">") && !(line.contains(">=")) && !(line.contains(">>")) && !(line.contains(">>=")) && !(line.contains(">>>"))){
+					conditionOpL.add(line);
+				}else if(line.contains("<") && !(line.contains("<=")) && !(line.contains("<<=")) && !(line.contains("<<"))) {
+					conditionOpL.add(line);
+				}else if(line.contains("==")) {
+					conditionOpL.add(line);
+				}else if(line.contains("!=")) {
+					conditionOpL.add(line);
+				}else if(line.contains(">=") && !(line.contains(">>="))) {
+					conditionOpL.add(line);
+				}else if(line.contains("<=") && !(line.contains("<<="))) {
+					conditionOpL.add(line);
+				}
 			}
+			
 			
 		}
 		

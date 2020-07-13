@@ -154,6 +154,9 @@ public class OperatorStorage {
 			if(line.contains("switch"))
 				continue;
 			
+			if(line.contains("import"))
+				continue;
+			
 //			if(line.contains("return")) {
 //				boolean flag=false;
 //				String[] words = line.split("");
