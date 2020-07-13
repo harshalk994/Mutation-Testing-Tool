@@ -40,7 +40,10 @@ public class UserInputs {
 		    String incdec = props.getProperty("incrementdecrementop(y/n)");
 		    String relational = props.getProperty("relationalop(y/n)");
 		    String shift = props.getProperty("shiftop(y/n)");
+		    
+		    oPath=oPath+"\\"+cName+".java";
 		    System.out.println("pName is: " + pName);
+		    
 		    setProperties(oPath, mPath, pName, cName, arith, assign, bitwise, conditional, incdec, relational, shift);
 		} catch (Exception e) {
 		    e.printStackTrace();
