@@ -59,6 +59,12 @@ public class TempFileProcessor {
 		String line;
 		String updateCName = "FirstTemp";
 		scp.setCName(updateCName);
+		
+		String and = "&&";
+		String or = "||";
+		String updateAnd = "&&\n";
+		String updateOr = "||\n";
+		
 		while((line = br.readLine()) != null) {
 			
 			if(line.contains(className)) {
@@ -138,23 +144,44 @@ public class TempFileProcessor {
 //					bw.newLine();
 //				
 //				}
-				else if(line.contains("&&") || line.contains("||")){
-					String[] words = line.split("");
-					for(int k=0;k<words.length;k++) {
-						String replaceA = "&" + System.lineSeparator();
-						String replaceO = "|" + System.lineSeparator();
- 						if(words[k].contains("&") && words[k+1].contains("&")) {
-							String temp = replaceA;
-							words[k+1] = temp;
-						}
- 						
- 						if(words[k].contains("|") && words[k+1].contains("|")) {
-							String temp = replaceO;
-							words[k+1] = temp;
-						}
-						
-					}
-					String newLine = String.join("", words);
+//				else if(line.contains("&&") || line.contains("||")){
+//					String[] words = line.split("");
+//					for(int i=0;i<words.length;i++) {
+//						System.out.println(words[i]);
+//					}
+//					System.out.println("Array priting done!!");
+//					for(int k=0;k<words.length;k++) {
+//						String replaceA = "&" + System.lineSeparator();
+//						String replaceO = "|" + System.lineSeparator();
+//						String lineSep = System.lineSeparator();
+//						
+//						if((words[k].contains("&") && words[k+1].contains("&") && words[k+2].contains("")) || (words[k].contains("|") && words[k+1].contains("|"+"")))
+//							continue;
+//						
+// 						if(words[k].contains("&") && words[k+1].contains("&")) {
+//							String temp = replaceA;
+//							words[k+1] = temp;
+//						}
+// 						
+// 						if(words[k].contains("|") && words[k+1].contains("|")) {
+//							String temp = replaceO;
+//							words[k+1] = temp;
+//						}
+//						
+//					}
+//					String newLine = String.join("", words);
+//					
+//					bw.write(newLine);
+//					bw.newLine();
+//				}
+				else if(line.contains(and)) {
+					String newLine = line.replace(and, updateAnd);
+					
+					bw.write(newLine);
+					bw.newLine();
+				}
+				else if(line.contains(or)) {
+					String newLine = line.replace(or, updateOr);
 					
 					bw.write(newLine);
 					bw.newLine();
