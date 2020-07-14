@@ -35,7 +35,10 @@ public class ConditionalOpStorage {
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 			
-			if(line.contains("&&") ) {
+			if(line.contains("'&&'") || line.contains("'||'"))
+				continue;
+			
+			if(line.contains("&&") && !(line.contains("\"&&\""))) {
 				conditionOpL.add(line);
 //				String[] words = line.split("");
 //				for(int i=0;i<words.length;i++) {
@@ -47,7 +50,7 @@ public class ConditionalOpStorage {
 //						conditionOpL.add(words[i-6]+words[i-5]+words[i-4]+words[i-3]+words[i-2]+words[i-1]+words[i]+words[i+1]+words[i+2]+words[i+3]);
 //					}
 //				}
-			}else if(line.contains("||")) {
+			}else if(line.contains("||") && !(line.contains("\"||\""))) {
 				conditionOpL.add(line);
 			}
 			

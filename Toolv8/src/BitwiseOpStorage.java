@@ -26,11 +26,14 @@ public void processOp() throws IOException{
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 			
-				if(line.contains("&") && !(line.contains("&&")) && !(line.contains("&="))){
+			if(line.contains("'&'") || line.contains("'|'") || line.contains("'^'"))
+				continue;
+			
+				if(line.contains("&") && !(line.contains("\"&\"")) && !(line.contains("&&")) && !(line.contains("\"&&\"")) && !(line.contains("&=")) && !(line.contains("\"&=\""))){
 					bitwiseOpL.add(line);
-				}else if(line.contains("|") && !(line.contains("||")) && !(line.contains("|="))) {
+				}else if(line.contains("|") && !(line.contains("\"|\"")) && !(line.contains("||")) && !(line.contains("\"||\"")) && !(line.contains("|=")) && !(line.contains("\"|=\""))) {
 					bitwiseOpL.add(line);
-				}else if(line.contains("^") && !(line.contains("^="))) {
+				}else if(line.contains("^") && !(line.contains("\"^\"")) && !(line.contains("^=")) && !(line.contains("\"^=\""))) {
 					bitwiseOpL.add(line);
 				}
 //				else if(line.contains("~")) {

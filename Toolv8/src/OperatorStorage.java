@@ -196,6 +196,12 @@ public class OperatorStorage {
 				}
 			}
 			
+			if(line.contains("\"+\"") || line.contains("\"-\"") || line.contains("\"*\"") || line.contains("\"/\"") || line.contains("\"%\""))
+				continue;
+			
+			if(line.contains("'+'") || line.contains("'-'") || line.contains("'*'") || line.contains("'/'") || line.contains("'%'"))
+				continue;
+			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
 			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("--")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++"))) || (line.contains("-") && !(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")))  || (line.contains("*") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("/=")) || (line.contains("%") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("%=")))) {
 					//String newLine = line.trim();

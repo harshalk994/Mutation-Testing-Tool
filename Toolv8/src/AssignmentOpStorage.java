@@ -32,28 +32,32 @@ public void processOp() throws IOException{
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 			
+			if(line.contains("'+='") || line.contains("'-='") || line.contains("'*='") || line.contains("'/='") || line.contains("'%='") || line.contains("'&='") || line.contains("'|='") || line.contains("'^='") || line.contains("'<<='") || line.contains("'>>='"))
+				continue;
 //				if(line.contains("=") && !(line.contains("==")) && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains(">>=")) && !(line.contains("<<=")) && !(line.contains("!=")) && !(line.contains(">=")) && !(line.contains("<="))){
 //					assignmentArithOpL.add(line);
 //				}
-				if(line.contains("+=") ) {
+			
+			
+				if(line.contains("+=") && !(line.contains("\"+=\""))) {
 					assignmentArithOpL.add(line);
-				}else if(line.contains("-=") ) {
+				}else if(line.contains("-=") && !(line.contains("\"-=\""))) {
 					assignmentArithOpL.add(line);
-				}else if(line.contains("*=") ) {
+				}else if(line.contains("*=") && !(line.contains("\"*=\""))) {
 					assignmentArithOpL.add(line);
-				}else if(line.contains("/=") ) {
+				}else if(line.contains("/=") && !(line.contains("\"/=\""))) {
 					assignmentArithOpL.add(line);
-				}else if(line.contains("%=") ) {
+				}else if(line.contains("%=") && !(line.contains("\"%=\""))) {
 					assignmentArithOpL.add(line);
-				}else if(line.contains("&=") ) {
+				}else if(line.contains("&=") && !(line.contains("\"&=\""))) {
 					assignmentBitwiseOpL.add(line);
-				}else if(line.contains("|=") ) {
+				}else if(line.contains("|=") && !(line.contains("\"|=\""))) {
 					assignmentBitwiseOpL.add(line);
-				}else if(line.contains("^=") ) {
+				}else if(line.contains("^=") && !(line.contains("\"^=\""))) {
 					assignmentBitwiseOpL.add(line);
-				}else if(line.contains(">>=") ) {
+				}else if(line.contains(">>=") && !(line.contains("\">>=\""))) {
 					assignmentShiftOpL.add(line);
-				}else if(line.contains("<<=") ) {
+				}else if(line.contains("<<=") && !(line.contains("\"<<=\""))) {
 					assignmentShiftOpL.add(line);
 				}
 				

@@ -28,12 +28,14 @@ public void processOp() throws IOException{
 		while((line = br.readLine()) != null) {
 //			if(line.contains("System.out.println") && line.contains("+"))
 //				continue;
+				if(line.contains("'>>'") || line.contains("'<<'") || line.contains("'>>>'"))
+					continue;
 			
-				if(line.contains(">>") && !(line.contains(">>=")) && !(line.contains(">>>")) && !(line.contains(">>>="))){
+				if(line.contains(">>") && !(line.contains("\">>\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains("\">>>\"")) && !(line.contains(">>>=")) && !(line.contains("\">>>=\""))){
 					shiftOpL.add(line);
-				}else if(line.contains("<<") && !(line.contains("<<="))) {
+				}else if(line.contains("<<") && !(line.contains("\"<<\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\""))) {
 					shiftOpL.add(line);
-				}else if(line.contains(">>>") && !(line.contains(">>>="))) {
+				}else if(line.contains(">>>") && !(line.contains("\">>>\"")) && !(line.contains(">>>=")) && !(line.contains("\">>>=\""))) {
 					shiftOpL.add(line);
 				}
 			

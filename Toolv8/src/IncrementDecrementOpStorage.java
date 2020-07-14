@@ -25,7 +25,8 @@ public class IncrementDecrementOpStorage {
 			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")))
 				continue;
 			
-
+			if(line.contains("'++'") || line.contains("'--'"))
+				continue;
 			
 //			if(line.contains("return")) {
 //				if((line.contains("++") && !(line.contains("+"))) || (line.contains("--") || !(line.contains("-")))) {
@@ -35,7 +36,7 @@ public class IncrementDecrementOpStorage {
 			
 			//if(line.contains("=") && !(line.contains("+=")) && !(line.contains("-=")) && !(line.contains("*=")) && !(line.contains("/=")) && !(line.contains("%=")) && !(line.contains("&=")) && !(line.contains("|=")) && !(line.contains("^=")) && !(line.contains("<<=")) && !(line.contains(">>="))) {
 			//if((line.contains("++") && !(line.contains("+"))) || (line.contains("--") && !(line.contains("-")))) {
-			if(line.contains("++") || line.contains("--")) {	
+			if((line.contains("++") && !(line.contains("\"++\""))) || (line.contains("--") && !(line.contains("\"--\"")))) {	
 					//String newLine = line.trim();
 					incdecOpL.add(line);
 					//System.out.println(line);
