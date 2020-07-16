@@ -8,6 +8,8 @@ public class RelOpStorageFinal {
 	
 	private static List<String> conditionOpL = new ArrayList<String>();
 	private static List<String> conditionOpP = new ArrayList<String>();
+	private static List<String> conditionOpLNotEqual = new ArrayList<String>();
+	private static List<String> conditionOpPNotEqual = new ArrayList<String>();
 	
 //	public static void main(String[] args) throws IOException {
 //		RelOpStorageFinal rel = new RelOpStorageFinal();
@@ -55,9 +57,13 @@ public class RelOpStorageFinal {
 				conditionOpL.add(line);
 			}else if(line.contains("<") && !(line.contains("\"<\"")) && !(line.contains("<=")) && !(line.contains("\"<=\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\"")) && !(line.contains("<<")) && !(line.contains("\"<<\""))) {
 				conditionOpL.add(line);
-			}else if(line.contains("==") && !(line.contains("\"==\""))) {
+			}else if(line.contains("==") && !(line.contains("\"==\"")) && line.contains("null")) {
+				conditionOpLNotEqual.add(line);
+			}else if(line.contains("==") && !(line.contains("\"==\"")) && !(line.contains("null"))) {
 				conditionOpL.add(line);
-			}else if(line.contains("!=") && !(line.contains("\"!=\""))) {
+			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && line.contains("null")) {
+				conditionOpLNotEqual.add(line);
+			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && !(line.contains("null"))) {
 				conditionOpL.add(line);
 			}else if(line.contains(">=") && !(line.contains("\">=\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\""))) {
 				conditionOpL.add(line);
@@ -77,6 +83,10 @@ public class RelOpStorageFinal {
 	
 	public List<String> returnRelOpList(){
 		return conditionOpL;
+	}
+	
+	public List<String> returnRelOpListNotEqual(){
+		return conditionOpLNotEqual;
 	}
 	
 //	public void printOp() {
@@ -141,8 +151,27 @@ public class RelOpStorageFinal {
 		}
 	}
 	
+	public void processListNotEqual(List<String> conditionOpLNotEqual ) {
+		for(String s : conditionOpLNotEqual) {
+			if(s.contains("==")) {
+				conditionOpPNotEqual.add(s.replace("==", "!="));
+			}
+			if(s.contains("!=")) {
+				//s.replace("-", "+");
+				conditionOpPNotEqual.add(s.replace("!=", "=="));
+			}
+
+		}
+	}
+
+	
+	
 	public List<String> retriveRelProcessList(){
 		return conditionOpP;
+	}
+	
+	public List<String> retriveRelProcessListNotEq(){
+		return conditionOpPNotEqual;
 	}
 	
 //	public void listMutantCount() {

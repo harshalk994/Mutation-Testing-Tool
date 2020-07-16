@@ -58,6 +58,7 @@ public class OperatorMutation {
 		List<String> arithTwoList = new ArrayList<String>();
 		List<String> conditionalOpList = new ArrayList<String>();
 		List<String> relationalOpList = new ArrayList<String>();
+		List<String> relationalOpTwoList = new ArrayList<String>();
 		List<String> shiftOpList = new ArrayList<String>();
 		List<String> bitwiseOpList = new ArrayList<String>();
 		List<String> arithAssignmentOpList = new ArrayList<String>();
@@ -99,6 +100,7 @@ public class OperatorMutation {
 		RelOpStorageFinal rs = new RelOpStorageFinal();
 		rs.processOp();
 		relationalOpList = rs.returnRelOpList();
+		relationalOpTwoList = rs.returnRelOpListNotEqual();
 		
 		ShiftOpStorage ss = new ShiftOpStorage();
 		ss.processOp();
@@ -144,7 +146,7 @@ public class OperatorMutation {
 			}
 			
 			
-			if(relationalOpList.isEmpty() == false) {
+			if(relationalOpList.isEmpty() == false || relationalOpTwoList.isEmpty() == false) {
 				RelOpTryFinal rop = new RelOpTryFinal();
 				rop.generateRelOpMutantFiles();
 				PrintHtmlTable pht = new PrintHtmlTable();
@@ -226,7 +228,7 @@ public class OperatorMutation {
 		}
 		
 		if(relationalop=='y') {
-			if(relationalOpList.isEmpty() == false) {
+			if(relationalOpList.isEmpty() == false || relationalOpTwoList.isEmpty() == false) {
 				RelOpTryFinal rop = new RelOpTryFinal();
 				rop.generateRelOpMutantFiles();
 				PrintHtmlTable pht = new PrintHtmlTable();
