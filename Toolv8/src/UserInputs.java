@@ -9,8 +9,10 @@ import java.util.Properties;
 public class UserInputs {
 	
 	private static String originalpath;
+	private static String originalpathWOCname;
 	private static String mutantpath;
 	private static String finalPath;
+	//private static String depenedentClassCopyPath;
 	private static String originalClassName; 
 	private static char arithop=' ';
 	private static char assignmentop=' ';
@@ -29,9 +31,11 @@ public class UserInputs {
 		    props.load(reader);
 		 
 		    String oPath = props.getProperty("originalprogrampath");
+		    String oPathWOCName = props.getProperty("originalprogrampath");
 		    String mPath = props.getProperty("mutantdestination");
 		    String pName = props.getProperty("originalprogrampackagename");
 		    String cName = props.getProperty("originalclassname");
+		   // String dPath = props.getProperty("dependentclasscopypath");
 		    String arith = props.getProperty("arithop(y/n)");
 		    System.out.println("In config file value of arithop was set to: " + arith);
 		    String assign = props.getProperty("assignmentop(y/n)");
@@ -44,15 +48,17 @@ public class UserInputs {
 		    oPath=oPath+"\\"+cName+".java";
 		    System.out.println("pName is: " + pName);
 		    
-		    setProperties(oPath, mPath, pName, cName, arith, assign, bitwise, conditional, incdec, relational, shift);
+		    setProperties(oPath, oPathWOCName, mPath, pName, cName, arith, assign, bitwise, conditional, incdec, relational, shift);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String oPath, String mPath, String pName, String oCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
+	public void setProperties(String oPath, String oPathWOCName, String mPath, String pName, String oCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
 		originalpath = oPath;
+		originalpathWOCname = oPathWOCName;
 		mutantpath = mPath;
+		//depenedentClassCopyPath = dPath;
 		originalClassName = oCName;
 		System.out.println("Got value of arithop inside setProperties as : " + arith);
 		System.out.println("value of assignment op was: " + assign);
@@ -137,10 +143,40 @@ public class UserInputs {
 			}
 		}
 		
+//		String appendDPath;
+//		if(pName!=null) {
+//			if(pName.contains(".")) {
+//				appendDPath = pName.replace(".", "\\");
+//				depenedentClassCopyPath = dPath+"\\"+appendDPath;
+//				Path path = Paths.get(depenedentClassCopyPath);
+//				
+//				if(!Files.exists(path)){
+//					Files.createDirectories(path);
+//					System.out.println("Driectory structure created");
+//				}else {
+//					System.out.println("Directory already exists");
+//				}
+//			}else {
+//				depenedentClassCopyPath = dPath+"\\"+pName;
+//				Path path = Paths.get(depenedentClassCopyPath);
+//				
+//				if(!Files.exists(path)){
+//					Files.createDirectories(path);
+//					System.out.println("Driectory structure created");
+//				}else {
+//					System.out.println("Directory already exists");
+//				}
+//			}
+//		}
+		
 	}
 	
 	public String returnOPath() {
 		return originalpath;
+	}
+	
+	public String returnOPathWoCName() {
+		return originalpathWOCname;
 	}
 	
 	public String returnMPath() {
@@ -150,6 +186,10 @@ public class UserInputs {
 	public String returnCName() {
 		return originalClassName;
 	}
+	
+//	public String returnDPath() {
+//		return depenedentClassCopyPath;
+//	}
 	
 	public char returnArithOp() {
 		return arithop;

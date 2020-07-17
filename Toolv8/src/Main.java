@@ -11,6 +11,8 @@ public class Main {
 		String fileLocation;
 		String mutantFileLocation;
 		String originalClassName;
+		//String dependentClassPath;
+		//String oPathWoCName;
 		
 //		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
 //		fileLocation = sc.nextLine();
@@ -23,6 +25,8 @@ public class Main {
 		fileLocation = ui.returnOPath();
 		mutantFileLocation = ui.returnMPath();
 		originalClassName = ui.returnCName();
+		//dependentClassPath = ui.returnDPath();
+	//	oPathWoCName = ui.returnOPathWoCName();
 		
 		System.out.println("MPath is: " + mutantFileLocation);
 		
@@ -120,13 +124,49 @@ public class Main {
 		
 		
 		System.out.println("Generating Mutants . . . . . \n");
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
 		
 		System.out.println("\nMutant Generation Ended\n");
 		System.out.println("Please check the html report to view the mutations.");
+		
+//		CopyDependentClasses cdc = new CopyDependentClasses();
+//		cdc.getCName(originalClassName);
+//		cdc.getFPath(oPathWoCName);
+//		cdc.getPath(mutantFileLocation);
+//		cdc.copyDependentClasses();
+//		
+//		CopyDependentClassV2 cdcv = new CopyDependentClassV2();
+//		cdcv.getCName(originalClassName);
+//		cdcv.getFPath(oPathWoCName);
+//		cdcv.getPath(mutantFileLocation);
+//		cdcv.copyDependentClasses();
+//		
+//		CopyDependentClassesV3 cdcv3 = new CopyDependentClassesV3();
+//		cdcv3.getCName(originalClassName);
+//		cdcv3.getFPath(oPathWoCName);
+//		cdcv3.getPath(mutantFileLocation);
+//		cdcv3.copyDependentClasses();
+		
+//		CreateTempCopyDependentClass ctcd = new CreateTempCopyDependentClass();
+//		ctcd.getCName(originalClassName);
+//		ctcd.getFPath(oPathWoCName);
+//		ctcd.getPath(mutantFileLocation);
+//		ctcd.createTempCopy();
+//		
+//		CreateTempCopyDependentClassV2 ctcdv2 = new CreateTempCopyDependentClassV2();
+//		ctcdv2.getCName(originalClassName);
+//		ctcdv2.getFPath(oPathWoCName);
+//		ctcdv2.getPath(mutantFileLocation);
+//		ctcdv2.createClassCopy();
+//		
+//		CreateTempCopyDependentClassV3 ctcdv3 = new CreateTempCopyDependentClassV3();
+//		ctcdv3.getCName(originalClassName);
+//		ctcdv3.getFPath(oPathWoCName);
+//		ctcdv3.getPath(mutantFileLocation);
+//		ctcdv3.createFinalCopy();
 		
 //		ArithOpTry3 aot = new ArithOpTry3();
 //		aot.generateArithOpMutantFiles();

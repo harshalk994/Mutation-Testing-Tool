@@ -13,6 +13,8 @@ public class UserInputs {
 	private static String nameOfClassUnderTest;
 	private static String testPackageName;
 	private static String mTestPath;
+	private static char deletionChoice;
+	
 	//private static String nameOfTestClass;
 	
 	public void readProperties() {
@@ -29,20 +31,28 @@ public class UserInputs {
 		    String testPath = props.getProperty("testcopypath");
 		    String testPName = props.getProperty("testpackagename");
 		    String rPath = props.getProperty("reportspath");
+		    String deleteChoice = props.getProperty("deletekilledmutants(y/n)");
 		    
 	
-		    setProperties(mutantsPath, originalClassName, pName, testPath, testPName, rPath);
+		    setProperties(mutantsPath, originalClassName, pName, testPath, testPName, rPath, deleteChoice);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String mutantsPath, String orignalCName, String pName, String testPath, String testPName, String rPath) throws IOException {
+	public void setProperties(String mutantsPath, String orignalCName, String pName, String testPath, String testPName, String rPath, String deleteChoice) throws IOException {
 
 		mutantPath = mutantsPath;
 		nameOfClassUnderTest = orignalCName;
 		mTestPath = testPath;
 		reportsPath = rPath;
+		if(deleteChoice.isBlank()==false) {
+			char dChoice = deleteChoice.charAt(0);
+			if(dChoice == 'y' || dChoice == 'n') {
+				deletionChoice = dChoice;
+			}
+		}
+		
 		//System.out.println("Name of class Under test was: " + nameOfClassUnderTest);
 		//nameOfTestClass = originalTName;
 		String appendPath;
@@ -89,6 +99,10 @@ public class UserInputs {
 	public String returnReportsPath() {
 		//System.out.println("Reports path is: " + reportsPath);
 		return reportsPath;
+	}
+	
+	public char returnDeleteChoice() {
+		return deletionChoice;
 	}
 	
 //	public String returnOriginalTName() {

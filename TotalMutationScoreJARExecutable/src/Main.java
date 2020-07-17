@@ -5,8 +5,10 @@ public class Main {
 	private static String className;
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
+		char deleteChoice;
 		UserInputs ui = new UserInputs();
 		ui.readProperties();
+		deleteChoice = ui.returnDeleteChoice();
 		className = ui.returnOriginalCName();
 		
 		System.out.println("Mutation Testing Result for Class " + className + " is given below:");
@@ -20,9 +22,19 @@ public class Main {
 		TotalSurvived ts = new TotalSurvived();
 		ts.totalSurvivedMutants();
 		
-		System.out.println("-----------DONE-----------");
+		//System.out.println("Delete");
 		
-		Thread.sleep(10000);
+		if(deleteChoice == 'y') {
+			DeleteKilledMutants dm = new DeleteKilledMutants();
+			dm.deleteMutants();
+			
+			DeleteKilledTests dt = new DeleteKilledTests();
+			dt.deleteTests();
+		}
+		
+		//Thread.sleep(10000);
+		
+		
 	}
 
 }
