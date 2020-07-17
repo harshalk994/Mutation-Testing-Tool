@@ -22,9 +22,10 @@ public class Main {
 		TotalSurvived ts = new TotalSurvived();
 		ts.totalSurvivedMutants();
 		
-		//System.out.println("Delete");
 		
 		if(deleteChoice == 'y') {
+			System.out.println("\n");
+			System.out.println("-------------Deleting files--------------------");
 			DeleteKilledMutants dm = new DeleteKilledMutants();
 			dm.deleteMutants();
 			
