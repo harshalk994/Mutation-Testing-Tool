@@ -11,6 +11,9 @@ public class Main {
 		//String packageName="";
 		String nameOfClassUnderTest;
 		String mutantPath;
+		String dName;
+		//String nameOfClassUnderTest;
+		char testChoice;
 		boolean flag=true;
 		//FileDetailsStorage fds = new FileDetailsStorage();
 		
@@ -20,6 +23,8 @@ public class Main {
 		testCopyLocation = ui.returnTestCopyPath();
 		nameOfClassUnderTest = ui.returnOriginalCName();
 		mutantPath = ui.returnMutantPath();
+		testChoice = ui.returnDClassChoice();
+		dName = ui.returnDClassName();
 		
 //		CreateTempTest ct = new CreateTempTest();
 //		ct.getFPath(originalTestLocation);
@@ -27,13 +32,26 @@ public class Main {
 //		ct.getClassName(nameOfClassUnderTest);
 //		ct.createTempCopy();
 		
-		TestReplicatorTry tr = new TestReplicatorTry();
-		tr.getPath(testCopyLocation);
-		tr.getFPath(originalTestLocation);
-		tr.getTMPath(testCopyLocation);
-		tr.getMPath(mutantPath);
-		tr.getClassName(nameOfClassUnderTest);
-		tr.testReplicator();
+		if(testChoice=='y') {
+			//System.out.println("HERE");
+			TestReplicatorDependentClass trdc = new TestReplicatorDependentClass();
+			trdc.getClassName(nameOfClassUnderTest);
+			trdc.getDClName(dName);
+			trdc.getFPath(originalTestLocation);
+			trdc.getMPath(mutantPath);
+			trdc.getPath(testCopyLocation);
+			trdc.getTMPath(testCopyLocation);
+			trdc.testReplicator();
+		}else {
+			TestReplicatorTry tr = new TestReplicatorTry();
+			tr.getPath(testCopyLocation);
+			tr.getFPath(originalTestLocation);
+			tr.getTMPath(testCopyLocation);
+			tr.getMPath(mutantPath);
+			tr.getClassName(nameOfClassUnderTest);
+			tr.testReplicator();
+		}
+	
 		
 //		System.out.println("Enter the location and filename of the test that needs to be tested:");
 //		originalTestLocation = sc.nextLine();

@@ -30,7 +30,7 @@ public class FinalTempProcessor {
 		
 		SetClassNameProperty scp = new SetClassNameProperty();
 		className = scp.getCName();
-		System.out.println("Int Final Temp Processor got the name as : " + scp.getCName());
+		//System.out.println("Int Final Temp Processor got the name as : " + scp.getCName());
 		
 //		TempFileProcessor tfp = new TempFileProcessor();
 //		className = tfp.getClass().getName();

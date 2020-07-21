@@ -9,11 +9,13 @@ import java.util.Properties;
 public class UserInputs {
 	
 	private static String originalpath;
+	private static String dependentpath;
 	private static String originalpathWOCname;
 	private static String mutantpath;
 	private static String finalPath;
 	//private static String depenedentClassCopyPath;
 	private static String originalClassName; 
+	private static String dependentClassName;
 	private static char arithop=' ';
 	private static char assignmentop=' ';
 	private static char bitwiseop=' ';
@@ -35,9 +37,10 @@ public class UserInputs {
 		    String mPath = props.getProperty("mutantdestination");
 		    String pName = props.getProperty("originalprogrampackagename");
 		    String cName = props.getProperty("originalclassname");
+		    String dCName = props.getProperty("dependentclassname");
 		   // String dPath = props.getProperty("dependentclasscopypath");
 		    String arith = props.getProperty("arithop(y/n)");
-		    System.out.println("In config file value of arithop was set to: " + arith);
+		    //System.out.println("In config file value of arithop was set to: " + arith);
 		    String assign = props.getProperty("assignmentop(y/n)");
 		    String bitwise = props.getProperty("bitwiseop(y/n)");
 		    String conditional = props.getProperty("conditionalop(y/n)");
@@ -45,23 +48,26 @@ public class UserInputs {
 		    String relational = props.getProperty("relationalop(y/n)");
 		    String shift = props.getProperty("shiftop(y/n)");
 		    
-		    oPath=oPath+"\\"+cName+".java";
-		    System.out.println("pName is: " + pName);
+		    String newOPath=oPath+"\\"+cName+".java";
+		    String dPath = oPath+"\\"+dCName+".java";
+		    //System.out.println("pName is: " + pName);
 		    
-		    setProperties(oPath, oPathWOCName, mPath, pName, cName, arith, assign, bitwise, conditional, incdec, relational, shift);
+		    setProperties(newOPath, dPath, oPathWOCName, mPath, pName, cName, dCName, arith, assign, bitwise, conditional, incdec, relational, shift);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String oPath, String oPathWOCName, String mPath, String pName, String oCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
-		originalpath = oPath;
+	public void setProperties(String newOPath, String dPath, String oPathWOCName, String mPath, String pName, String oCName, String dCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
+		originalpath = newOPath;
+		dependentpath = dPath;
 		originalpathWOCname = oPathWOCName;
 		mutantpath = mPath;
 		//depenedentClassCopyPath = dPath;
 		originalClassName = oCName;
-		System.out.println("Got value of arithop inside setProperties as : " + arith);
-		System.out.println("value of assignment op was: " + assign);
+		dependentClassName = dCName;
+//		System.out.println("Got value of arithop inside setProperties as : " + arith);
+//		System.out.println("value of assignment op was: " + assign);
 		if(arith.isBlank()==false) {
 			char convertedarith = arith.charAt(0);
 			if(convertedarith=='y' || convertedarith=='n') {
@@ -126,9 +132,9 @@ public class UserInputs {
 				
 				if(!Files.exists(path)){
 					Files.createDirectories(path);
-					System.out.println("Driectory structure created");
+					System.out.println("Package Driectory structure created");
 				}else {
-					System.out.println("Directory already exists");
+					System.out.println("Package Directory structure not required, proceeding...");
 				}
 			}else {
 				mutantpath = mPath+"\\"+pName;
@@ -136,9 +142,9 @@ public class UserInputs {
 				
 				if(!Files.exists(path)){
 					Files.createDirectories(path);
-					System.out.println("Driectory structure created");
+					System.out.println("Package Driectory structure created");
 				}else {
-					System.out.println("Directory already exists");
+					System.out.println("Package Directory structure not required, proceeding...");
 				}
 			}
 		}
@@ -179,12 +185,20 @@ public class UserInputs {
 		return originalpathWOCname;
 	}
 	
+	public String returnDPath() {
+		return dependentpath;
+	}
+	
 	public String returnMPath() {
 		return mutantpath;
 	}
 	
 	public String returnCName() {
 		return originalClassName;
+	}
+	
+	public String returnDName() {
+		return dependentClassName;
 	}
 	
 //	public String returnDPath() {

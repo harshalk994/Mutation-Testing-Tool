@@ -11,6 +11,8 @@ public class Main {
 		String fileLocation;
 		String mutantFileLocation;
 		String originalClassName;
+		String dPath;
+		String dName;
 		//String dependentClassPath;
 		//String oPathWoCName;
 		
@@ -25,10 +27,12 @@ public class Main {
 		fileLocation = ui.returnOPath();
 		mutantFileLocation = ui.returnMPath();
 		originalClassName = ui.returnCName();
+		dPath = ui.returnDPath();
+		dName = ui.returnDName();
 		//dependentClassPath = ui.returnDPath();
 	//	oPathWoCName = ui.returnOPathWoCName();
 		
-		System.out.println("MPath is: " + mutantFileLocation);
+		//System.out.println("MPath is: " + mutantFileLocation);
 		
 //		JavaSyntaxChecker checker = new JavaSyntaxChecker();
 //		List<String> logs = checker.check(fileLocation);
@@ -131,6 +135,27 @@ public class Main {
 		
 		System.out.println("\nMutant Generation Ended\n");
 		System.out.println("Please check the html report to view the mutations.");
+		
+		if(dName.isBlank() == false) {
+			CreateTempCopyDependentClass ctcd = new CreateTempCopyDependentClass();
+			ctcd.getCName(dName);
+			ctcd.getOCName(originalClassName);
+			ctcd.getPath(mutantFileLocation);
+			ctcd.getDPath(dPath);
+			ctcd.createTempCopy();
+			
+			CreateTempCopyDependentClassV2 ctcdv2 = new CreateTempCopyDependentClassV2();
+			ctcdv2.getCName(dName);
+			ctcdv2.getOCName(originalClassName);
+			ctcdv2.getPath(mutantFileLocation);
+			ctcdv2.getDPath(dPath);
+			ctcdv2.createClassCopy();
+			
+			DeleteDependentClassTempFiles dt = new DeleteDependentClassTempFiles();
+			dt.getPath(mutantFileLocation);
+			dt.deleteTempFile();
+		}
+		
 		
 //		CopyDependentClasses cdc = new CopyDependentClasses();
 //		cdc.getCName(originalClassName);

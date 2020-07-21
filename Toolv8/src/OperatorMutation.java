@@ -84,7 +84,7 @@ public class OperatorMutation {
 		relationalop = ui.returnRelationalOp();
 		shiftop = ui.returnShiftOp();
 		
-		System.out.println("received arithop value as: " + arithop);
+		//System.out.println("received arithop value as: " + arithop);
 //		char convertedarith = arithop.charAt(0);
 //		System.out.println("Converted to char for arith, value is : " + convertedarith);
 		

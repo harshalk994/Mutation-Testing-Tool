@@ -12,6 +12,9 @@ public class UserInputs {
 	private static String testCopyPath;
 	private static String mutantPath;
 	private static String nameOfClassUnderTest;
+	private static String dependentClassName;
+	private static char testForDClass;
+	
 	//private static String nameOfTestClass;
 	
 	public void readProperties() {
@@ -27,20 +30,32 @@ public class UserInputs {
 		    String pName = props.getProperty("testpackagename");
 		    String mPName = props.getProperty("originalprogrampackagename");
 		    String mutantsPath = props.getProperty("mutantdestination");
-		    String originalClassName = props.getProperty("originalclassname");
+		    String originalClassName = props.getProperty("testclassname");
+		    String dClassName = props.getProperty("dependentclassname");
+		    String testDClass = props.getProperty("testdependentclass(y/n)");
+		    
 		    //String testClassName = props.getProperty("testclassname");
-		    setProperties(oPath, mPath, pName, mutantsPath, originalClassName, mPName);
+		    setProperties(oPath, mPath, pName, mutantsPath, originalClassName, mPName, dClassName, testDClass);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String oPath, String mPath, String pName, String mutantsPath, String orignalCName, String mPName) throws IOException {
+	public void setProperties(String oPath, String mPath, String pName, String mutantsPath, String orignalCName, String mPName, String dClassName, String testDClass) throws IOException {
 		originalTestPath = oPath;
 		testCopyPath = mPath;
 		mutantPath = mutantsPath;
 		nameOfClassUnderTest = orignalCName;
-		System.out.println("Name of class Under test was: " + nameOfClassUnderTest);
+		dependentClassName = dClassName;
+		
+		if(testDClass.isBlank()==false) {
+			char dClassChoice = testDClass.charAt(0);
+			if(dClassChoice=='y' || dClassChoice=='n') {
+				testForDClass = dClassChoice;
+				//System.out.println("value of arithop was set to: " + arithop);
+			}
+		}
+		System.out.println("Name of class Under test is: " + nameOfClassUnderTest);
 		//nameOfTestClass = originalTName;
 		String appendPath;
 		String appendMPath;
@@ -52,9 +67,9 @@ public class UserInputs {
 				
 				if(!Files.exists(path)){
 					Files.createDirectories(path);
-					System.out.println("Driectory structure created");
+					System.out.println("Package Driectory structure created");
 				}else {
-					System.out.println("Directory already exists");
+					System.out.println("Package Directory structure not required, proceeding...");
 				}
 			}else {
 				testCopyPath = mPath+"\\"+pName;
@@ -62,9 +77,9 @@ public class UserInputs {
 				
 				if(!Files.exists(path)){
 					Files.createDirectories(path);
-					System.out.println("Driectory structure created");
+					System.out.println("Package Driectory structure created");
 				}else {
-					System.out.println("Directory already exists");
+					System.out.println("Package Directory structure not required, proceeding...");
 				}
 			}
 		}
@@ -109,6 +124,14 @@ public class UserInputs {
 	
 	public String returnOriginalCName() {
 		return nameOfClassUnderTest;
+	}
+	
+	public String returnDClassName() {
+		return dependentClassName;
+	}
+	
+	public char returnDClassChoice() {
+		return testForDClass;
 	}
 	
 //	public String returnOriginalTName() {
