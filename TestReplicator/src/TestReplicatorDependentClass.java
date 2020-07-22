@@ -15,7 +15,7 @@ public class TestReplicatorDependentClass {
 	private static String nameOfClassUnderTest;
 	private static String mPath;
 	private static String fPath;
-	
+	private static String originalClassName;
 	private static String className;
 	private static String dependentClassName;
 	
@@ -41,6 +41,10 @@ public class TestReplicatorDependentClass {
 	
 	public void getDClName(String dName) {
 		dependentClassName = dName;
+	}
+	
+	public void getOriginalClassName(String oCName) {
+		originalClassName = oCName;
 	}
 	
 //	public void getTCName(String tCName) {

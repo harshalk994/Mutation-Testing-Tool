@@ -14,6 +14,7 @@ public class UserInputs {
 	private static String nameOfClassUnderTest;
 	private static String dependentClassName;
 	private static char testForDClass;
+	private static String originalClassName;
 	
 	//private static String nameOfTestClass;
 	
@@ -33,20 +34,22 @@ public class UserInputs {
 		    String originalClassName = props.getProperty("testclassname");
 		    String dClassName = props.getProperty("dependentclassname");
 		    String testDClass = props.getProperty("testdependentclass(y/n)");
+		    String oCName = props.getProperty("originalclassname");
 		    
 		    //String testClassName = props.getProperty("testclassname");
-		    setProperties(oPath, mPath, pName, mutantsPath, originalClassName, mPName, dClassName, testDClass);
+		    setProperties(oPath, mPath, pName, mutantsPath, originalClassName, mPName, dClassName, testDClass, oCName);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String oPath, String mPath, String pName, String mutantsPath, String orignalCName, String mPName, String dClassName, String testDClass) throws IOException {
+	public void setProperties(String oPath, String mPath, String pName, String mutantsPath, String orignalCName, String mPName, String dClassName, String testDClass, String oCName) throws IOException {
 		originalTestPath = oPath;
 		testCopyPath = mPath;
 		mutantPath = mutantsPath;
 		nameOfClassUnderTest = orignalCName;
 		dependentClassName = dClassName;
+		originalClassName = oCName;
 		
 		if(testDClass.isBlank()==false) {
 			char dClassChoice = testDClass.charAt(0);
@@ -132,6 +135,10 @@ public class UserInputs {
 	
 	public char returnDClassChoice() {
 		return testForDClass;
+	}
+	
+	public String returnOriginalClassName() {
+		return originalClassName;
 	}
 	
 //	public String returnOriginalTName() {

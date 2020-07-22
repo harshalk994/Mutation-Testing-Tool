@@ -19,13 +19,19 @@ public void deleteTempFile() {
 				tempDClasses.add(contents[i]);
 			}
 		}
+		
+		System.out.println("-------got file names------------");
+		for(int i=0;i<tempDClasses.size();i++) {
+			System.out.println(tempDClasses.get(i));
+		}
 		//System.out.println(file);
 		//System.out.println(file2);
 		try  
 		{         
 		if(tempDClasses.isEmpty() == false) {
 			for(int i=0;i<tempDClasses.size();i++) {
-				String fileName = mPath+tempDClasses.get(i);
+				String fileName = mPath+"\\"+tempDClasses.get(i);
+				System.out.println(fileName);
 				File f4 = new File(fileName);
 				if(f4.delete()) {
 					//System.out.println(f3.getName() + " deleted");

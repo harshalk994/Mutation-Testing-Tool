@@ -12,6 +12,7 @@ public class Main {
 		String nameOfClassUnderTest;
 		String mutantPath;
 		String dName;
+		String oCName;
 		//String nameOfClassUnderTest;
 		char testChoice;
 		boolean flag=true;
@@ -25,6 +26,7 @@ public class Main {
 		mutantPath = ui.returnMutantPath();
 		testChoice = ui.returnDClassChoice();
 		dName = ui.returnDClassName();
+		oCName = ui.returnOriginalClassName();
 		
 //		CreateTempTest ct = new CreateTempTest();
 //		ct.getFPath(originalTestLocation);
@@ -41,6 +43,7 @@ public class Main {
 			trdc.getMPath(mutantPath);
 			trdc.getPath(testCopyLocation);
 			trdc.getTMPath(testCopyLocation);
+			trdc.getOriginalClassName(oCName);
 			trdc.testReplicator();
 		}else {
 			TestReplicatorTry tr = new TestReplicatorTry();
