@@ -48,6 +48,7 @@ public class UserInputs {
 		    String relational = props.getProperty("relationalop(y/n)");
 		    String shift = props.getProperty("shiftop(y/n)");
 		    
+		    
 		    String newOPath=oPath+"\\"+cName+".java";
 		    String dPath = oPath+"\\"+dCName+".java";
 		    //System.out.println("pName is: " + pName);

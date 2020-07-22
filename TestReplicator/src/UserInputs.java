@@ -58,7 +58,7 @@ public class UserInputs {
 				//System.out.println("value of arithop was set to: " + arithop);
 			}
 		}
-		System.out.println("Name of class Under test is: " + nameOfClassUnderTest);
+		
 		//nameOfTestClass = originalTName;
 		String appendPath;
 		String appendMPath;
@@ -110,7 +110,7 @@ public class UserInputs {
 				}
 			}
 		}
-		
+		System.out.println("Name of class Under test is: " + nameOfClassUnderTest);
 	}
 	
 	public String returnOPath() {
