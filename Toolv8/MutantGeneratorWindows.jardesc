@@ -4,7 +4,7 @@
     <options buildIfNeeded="true" compress="true" descriptionLocation="/Toolv8/MutantGeneratorWindows.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=Toolv8/src&lt;{Main.java[Main" manifestLocation="/Toolv8/MutantGeneratorWindowsManifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+    <manifest generateManifest="true" mainClassHandleIdentifier="=Toolv8/src&lt;com.hsk.main{Main.java[Main" manifestLocation="/Toolv8/MutantGeneratorWindowsManifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
