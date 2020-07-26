@@ -94,6 +94,7 @@ public class DeleteKilledTests {
 		}
 		
 		System.out.println("Tests that killed mutants were deleted successfully!!");
+		System.out.println("Testing commit");
 	}
 
 
