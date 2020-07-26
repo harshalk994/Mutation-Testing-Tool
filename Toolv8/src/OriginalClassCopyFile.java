@@ -39,7 +39,7 @@ public class OriginalClassCopyFile {
 //		String updateCName = "OriginalTempCopy";
 //		scp.setCName(updateCName);
     	String tempFileName = mPath+"\\OriginalTempCopy.java";
-    	
+    	//System.out.println("NAME IS : " + tempFileName);
 //    	System.out.println("In Original Class Copy name was set to: " + scp.getCName());
 		FileReader source = new FileReader(file);
 		BufferedReader br = new BufferedReader(source);

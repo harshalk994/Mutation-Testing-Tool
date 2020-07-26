@@ -13,6 +13,10 @@ public class UserInputs {
 	private static String originalpathWOCname;
 	private static String mutantpath;
 	private static String finalPath;
+	private static String mTestPath;
+	private static String originalPackageName;
+	private static String testPackageName;
+	
 	//private static String depenedentClassCopyPath;
 	private static String originalClassName; 
 	private static String dependentClassName;
@@ -34,8 +38,10 @@ public class UserInputs {
 		 
 		    String oPath = props.getProperty("originalprogrampath");
 		    String oPathWOCName = props.getProperty("originalprogrampath");
+		    String testPath = props.getProperty("testcopypath");
 		    String mPath = props.getProperty("mutantdestination");
 		    String pName = props.getProperty("originalprogrampackagename");
+		    String testPName = props.getProperty("testpackagename");
 		    String cName = props.getProperty("originalclassname");
 		    String dCName = props.getProperty("dependentclassname");
 		   // String dPath = props.getProperty("dependentclasscopypath");
@@ -53,13 +59,13 @@ public class UserInputs {
 		    String dPath = oPath+"\\"+dCName+".java";
 		    //System.out.println("pName is: " + pName);
 		    
-		    setProperties(newOPath, dPath, oPathWOCName, mPath, pName, cName, dCName, arith, assign, bitwise, conditional, incdec, relational, shift);
+		    setProperties(newOPath, dPath, oPathWOCName, testPath, mPath, pName, testPName, cName, dCName, arith, assign, bitwise, conditional, incdec, relational, shift);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
-	public void setProperties(String newOPath, String dPath, String oPathWOCName, String mPath, String pName, String oCName, String dCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
+	public void setProperties(String newOPath, String dPath, String oPathWOCName, String testPath, String mPath, String pName, String testPName, String oCName, String dCName, String arith, String assign, String bitwise, String conditional, String incdec, String relational, String shift) throws IOException {
 		originalpath = newOPath;
 		dependentpath = dPath;
 		originalpathWOCname = oPathWOCName;
@@ -67,6 +73,10 @@ public class UserInputs {
 		//depenedentClassCopyPath = dPath;
 		originalClassName = oCName;
 		dependentClassName = dCName;
+		mTestPath = testPath;
+		originalPackageName = pName;
+		testPackageName = testPName;
+		
 //		System.out.println("Got value of arithop inside setProperties as : " + arith);
 //		System.out.println("value of assignment op was: " + assign);
 		if(arith.isBlank()==false) {
@@ -147,6 +157,16 @@ public class UserInputs {
 				}else {
 					System.out.println("Package Directory structure not required, proceeding...");
 				}
+			}
+		}
+		
+		String appendTPath;
+		if(testPName!=null) {
+			if(testPName.contains(".")) {
+				appendTPath = testPName.replace(".", "\\");
+				mTestPath = testPath+"\\"+appendTPath;
+			}else {
+				mTestPath = testPath+"\\"+testPName;
 			}
 		}
 		
@@ -232,5 +252,17 @@ public class UserInputs {
 	
 	public char returnShiftOp() {
 		return shiftop;
+	}
+	
+	public String returnTPath() {
+		return mTestPath;
+	}
+	
+	public String returnOPName() {
+		return originalPackageName;
+	}
+	
+	public String returnTPName() {
+		return testPackageName;
 	}
 }

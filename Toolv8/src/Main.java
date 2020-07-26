@@ -13,6 +13,10 @@ public class Main {
 		String originalClassName;
 		String dPath;
 		String dName;
+		String testFileLocation;
+		String mPName;
+		String tPName;
+		//String premutantFilelocation;
 		//String dependentClassPath;
 		//String oPathWoCName;
 		
@@ -22,13 +26,25 @@ public class Main {
 //		System.out.println("Enter the location where you want to store the generated mutants:");
 //		mutantFileLocation = sc.nextLine();
 		
+		PreProcessDeleteFiles pdf = new PreProcessDeleteFiles();
+//		pdf.getPath(mutantFileLocation);
+//		pdf.getMTPath(testFileLocation);
+//		pdf.getOPName(mPName);
+//		pdf.getTPName(tPName);
+		pdf.deleteTempFile();
+		
 		UserInputs ui = new UserInputs();
 		ui.readProperties();
 		fileLocation = ui.returnOPath();
-		mutantFileLocation = ui.returnMPath();
+		//premutantFilelocation = ui.returnMPath();
+		//mutantFileLocation = ui.returnMPath();
+		//System.out.println("Pre path: " + mutantFileLocation);
 		originalClassName = ui.returnCName();
 		dPath = ui.returnDPath();
 		dName = ui.returnDName();
+		testFileLocation = ui.returnTPath();
+		mPName = ui.returnOPName();
+		tPName = ui.returnTPName();
 		//dependentClassPath = ui.returnDPath();
 	//	oPathWoCName = ui.returnOPathWoCName();
 		
@@ -43,6 +59,11 @@ public class Main {
 		
 		//FileOpsTest fot = new FileOpsTest();
 		//fot.createCopies(fileLocation);
+		
+		
+//		
+		mutantFileLocation = ui.returnMPath();
+		//System.out.println("Got the mutant file location as: " + mutantFileLocation);
 		
 		ArithOpTry3 at = new ArithOpTry3();
 		at.getPath(mutantFileLocation);
