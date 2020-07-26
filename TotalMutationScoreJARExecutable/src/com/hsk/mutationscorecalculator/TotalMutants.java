@@ -1,8 +1,12 @@
+package com.hsk.mutationscorecalculator;
+import com.hsk.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.hsk.userinputs.UserInputs;
 
 public class TotalMutants {
 	public void totalMutantsCount() throws IOException {

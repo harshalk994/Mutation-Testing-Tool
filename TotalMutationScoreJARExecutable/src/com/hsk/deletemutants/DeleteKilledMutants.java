@@ -1,6 +1,10 @@
+package com.hsk.deletemutants;
+import com.hsk.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.hsk.userinputs.UserInputs;
 
 public class DeleteKilledMutants {
 	

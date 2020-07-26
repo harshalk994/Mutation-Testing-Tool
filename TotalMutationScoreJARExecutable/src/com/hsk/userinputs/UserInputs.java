@@ -1,3 +1,5 @@
+package com.hsk.userinputs;
+import com.hsk.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
