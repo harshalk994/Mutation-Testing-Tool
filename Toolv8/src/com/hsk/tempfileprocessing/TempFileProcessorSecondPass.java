@@ -1,3 +1,5 @@
+//	This class is created to process the original class file and generate a temp file (this is the second pass for processing the original class)
+
 package com.hsk.tempfileprocessing;
 import com.hsk.*;
 import java.io.BufferedReader;
@@ -10,66 +12,44 @@ import java.util.regex.Pattern;
 import com.hsk.userinputs.SetClassNameProperty;
 
 public class TempFileProcessorSecondPass {
-	
+
 	private static String mPath;
-	//private static String fPath;
 	private static String className;
-	
+
+	//----------Method to get the mutant folder path-----------------
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
-	
+
+	//----------Method to get the original class name-----------------
 	public void getCName(String originalCName) {
 		className = originalCName;
 	}
-	
-//	public void getFPath(String originalFilePath) {
-//		fPath = originalFilePath;
-//	}
-	
+
+	//----------Method to process the original class and create a temporary copy of it (second pass)-----------------
 	public void processTempFile() throws IOException {
-		
-//		String[] locatewords = fPath.split("\\\\");
-//		for(int i=0;i<locatewords.length;i++) {
-//			if(locatewords[i].contains(".java")) {
-//				String newW = locatewords[i].replace(".java", "");
-//				className =newW;
-//			}
-//		}
 		SetClassNameProperty scp = new SetClassNameProperty();
 		className = scp.getCName();
-//		System.out.println("In TempFileProcessor got the class name as : " + scp.getCName());
-		//System.out.println("Cname in TFP : " + className);
-		
-		
-//		TempFileGenerator tfg = new TempFileGenerator();
-//		className = tfg.getClass().getName();
-//		Properties props = new Properties();
-		
+
 		String tempFileName = mPath+"\\FirstTemp.java";
-    	String newTempFile = mPath+"\\SecondTemp.java";
-    	//System.out.println("In temp file process got : " + className);
+		String newTempFile = mPath+"\\SecondTemp.java";
+
 		FileReader source = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(source);
 		FileWriter targetFile = new FileWriter(newTempFile);
 		BufferedWriter bw = new BufferedWriter(targetFile);
-		
-		String classKeyword = "class";
-		String regex = ".*\\class" + Pattern.quote(classKeyword) + "\\class.*";
+
 		String line;
 		String updateCName = "SecondTemp";
-		//scp.setCName(updateCName);
-		while((line = br.readLine()) != null) {
-			
-			if(line.contains(className)) {
 
-				
+		while((line = br.readLine()) != null) {
+
+			if(line.contains(className)) {
 				String newLine = line.replaceAll(className, updateCName);
 				scp.setCName(updateCName);
 				bw.write(newLine);
-				bw.newLine();
-				
-		}
+				bw.newLine();				
+			}
 			else if((!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("*")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("+")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("/")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("%"))){
 				String[] words = line.split("");
 				for(int k=0;k<words.length;k++) {
@@ -79,31 +59,30 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-							if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-							if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-							if(words[k].contains("*")) {
+						if(words[k].contains("*")) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-							if(words[k].contains("/")) {
+						if(words[k].contains("/")) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-							if(words[k].contains("%")) {
+						if(words[k].contains("%")) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
 					}
-					}
+				}
 
-				String newLine = String.join("", words);
-				
+				String newLine = String.join("", words);		
 				bw.write(newLine);
 				bw.newLine();
 			}
@@ -116,32 +95,30 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-							if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-							if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-							if(words[k].contains("*")) {
+						if(words[k].contains("*")) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-							if(words[k].contains("/")) {
+						if(words[k].contains("/")) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-							if(words[k].contains("%")) {
+						if(words[k].contains("%")) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
 					}
-					}
+				}
 
-					
-				String newLine = String.join("", words);
-				
+				String newLine = String.join("", words);				
 				bw.write(newLine);
 				bw.newLine();
 			}
@@ -154,31 +131,30 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-							if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-							if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-							if(words[k].contains("*")) {
+						if(words[k].contains("*")) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-							if(words[k].contains("/")) {
+						if(words[k].contains("/")) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-							if(words[k].contains("%")) {
+						if(words[k].contains("%")) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
 					}
-					}
+				}
 
 				String newLine = String.join("", words);
-				
 				bw.write(newLine);
 				bw.newLine();
 			}
@@ -191,47 +167,44 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-							if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-							if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-							if(words[k].contains("*")) {
+						if(words[k].contains("*")) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-							if(words[k].contains("/")) {
+						if(words[k].contains("/")) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-							if(words[k].contains("%")) {
+						if(words[k].contains("%")) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
 					}
-					}
+				}
+
 				String newLine = String.join("", words);
-				
 				bw.write(newLine);
 				bw.newLine();
 			}
 			else {
 				bw.write(line);
 				bw.newLine();
-				}
-//			}
-			
+			}	
 		}
-		
+
 		br.close();
 		bw.close();
 		source.close();
 		targetFile.close();
-		
-}
 
+	}
 
 }

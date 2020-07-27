@@ -1,3 +1,5 @@
+//	This class is created to process the original class and remove comments from the file so that the size of the file can be reduced
+
 package com.hsk.tempfileprocessing;
 import com.hsk.*;
 import java.io.BufferedReader;
@@ -13,65 +15,30 @@ public class RemoveComments {
 	
 	private static String mPath;
 	private static String fPath;
+	
+	//----------Method to get the mutant folder path-----------------
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
 	
+	//----------Method to get the original class folder path-----------------
 	public void getFPath(String originalFilePath) {
 		fPath = originalFilePath;
 	}
 	
+	//----------Method to remove comments from the original class file-----------------
 	public void removeComments() throws IOException {
-//		List<String> paths = new ArrayList<String>();
-//    	FileDetailsStorage fds3 = new FileDetailsStorage();
-//    	paths = fds3.returnPaths();
-//    	String mPath = null;
-//    	
-//    	for(int i=0;i<paths.size();) {
-//    		i++;
-//    		mPath = paths.get(i);
-//    		break;		
-//    	}
     	String tempFileName = mPath+"\\OriginalTempCopy.java";
 		
 		Cleaner cleaner = new Cleaner();
 		String line = cleaner.readFile();
 		String newLine = line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");
-		//System.out.println(newLine);
+
 		FileWriter fw = new FileWriter(tempFileName);
 		fw.write(newLine);
 		fw.close();
 		
 		System.out.println("Temp File generated successfully!!");
-		
-		
-		
-		
-		
-		
-//		FileReader source = new FileReader("src/Temp.java");
-//		BufferedReader br = new BufferedReader(source);
-//		FileWriter targetFile = new FileWriter("src/TempC.java");
-//		BufferedWriter bw = new BufferedWriter(targetFile);
-//		
-//		String line;
-//		line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");
-//		//String multiLine = "/\*.*\n.*\*\/";
-//		
-//		while((line = br.readLine()) != null) {
-//			line.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");
-//			
-//			
-//			bw.write(line);
-//			bw.newLine();
-//			
-//		}
-//		
-//		bw.close();
-//		br.close();
-//		targetFile.close();
-//		source.close();
-//	}
 	}
 
 }
