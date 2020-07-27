@@ -35,7 +35,6 @@ public class Main {
 
 		//----------If testdependentclass flag is set to y, execute the below if block for creating copies of the dependent class tests, otherwise execute the else block to create copies of the original class tests---------------
 		if(testChoice=='y') {
-			//System.out.println("HERE");
 			TestReplicatorDependentClass trdc = new TestReplicatorDependentClass();
 			trdc.getClassName(nameOfClassUnderTest);
 			trdc.getDClName(dName);
