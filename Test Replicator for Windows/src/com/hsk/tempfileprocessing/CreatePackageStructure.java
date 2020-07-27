@@ -37,7 +37,7 @@ public class CreatePackageStructure {
 		
 		if(!Files.exists(path)){
 			Files.createDirectories(path);
-			System.out.println("Driectory structure created");
+			System.out.println("Directory structure created");
 		}else {
 			System.out.println("Directory already exists");
 		}
