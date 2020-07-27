@@ -1,3 +1,5 @@
+//	Main class/Entry point of Mutant Generator JAR executable
+
 package com.hsk.main;
 import com.hsk.*;
 import java.io.IOException;
@@ -37,7 +39,8 @@ public class Main {
 
 	private static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+
+		//--------required variable declarations-------------------
 		String fileLocation;
 		String mutantFileLocation;
 		String originalClassName;
@@ -46,240 +49,156 @@ public class Main {
 		String testFileLocation;
 		String mPName;
 		String tPName;
-		//String premutantFilelocation;
-		//String dependentClassPath;
-		//String oPathWoCName;
-		
-//		System.out.println("Enter the original file's location and filename whose mutants need to be generated:");
-//		fileLocation = sc.nextLine();
-//		
-//		System.out.println("Enter the location where you want to store the generated mutants:");
-//		mutantFileLocation = sc.nextLine();
-		
+
+		//--------deleting the files generated from previous project run using the tool
 		PreProcessDeleteFiles pdf = new PreProcessDeleteFiles();
-//		pdf.getPath(mutantFileLocation);
-//		pdf.getMTPath(testFileLocation);
-//		pdf.getOPName(mPName);
-//		pdf.getTPName(tPName);
 		pdf.deleteTempFile();
-		
+
+
+		//----------reading config file and retrieving the required user inputs-------------
 		UserInputs ui = new UserInputs();
 		ui.readProperties();
 		fileLocation = ui.returnOPath();
-		//premutantFilelocation = ui.returnMPath();
-		//mutantFileLocation = ui.returnMPath();
-		//System.out.println("Pre path: " + mutantFileLocation);
 		originalClassName = ui.returnCName();
 		dPath = ui.returnDPath();
 		dName = ui.returnDName();
 		testFileLocation = ui.returnTPath();
 		mPName = ui.returnOPName();
-		tPName = ui.returnTPName();
-		//dependentClassPath = ui.returnDPath();
-	//	oPathWoCName = ui.returnOPathWoCName();
-		
-		//System.out.println("MPath is: " + mutantFileLocation);
-		
-//		JavaSyntaxChecker checker = new JavaSyntaxChecker();
-//		List<String> logs = checker.check(fileLocation);
-//		
-//		FileErrorLogPrintAndBreak fel = new FileErrorLogPrintAndBreak();
-//		fel.printLogs(logs);
-//		fel.breakCode(logs);
-		
-		//FileOpsTest fot = new FileOpsTest();
-		//fot.createCopies(fileLocation);
-		
-		
-//		
+		tPName = ui.returnTPName();	
 		mutantFileLocation = ui.returnMPath();
-		//System.out.println("Got the mutant file location as: " + mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the arithmetic operator mutation class-------------
 		ArithmeticOperatorMutation at = new ArithmeticOperatorMutation();
 		at.getPath(mutantFileLocation);
-	
+
+		//------------passing the mutant file path value to the conditional operator storage class---------------
 		ConditionalOpStorage cs = new ConditionalOpStorage();
 		cs.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the conditional operator mutation class---------------
 		ConditionOperatorMutation ct = new ConditionOperatorMutation();
 		ct.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the arithmetic operator storage class---------------
 		ArithmeticOpStorage os = new ArithmeticOpStorage();
 		os.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the relational operator storage class---------------
 		RelationalOpStorage rs = new RelationalOpStorage();
 		rs.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the relational operator mutation class---------------
 		RelationalOperatorMutation rt = new RelationalOperatorMutation();
 		rt.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the shift operator storage class---------------
 		ShiftOpStorage ss = new ShiftOpStorage();
 		ss.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the shift operator mutation class---------------
 		ShiftOperatorMutation st = new ShiftOperatorMutation();
 		st.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the bitwise operator storage class---------------
 		BitwiseOpStorage bw = new BitwiseOpStorage();
 		bw.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the bitwise operator mutation class---------------
 		BitwiseOperatorMutation bt = new BitwiseOperatorMutation();
 		bt.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the assignment operator storage class---------------
 		AssignmentOpStorage aos = new AssignmentOpStorage();
 		aos.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the assignment operator mutation class---------------
 		AssignmentOperatorMutation aot = new AssignmentOperatorMutation();
 		aot.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the inc/dec operator storage class---------------
 		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
 		ios.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the inc/dec operator mutation class---------------
 		IncrementDecrementOperatorMutation idt = new IncrementDecrementOperatorMutation();
 		idt.getPath(mutantFileLocation);
-		
+
+		//------------passing the mutant file path value to the cleaner class---------------
 		Cleaner cc = new Cleaner();
 		cc.getPath(mutantFileLocation);
-		
+
+
+		//-----------passing required inputs to the CopyOriginalClassFile class--------------
 		CopyOriginalClassFile ocp = new CopyOriginalClassFile();
 		ocp.getPath(mutantFileLocation);
 		ocp.getFPath(fileLocation);
 		ocp.createTempFile(fileLocation);
 
+		//------------passing the mutant file path value to the RemoveComments class and run the removeComments() method---------------
 		RemoveComments rc = new RemoveComments();
 		rc.getPath(mutantFileLocation);
 		rc.removeComments();
-		
-//		TempFileGenerator temp = new TempFileGenerator();
-//		temp.getPath(mutantFileLocation);
-//		temp.createTempFile();
-		
+
+		//-----------passing required inputs to the TempFileProcessorFirstPass class and running the processTempFile() method--------------
 		TempFileProcessorFirstPass tfp = new TempFileProcessorFirstPass();
 		tfp.getCName(originalClassName);
 		tfp.getPath(mutantFileLocation);
-		//tfp.getFPath(fileLocation);
 		tfp.processTempFile();
-		
+
+		//-----------passing required inputs to the TempFileProcessorSecondPass class and running the processTempFile() method--------------
 		TempFileProcessorSecondPass stp = new TempFileProcessorSecondPass();
 		stp.getCName(originalClassName);
 		stp.getPath(mutantFileLocation);
 		stp.processTempFile();
-		
-		
-//		TempFileProcessor tfp = new TempFileProcessor();
-//		tfp.getPath(mutantFileLocation);
-//		tfp.processTempFile();
-		
+
+		//-----------passing required inputs to the TempFileProcessorThirdPass class and running the processTempFile() method--------------
 		TempFileProcessorThirdPass ftp = new TempFileProcessorThirdPass();
 		ftp.getPath(mutantFileLocation);
 		ftp.processTempFile();
-		
+
+		//-----------passing required inputs to the DeleteTempFile class and running the deleteTempFile() method--------------
 		DeleteTempFile dtf = new DeleteTempFile();
 		dtf.getPath(mutantFileLocation);
 		dtf.deleteTempFile();
-		
-		
+
+
 		System.out.println("Generating Mutants . . . . . \n");
-		//Thread.sleep(2000);
-		
+
+		//-----------running the opMutationRules() method--------------
 		OperatorMutation opm = new OperatorMutation();
 		opm.opMutationRules();
-		
+
 		System.out.println("\nMutant Generation Ended\n");
 		System.out.println("Please check the html report to view the mutations.");
-		
+
+		//If depenendent class name is not blank, invoke the dependent class copies generator----------------------
 		if(dName.isBlank() == false) {
+
+			//------------passing the mutant file path value to the CreateTempCopyDependentClassFirstPass class and run the createTempCopy() method---------------
 			CreateTempCopyDependentClassFirstPass ctcd = new CreateTempCopyDependentClassFirstPass();
 			ctcd.getCName(dName);
 			ctcd.getOCName(originalClassName);
 			ctcd.getPath(mutantFileLocation);
 			ctcd.getDPath(dPath);
 			ctcd.createTempCopy();
-			
+
+			//------------passing the mutant file path value to the CreateTempCopyDependentClassSecondPass class and run the createClassCopy() method---------------
 			CreateTempCopyDependentClassSecondPass ctcdv2 = new CreateTempCopyDependentClassSecondPass();
 			ctcdv2.getCName(dName);
 			ctcdv2.getOCName(originalClassName);
 			ctcdv2.getPath(mutantFileLocation);
 			ctcdv2.getDPath(dPath);
 			ctcdv2.createClassCopy();
-			
+
+			//-----------passing required inputs to the DeleteDependentClassTempFiles class and running the deleteTempFile() method--------------
 			DeleteDependentClassTempFiles dt = new DeleteDependentClassTempFiles();
 			dt.getPath(mutantFileLocation);
 			dt.deleteTempFile();
 		}
-		
-		
-//		CopyDependentClasses cdc = new CopyDependentClasses();
-//		cdc.getCName(originalClassName);
-//		cdc.getFPath(oPathWoCName);
-//		cdc.getPath(mutantFileLocation);
-//		cdc.copyDependentClasses();
-//		
-//		CopyDependentClassV2 cdcv = new CopyDependentClassV2();
-//		cdcv.getCName(originalClassName);
-//		cdcv.getFPath(oPathWoCName);
-//		cdcv.getPath(mutantFileLocation);
-//		cdcv.copyDependentClasses();
-//		
-//		CopyDependentClassesV3 cdcv3 = new CopyDependentClassesV3();
-//		cdcv3.getCName(originalClassName);
-//		cdcv3.getFPath(oPathWoCName);
-//		cdcv3.getPath(mutantFileLocation);
-//		cdcv3.copyDependentClasses();
-		
-//		CreateTempCopyDependentClass ctcd = new CreateTempCopyDependentClass();
-//		ctcd.getCName(originalClassName);
-//		ctcd.getFPath(oPathWoCName);
-//		ctcd.getPath(mutantFileLocation);
-//		ctcd.createTempCopy();
-//		
-//		CreateTempCopyDependentClassV2 ctcdv2 = new CreateTempCopyDependentClassV2();
-//		ctcdv2.getCName(originalClassName);
-//		ctcdv2.getFPath(oPathWoCName);
-//		ctcdv2.getPath(mutantFileLocation);
-//		ctcdv2.createClassCopy();
-//		
-//		CreateTempCopyDependentClassV3 ctcdv3 = new CreateTempCopyDependentClassV3();
-//		ctcdv3.getCName(originalClassName);
-//		ctcdv3.getFPath(oPathWoCName);
-//		ctcdv3.getPath(mutantFileLocation);
-//		ctcdv3.createFinalCopy();
-		
-//		ArithOpTry3 aot = new ArithOpTry3();
-//		aot.generateArithOpMutantFiles();
-//		
-//		ConditionOpTry2 ct = new ConditionOpTry2();
-//		ct.generateConditionMutantFiles();
-//		
-//		RelOpTryFinal rt = new RelOpTryFinal();
-//		rt.generateRelOpMutantFiles();
-				
 
-		//MutantAOP muaop = new MutantAOP();
-		//muaop.processMutants();
-		
-//		List<String> opL = new ArrayList<String>();
-//		
-//		OperatorStorage os = new OperatorStorage();
-//		os.processOp();
-//		opL = os.returnOpList();
-//		os.processList(opL);
-//		
-			
-		//FileBufferTry fbt = new FileBufferTry();
-		//fbt.createCopies();
-		
-//		BuffOpTry bot = new BuffOpTry();
-//		bot.createCopies(fileLocation);
-	//	System.out.println("All mutants were generated successfully!!");
-		
-//		System.out.println("Do you want to quit? (Y/N)");
-//		String qChoice = sc.nextLine();
-//		if(qChoice.equalsIgnoreCase("Y") || qChoice.equalsIgnoreCase("y")) {
-//			System.exit(1);
-//		}
 
 	}
-	
-	
+
+
 
 }

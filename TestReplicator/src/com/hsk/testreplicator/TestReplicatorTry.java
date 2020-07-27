@@ -1,13 +1,18 @@
+package com.hsk.testreplicator;
+import com.hsk.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestReplicatorDependentClass {
+import com.hsk.userinputs.SetClassNameProperty;
+
+public class TestReplicatorTry {
 	
 	private static String mutantsPath;
 	private static String tmPath;
@@ -15,9 +20,8 @@ public class TestReplicatorDependentClass {
 	private static String nameOfClassUnderTest;
 	private static String mPath;
 	private static String fPath;
-	private static String originalClassName;
+	
 	private static String className;
-	private static String dependentClassName;
 	
 	public void getTMPath(String testFilePath) {
 		tmPath = testFilePath;
@@ -39,18 +43,6 @@ public class TestReplicatorDependentClass {
 		fPath = originalTestPath;
 	}
 	
-	public void getDClName(String dName) {
-		dependentClassName = dName;
-	}
-	
-	public void getOriginalClassName(String oCName) {
-		originalClassName = oCName;
-	}
-	
-//	public void getTCName(String tCName) {
-//		nameOfTestClass = tCName;
-//	}
-	
 	public void testReplicator() throws IOException {
 		SetClassNameProperty scp = new SetClassNameProperty();
 		String mLocation=mPath;
@@ -66,10 +58,8 @@ public class TestReplicatorDependentClass {
 		
 		
 		nameOfTestClass = className;
-		System.out.println("Name of test class is: " + nameOfTestClass);
 			File directoryPath = new File(mutantsPath);
 			List<String> removeNull = new ArrayList<String>();
-			List<String> removeDNull = new ArrayList<String>();
 	      //List of all files and directories
 	      String contents[] = directoryPath.list();
 	     
@@ -89,7 +79,7 @@ public class TestReplicatorDependentClass {
 	      
 	      
 	      for(int l=0, m=0; l<contents.length; l++) {
-	    	  if(contents[l].matches("Temp") || (contents[l].contains("Mu") && contents[l].contains("Op"))) 
+	    	  if(contents[l].contains("Temp")) 
 	    		  continue;
 	    	  
 	    	 
@@ -111,31 +101,16 @@ public class TestReplicatorDependentClass {
 	      
 	      trimmedStr = removeNull.toArray(new String[removeNull.size()]);
 //	      
-	      
-//	      System.out.println("----------trimmed str-----------");
 //	      for(int j=0;j<trimmedStr.length;j++) {
 //	    	  
 //	    	  System.out.println(trimmedStr[j]);
-//	      }	
+//	      }
 	      
 	      for(int v=0, a=0;v<trimmedStr.length;v++,a++) {
 	    	  className[a] = trimmedStr[v];
 	    	  className[a]=className[a]+"Test";
 	    	//  System.out.println(className[a]);
 	      }
-	      
-	      for(String s : className) {
-	    	  if(s!=null && s.length() > 0) {
-	    		  removeDNull.add(s);
-	    	  }
-	      }
-	      
-	      className = removeDNull.toArray(new String[removeDNull.size()]);
-	      
-//	      System.out.println("---------Testclass names are-------------");
-//	      for(int i=0;i<className.length;i++) {
-//	    	  System.out.println(className[i]);
-//	      }
 
 		FileReader source = null;
 		BufferedReader br = null;
@@ -197,7 +172,7 @@ public class TestReplicatorDependentClass {
 //						bw.newLine();
 //					
 //					}
-					else if(line.contains(dependentClassName)) {
+					else if(line.contains(nameOfClassUnderTest)) {
 						
 //						String[] classLineWords = line.split(" ");
 //						for(int c=0; c<classLineWords.length;c++) {
@@ -214,7 +189,7 @@ public class TestReplicatorDependentClass {
 //						bw.write(newLine);
 //						bw.newLine();
 						
-						String newLine = line.replaceAll(dependentClassName, trimmedStr[k]);
+						String newLine = line.replaceAll(nameOfClassUnderTest, trimmedStr[k]);
 						bw.write(newLine);
 						bw.newLine();
 						
@@ -238,6 +213,4 @@ public class TestReplicatorDependentClass {
 		System.out.println("Test Copies generated in the specified folder.");
 
 }
-
-
 }

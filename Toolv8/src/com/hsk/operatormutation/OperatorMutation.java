@@ -1,3 +1,5 @@
+//	This class is created to apply the different types of operator mutation rules based on operators captured from the original program 
+
 package com.hsk.operatormutation;
 import com.hsk.*;
 import java.io.IOException;
@@ -15,56 +17,8 @@ import com.hsk.operatorstorage.ShiftOpStorage;
 import com.hsk.userinputs.UserInputs;
 
 public class OperatorMutation {
-	
-	
-//	public static void main(String[] args) throws IOException {
-//		List<String> arithOpList = new ArrayList<String>();
-//		List<String> conditionalOpList = new ArrayList<String>();
-//		List<String> relationalOpList = new ArrayList<String>();
-//		
-//		OperatorStorage ops = new OperatorStorage();
-//		ops.processOp();
-//		
-//		ConditionalOpStorage cs = new ConditionalOpStorage();
-//		cs.processOp();
-//		
-//		RelOpStorageFinal rs = new RelOpStorageFinal();
-//		rs.processOp();
-//		
-//		ArithOpTry3 aop = new ArithOpTry3();
-//		ConditionOpTry2 cop = new ConditionOpTry2();
-//		RelOpTryFinal rop = new RelOpTryFinal();
-//		
-//		arithOpList = ops.returnOpList();
-//		System.out.println("ArithList");
-//		for(int i=0;i<arithOpList.size();i++) {
-//			System.out.println(arithOpList.get(i));
-//		}
-////		if(arithOpList.isEmpty() == false) {
-////			aop.generateArithOpMutantFiles();
-////		}
-//		
-//		conditionalOpList = cs.returnOpList();
-//		System.out.println("ConditionList");
-//		for(int i=0;i<conditionalOpList.size();i++) {
-//			System.out.println(conditionalOpList.get(i));
-//		}
-////		if(conditionalOpList.isEmpty() == false) {
-////			cop.generateConditionMutantFiles();
-////		}
-//		
-//		relationalOpList = rs.returnRelOpList();
-//		System.out.println("RelList");
-//		for(int i=0;i<relationalOpList.size();i++) {
-//			System.out.println(relationalOpList.get(i));
-//		}
-////		if(relationalOpList.isEmpty() == false) {
-////			rop.generateRelOpMutantFiles();
-////		}
-//	
-//
-//	}
-	
+
+	//--------------Method to apply required mutation rules to operatores captured in the original program---------------------
 	public void opMutationRules() throws IOException {
 		List<String> arithOpList = new ArrayList<String>();
 		List<String> arithTwoList = new ArrayList<String>();
@@ -77,7 +31,7 @@ public class OperatorMutation {
 		List<String> bitwiseAssignOpList = new ArrayList<String>();
 		List<String> shiftAssignOpList = new ArrayList<String>();
 		List<String> incDecOpList = new ArrayList<String>();
-		
+
 		boolean allops = false;
 		char arithop;
 		char assignmentop;
@@ -86,7 +40,8 @@ public class OperatorMutation {
 		char incdecop;
 		char relationalop;
 		char shiftop;
-		
+
+		//----------getting userinputs regarding which mutation rules user wishes to apply to the program------------
 		UserInputs ui = new UserInputs();
 		arithop = ui.returnArithOp();
 		assignmentop = ui.returnAssignOp();
@@ -95,97 +50,104 @@ public class OperatorMutation {
 		incdecop = ui.returnIncDecOp();
 		relationalop = ui.returnRelationalOp();
 		shiftop = ui.returnShiftOp();
-		
-		//System.out.println("received arithop value as: " + arithop);
-//		char convertedarith = arithop.charAt(0);
-//		System.out.println("Converted to char for arith, value is : " + convertedarith);
-		
+
+
+		//-------------------Retrieve the arithmetic operators that are captured from original class----------------------
 		ArithmeticOpStorage ops = new ArithmeticOpStorage();
 		ops.processOp();
 		arithOpList = ops.returnOpList();
 		arithTwoList = ops.returnOpTwoList();
-		
+
+		//-------------------Retrieve the conditional operators that are captured from original class----------------------
 		ConditionalOpStorage cs = new ConditionalOpStorage();
 		cs.processOp();
 		conditionalOpList = cs.returnOpList();
-		
+
+		//-------------------Retrieve the relational operators that are captured from original class----------------------
 		RelationalOpStorage rs = new RelationalOpStorage();
 		rs.processOp();
 		relationalOpList = rs.returnRelOpList();
 		relationalOpTwoList = rs.returnRelOpListNotEqual();
-		
+
+		//-------------------Retrieve the shift operators that are captured from original class----------------------
 		ShiftOpStorage ss = new ShiftOpStorage();
 		ss.processOp();
 		shiftOpList = ss.returnShiftOpList();
-		//ss.printShiftOps();
-		
+
+		//-------------------Retrieve the bitwise operators that are captured from original class----------------------
 		BitwiseOpStorage bos = new BitwiseOpStorage();
 		bos.processOp();
 		bitwiseOpList = bos.returnBitwiseOpList();
-		
+
+		//-------------------Retrieve the assignment operators that are captured from original class----------------------
 		AssignmentOpStorage as = new AssignmentOpStorage();
 		as.processOp();
 		arithAssignmentOpList = as.returnArithAssignOpList();
 		bitwiseAssignOpList = as.returnBitwiseAssignOpList();
 		shiftAssignOpList = as.returnShiftAssignOpList();
-		
-		
+
+		//-------------------Retrieve the inc/dec operators that are captured from original class----------------------
 		IncrementDecrementOpStorage ids = new IncrementDecrementOpStorage();
 		ids.processOp();
 		incDecOpList = ids.returnOpList();
-		
-	
+
+		//-----------if choices in the cofig file are left blank for the mutation rules, apply all rules by default---------------
 		if((arithop==' ') && (assignmentop==' ') && (bitwiseop==' ')
 				&& (conditionalop==' ') && (incdecop==' ') && (relationalop==' ')
 				&& (shiftop==' ')) {
 			allops=true;
 		}
-		
+
 		if(allops==true) {
+			//------------apply arithmetic operator mutation rule if arithmetic operators are present in the original program-----------------
 			if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
 				ArithmeticOperatorMutation aop = new ArithmeticOperatorMutation();
 				aop.generateArithOpMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateArithOpTable();
 			}
-			
 
+			//------------apply conditional operator mutation rule if conditional operators are present in the original program-----------------
 			if(conditionalOpList.isEmpty() == false) {
 				ConditionOperatorMutation cop = new ConditionOperatorMutation();
 				cop.generateConditionMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateConditionalOpTable();
 			}
-			
-			
+
+			//------------apply relational operator mutation rule if relational operators are present in the original program-----------------
 			if(relationalOpList.isEmpty() == false || relationalOpTwoList.isEmpty() == false) {
 				RelationalOperatorMutation rop = new RelationalOperatorMutation();
 				rop.generateRelOpMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateRelationalOpTable();
 			}
-			
+
+			//------------apply shift operator mutation rule if shift operators are present in the original program-----------------
 			if(shiftOpList.isEmpty() == false) {
 				ShiftOperatorMutation sot = new ShiftOperatorMutation();
 				sot.generateShiftOpMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateShiftOpTable();
 			}
-			
+
+			//------------apply bitwise operator mutation rule if bitwise operators are present in the original program-----------------
 			if(bitwiseOpList.isEmpty() == false) {
 				BitwiseOperatorMutation bt = new BitwiseOperatorMutation();
 				bt.generateBitwiseOpMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateBitwiseOpTable();
 			}
-			
+
+			//------------apply assignment operator mutation rule if assignment operators are present in the original program-----------------
 			if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
 				AssignmentOperatorMutation at = new AssignmentOperatorMutation();
 				at.generateAssignmentOpMutantFiles();
 				GenerateHtmlTable pht = new GenerateHtmlTable();
 				pht.generateAssignmentOpTable();
 			}
-			
+
+			//------------apply inc/dec operator mutation rule if inc/dec operators are present in the original program-----------------
 			if(incDecOpList.isEmpty() == false) {
 				IncrementDecrementOperatorMutation idt = new IncrementDecrementOperatorMutation();
 				idt.generateIncDecOpMutantFiles();
@@ -193,7 +155,8 @@ public class OperatorMutation {
 				pht.generateIncDecOpTable();
 			}
 		}
-		
+
+		//------if flag for arithop mutation rule is set to y in config file, apply the rule----------
 		if(arithop=='y') {
 			if(arithOpList.isEmpty() == false || arithTwoList.isEmpty() == false) {
 				ArithmeticOperatorMutation aop = new ArithmeticOperatorMutation();
@@ -202,7 +165,8 @@ public class OperatorMutation {
 				pht.generateArithOpTable();
 			}
 		}
-		
+
+		//------if flag for assignment op mutation rule is set to y in config file, apply the rule----------
 		if(assignmentop=='y') {
 			if(arithAssignmentOpList.isEmpty() == false || bitwiseAssignOpList.isEmpty() == false || shiftAssignOpList.isEmpty() == false) {
 				AssignmentOperatorMutation at = new AssignmentOperatorMutation();
@@ -211,7 +175,8 @@ public class OperatorMutation {
 				pht.generateAssignmentOpTable();
 			}
 		}
-		
+
+		//------if flag for bitwise op mutation rule is set to y in config file, apply the rule----------
 		if(bitwiseop=='y') {
 			if(bitwiseOpList.isEmpty() == false) {
 				BitwiseOperatorMutation bt = new BitwiseOperatorMutation();
@@ -220,7 +185,8 @@ public class OperatorMutation {
 				pht.generateBitwiseOpTable();
 			}
 		}
-		
+
+		//------if flag for condition op mutation rule is set to y in config file, apply the rule----------
 		if(conditionalop=='y') {
 			if(conditionalOpList.isEmpty() == false) {
 				ConditionOperatorMutation cop = new ConditionOperatorMutation();
@@ -229,7 +195,8 @@ public class OperatorMutation {
 				pht.generateConditionalOpTable();
 			}
 		}
-		
+
+		//------if flag for incdec op mutation rule is set to y in config file, apply the rule----------
 		if(incdecop=='y') {
 			if(incDecOpList.isEmpty() == false) {
 				IncrementDecrementOperatorMutation idt = new IncrementDecrementOperatorMutation();
@@ -238,7 +205,8 @@ public class OperatorMutation {
 				pht.generateIncDecOpTable();
 			}
 		}
-		
+
+		//------if flag for relational op mutation rule is set to y in config file, apply the rule----------
 		if(relationalop=='y') {
 			if(relationalOpList.isEmpty() == false || relationalOpTwoList.isEmpty() == false) {
 				RelationalOperatorMutation rop = new RelationalOperatorMutation();
@@ -247,7 +215,8 @@ public class OperatorMutation {
 				pht.generateRelationalOpTable();
 			}
 		}
-		
+
+		//------if flag for shift op mutation rule is set to y in config file, apply the rule----------
 		if(shiftop=='y') {
 			if(shiftOpList.isEmpty() == false) {
 				ShiftOperatorMutation sot = new ShiftOperatorMutation();
@@ -256,9 +225,9 @@ public class OperatorMutation {
 				pht.generateShiftOpTable();
 			}
 		}
-		
-		
-		
+
+
+
 	}
 
 }

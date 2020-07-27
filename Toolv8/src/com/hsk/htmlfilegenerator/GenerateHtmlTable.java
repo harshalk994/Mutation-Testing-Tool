@@ -16,123 +16,34 @@ import com.hsk.operatorstorage.RelationalOpStorage;
 import com.hsk.operatorstorage.ShiftOpStorage;
 
 public class GenerateHtmlTable {
-	
-//	public void generateTabularOutput() throws IOException {
-//		
-//		List<String> conditionalOpList = new ArrayList<String>();
-//		List<String> relationalOpList = new ArrayList<String>();
-//		List<String> shiftOpList = new ArrayList<String>();
-//		List<String> bitwiseOpList = new ArrayList<String>();
-//		List<String> arithAssignmentOpList = new ArrayList<String>();
-//		
-//		
-//		
-//		List<String> processedConditionalOpList = new ArrayList<String>();
-//		List<String> processedRelationalOpList = new ArrayList<String>();
-//		List<String> processedShiftOpList = new ArrayList<String>();
-//		List<String> processedBitwiseOpList = new ArrayList<String>();
-//		List<String> processedArithAssignmentOpList = new ArrayList<String>();
-//		
-//		
-//		
-//		
-//		ConditionalOpStorage cs = new ConditionalOpStorage();
-//		cs.processOp();
-//		conditionalOpList = cs.returnOpList();
-//		
-//		RelOpStorageFinal rs = new RelOpStorageFinal();
-//		rs.processOp();
-//		relationalOpList = rs.returnRelOpList();
-//		rs.processList(relationalOpList);
-//		processedRelationalOpList = rs.retriveRelProcessList();
-//		
-//		ShiftOpStorage ss = new ShiftOpStorage();
-//		ss.processOp();
-//		shiftOpList = ss.returnShiftOpList();
-//		ss.processList(shiftOpList);
-//		processedShiftOpList = ss.retriveShiftProcessList();
-//		//ss.printShiftOps();
-//		
-//		BitwiseOpStorage bos = new BitwiseOpStorage();
-//		bos.processOp();
-//		bitwiseOpList = bos.returnBitwiseOpList();
-//		
-//		AssignmentOpStorage as = new AssignmentOpStorage();
-//		as.processOp();
-//		arithAssignmentOpList = as.returnArithAssignOpList();
-//		
-//		
-//		
-//		
-//		if(shiftOpList.isEmpty() == false) {
-//			PrintWriter pw = new PrintWriter(new FileWriter("htmlreport.html"), true);
-//			pw.append("\n\n");
-//			pw.append("---------------Shift Operator Mutants----------------");
-//			pw.append("<TABLE BORDER><TR><TH>Index<TH>Original Statement<TH>Mutation</TR>\n");
-//			int pointer =0;
-//			int counter = 1;
-//			for(int i=0;i<processedShiftOpList.size();i++) {
-//				if(i!=0 && i % 4 == 0) {
-//					//System.out.println(pointer);
-//					pointer++;
-//				}
-//				String s = shiftOpList.get(pointer);
-//				pw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",counter, s, processedShiftOpList.get(i));
-//				counter++;
-//		}
-//		
-//			 pw.append("</TABLE>");
-//		     pw.close();
-//		}
-//	}
-	
+
+	//------------Generate a html table for the arithmetic operators--------------------
 	public void generateArithOpTable() throws IOException {
 		List<String> arithOpList = new ArrayList<String>();
 		List<String> arithOpTwoList = new ArrayList<String>();
-//		List<String> originalArithOpList = new ArrayList<String>();
-//		List<String> originalArithOpTwoList = new ArrayList<String>();
-		
+
 		List<String> processedArithOpList = new ArrayList<String>();
 		List<String> processedArithOpTwoList = new ArrayList<String>();
-//		List<String> totalArithOpList = new ArrayList<String>();
-//		List<String> totalOriginalList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants---------------------- 
 		ArithmeticOpStorage ops = new ArithmeticOpStorage();
 		ops.processOp();
 		arithOpList = ops.returnOpList();
-		//originalArithOpList = arithOpList;
 		ops.processList(arithOpList);
-		processedArithOpList = ops.retriveProcessList();
-		
+		processedArithOpList = ops.retriveProcessList();		
 		arithOpTwoList = ops.returnOpTwoList();
-		//originalArithOpTwoList = arithOpTwoList;
 		ops.processTwoList(arithOpTwoList);
 		processedArithOpTwoList = ops.retriveProcessTwoList();
-		
-//		totalArithOpList.addAll(processedArithOpList);
-//		totalArithOpList.addAll(processedArithOpTwoList);
-//		
-//		totalOriginalList.addAll(originalArithOpList);
-//		totalOriginalList.addAll(originalArithOpTwoList);
-//		
-//		for(int i=0;i<totalArithOpList.size();i++) {
-//			System.out.println(totalArithOpList.get(i));
-//		}
-//		
-//		System.out.println();
-//		System.out.println("Original list");
-//		for(int i=0;i<totalOriginalList.size();i++) {
-//			System.out.println(totalOriginalList.get(i));
-//		}
-		
-		
+
+		//---------------------If the one of the retrieved lists are not empty, proceed with generating the html table--------------------------
 		if(arithOpList.isEmpty() == false || arithOpTwoList.isEmpty() == false) {
-			FileWriter aw = new FileWriter("htmlreport.html", true);
+			FileWriter aw = new FileWriter("htmlreport.html", true);		//write data to htmlreport.html file; append flag is set to "true"
 			BufferedWriter abw = new BufferedWriter(aw);
 			PrintWriter apw = new PrintWriter(abw);
 			apw.println("<br>");
-			//apw.println("---------------Arithmetic Operator Mutants----------------");
 			apw.println();
+
+			//---------------------Generating the required html table for arithmetic operators--------------------
 			apw.println("<html>\r\n" + 
 					"<head>\r\n" + 
 					"<style>\r\n" + 
@@ -169,10 +80,10 @@ public class GenerateHtmlTable {
 					"  </tr>");
 			int arithOpPointer =0;
 			int arithOpCounter = 1;
-			
+
 			int arithOpTwoPointer =0;
 			int arithOpTwoCounter = 1;
-			
+
 			if(arithOpList.isEmpty() == false) {
 				for(int i=0;i<processedArithOpList.size();i++) {
 					if(i!=0 && i % 4 == 0) {
@@ -182,10 +93,10 @@ public class GenerateHtmlTable {
 					String s = arithOpList.get(arithOpPointer);
 					apw.format("<TR ALIGN=CENTER><TD>%d<TD>%s<TD>%s%n",arithOpCounter, s, processedArithOpList.get(i));
 					arithOpCounter++;
+				}
+
 			}
-				
-			}
-			
+
 			if(arithOpTwoList.isEmpty() == false) {
 				for(int j=0;j<processedArithOpTwoList.size();j++) {
 					if(j!=0 && j % 1 == 0) {
@@ -196,47 +107,36 @@ public class GenerateHtmlTable {
 					arithOpTwoCounter++;
 				}
 			}
-			
-		
+
+
 			apw.println("</TABLE>");
 			apw.println("<br>");
-		     apw.close();
-		     abw.close();
-		     aw.close();
-		
+			apw.close();
+			abw.close();
+			aw.close();
+
+		}
+
 	}
-		
-	}
-	
+
+	//------------Generate a html table for the shift operators--------------------
 	public void generateShiftOpTable() throws IOException {
-		
-//		List<String> opL = new ArrayList<String>();
-//		List<String> opP = new ArrayList<String>();
-		
+
 		List<String> shiftOpList = new ArrayList<String>();
 		List<String> processedShiftOpList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		ShiftOpStorage ss = new ShiftOpStorage();
 		shiftOpList = ss.returnShiftOpList();
-		//ss.processList(shiftOpList);
 		processedShiftOpList = ss.retriveShiftProcessList();
-		
-//		System.out.println("\nPre List");
-//		for(int i=0;i<shiftOpList.size();i++) {
-//			System.out.println(shiftOpList.get(i));
-//		}
-//		
-//		System.out.println("\nPost List");
-//		for(int i=0;i<processedShiftOpList.size();i++) {
-//			System.out.println(processedShiftOpList.get(i));
-//		}
-		
+
+
+		//---------------------Generating the required html table for shift operators--------------------
 		if(shiftOpList.isEmpty() == false) {
 			FileWriter sw = new FileWriter("htmlreport.html", true);
 			BufferedWriter sbw = new BufferedWriter(sw);
 			PrintWriter spw = new PrintWriter(sbw);
 			spw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			spw.println();
 			spw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -276,49 +176,38 @@ public class GenerateHtmlTable {
 			int shiftCounter = 1;
 			for(int i=0;i<processedShiftOpList.size();i++) {
 				if(i!=0 && i % 2 == 0) {
-					//System.out.println(i);
 					shiftPointer++;
-					//System.out.println(pointer);
 				}
 				String s = shiftOpList.get(shiftPointer);
 				spw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",shiftCounter, s, processedShiftOpList.get(i));
 				shiftCounter++;
-		}
-		
+			}
+
 			spw.println("</TABLE>");
 			spw.println("<br>");
-		     spw.close();
-		     sbw.close();
-		     sw.close();
+			spw.close();
+			sbw.close();
+			sw.close();
 		}
 
 	}
-	
+
+	//------------Generate a html table for the bitwise operators--------------------
 	public void generateBitwiseOpTable() throws IOException {
 		List<String> bitwiseOpList = new ArrayList<String>();
 		List<String> processedBitwiseOpList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		BitwiseOpStorage bos = new BitwiseOpStorage();
 		bitwiseOpList = bos.returnBitwiseOpList();
-		//ss.processList(shiftOpList);
 		processedBitwiseOpList = bos.retriveBitwiseProcessList();
-		
-//		System.out.println("\nPre List");
-//		for(int i=0;i<shiftOpList.size();i++) {
-//			System.out.println(shiftOpList.get(i));
-//		}
-//		
-//		System.out.println("\nPost List");
-//		for(int i=0;i<processedShiftOpList.size();i++) {
-//			System.out.println(processedShiftOpList.get(i));
-//		}
-		
+
+		//---------------------Generating the required html table for bitwise operators--------------------
 		if(bitwiseOpList.isEmpty() == false) {
 			FileWriter bw = new FileWriter("htmlreport.html", true);
 			BufferedWriter brw = new BufferedWriter(bw);
 			PrintWriter bpw = new PrintWriter(brw);
 			bpw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			bpw.println();
 			bpw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -358,49 +247,39 @@ public class GenerateHtmlTable {
 			int bitwiseCounter = 1;
 			for(int i=0;i<processedBitwiseOpList.size();i++) {
 				if(i!=0 && i % 2 == 0) {
-					//System.out.println(i);
 					bitwisePointer++;
-					//System.out.println(pointer);
 				}
 				String s = bitwiseOpList.get(bitwisePointer);
 				bpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",bitwiseCounter, s, processedBitwiseOpList.get(i));
 				bitwiseCounter++;
-		}
-		
+			}
+
 			bpw.println("</TABLE>");
 			bpw.println("<br>");
-		     bpw.close();
-		     brw.close();
-		     bw.close();
+			bpw.close();
+			brw.close();
+			bw.close();
 		}
 
 	}
-	
+
+	//------------Generate a html table for the conditional operators--------------------
 	public void generateConditionalOpTable() throws IOException {
 		List<String> conditionalOpList = new ArrayList<String>();
 		List<String> processedConditionalOpList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		ConditionalOpStorage cos = new ConditionalOpStorage();
 		conditionalOpList = cos.returnOpList();
-		//ss.processList(shiftOpList);
 		processedConditionalOpList = cos.retriveProcessList();
-		
-//		System.out.println("\nPre List");
-//		for(int i=0;i<shiftOpList.size();i++) {
-//			System.out.println(shiftOpList.get(i));
-//		}
-//		
-//		System.out.println("\nPost List");
-//		for(int i=0;i<processedShiftOpList.size();i++) {
-//			System.out.println(processedShiftOpList.get(i));
-//		}
-		
+
+
+		//---------------------Generating the required html table for conditional operators--------------------
 		if(conditionalOpList.isEmpty() == false) {
 			FileWriter cw = new FileWriter("htmlreport.html", true);
 			BufferedWriter cbw = new BufferedWriter(cw);
 			PrintWriter cpw = new PrintWriter(cbw);
 			cpw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			cpw.println();
 			cpw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -440,48 +319,37 @@ public class GenerateHtmlTable {
 			int conditionalCounter = 1;
 			for(int i=0;i<processedConditionalOpList.size();i++) {
 				if(i!=0 && i % 1 == 0) {
-					//System.out.println(i);
 					conditionalPointer++;
-					//System.out.println(pointer);
 				}
 				String s = conditionalOpList.get(conditionalPointer);
 				cpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",conditionalCounter, s, processedConditionalOpList.get(i));
 				conditionalCounter++;
-		}
-		
+			}
+
 			cpw.println("</TABLE>");
 			cpw.println("<br>");
-		     cpw.close();
-		     cbw.close();
-		     cw.close();
+			cpw.close();
+			cbw.close();
+			cw.close();
 		}
 	}
-	
+
+	//------------Generate a html table for the relational operators--------------------
 	public void generateRelationalOpTable() throws IOException {
 		List<String> relationalOpList = new ArrayList<String>();
 		List<String> processedRelationalOpList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		RelationalOpStorage rs = new RelationalOpStorage();
 		relationalOpList = rs.returnRelOpList();
-		//ss.processList(shiftOpList);
 		processedRelationalOpList = rs.retriveRelProcessList();
-		
-//		System.out.println("\nPre List");
-//		for(int i=0;i<shiftOpList.size();i++) {
-//			System.out.println(shiftOpList.get(i));
-//		}
-//		
-//		System.out.println("\nPost List");
-//		for(int i=0;i<processedShiftOpList.size();i++) {
-//			System.out.println(processedShiftOpList.get(i));
-//		}
-		
+
+		//---------------------Generating the required html table for relational operators--------------------
 		if(relationalOpList.isEmpty() == false) {
 			FileWriter rw = new FileWriter("htmlreport.html", true);
 			BufferedWriter rbw = new BufferedWriter(rw);
 			PrintWriter rpw = new PrintWriter(rbw);
 			rpw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			rpw.println();
 			rpw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -521,49 +389,39 @@ public class GenerateHtmlTable {
 			int relationalCounter = 1;
 			for(int i=0;i<processedRelationalOpList.size();i++) {
 				if(i!=0 && i % 5 == 0) {
-					//System.out.println(i);
 					relationalPointer++;
-					//System.out.println(pointer);
 				}
 				String s = relationalOpList.get(relationalPointer);
 				rpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",relationalCounter, s, processedRelationalOpList.get(i));
 				relationalCounter++;
-		}
-		
+			}
+
 			rpw.println("</TABLE>");
 			rpw.println("<br>");
-		     rpw.close();
-		     rbw.close();
-		     rw.close();
+			rpw.close();
+			rbw.close();
+			rw.close();
 		}
 	}
-	
+
+	//------------Generate a html table for the increment/decrement operators--------------------
 	public void generateIncDecOpTable() throws IOException {
 		List<String> incDecOpList = new ArrayList<String>();
 		List<String> processedIncDecOpList = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
 		ios.processOp();
 		incDecOpList = ios.returnOpList();
 		ios.processList(incDecOpList);
 		processedIncDecOpList = ios.retriveProcessList();
-		
-//		System.out.println("\nPre List");
-//		for(int i=0;i<shiftOpList.size();i++) {
-//			System.out.println(shiftOpList.get(i));
-//		}
-//		
-//		System.out.println("\nPost List");
-//		for(int i=0;i<processedShiftOpList.size();i++) {
-//			System.out.println(processedShiftOpList.get(i));
-//		}
-		
+
+		//---------------------Generating the required html table for increment/decrement operators--------------------
 		if(incDecOpList.isEmpty() == false) {
 			FileWriter idw = new FileWriter("htmlreport.html", true);
 			BufferedWriter idbw = new BufferedWriter(idw);
 			PrintWriter idpw = new PrintWriter(idbw);
 			idpw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			idpw.println();
 			idpw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -603,49 +461,47 @@ public class GenerateHtmlTable {
 			int incDecCounter = 1;
 			for(int i=0;i<processedIncDecOpList.size();i++) {
 				if(i!=0 && i % 1 == 0) {
-					//System.out.println(i);
 					incDecPointer++;
-					//System.out.println(pointer);
 				}
 				String s = incDecOpList.get(incDecPointer);
 				idpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",incDecCounter, s, processedIncDecOpList.get(i));
 				incDecCounter++;
-		}
-		
+			}
+
 			idpw.println("</TABLE>");
 			idpw.println("<br>");
 			idpw.close();
-		     idbw.close();
-		     idw.close();
+			idbw.close();
+			idw.close();
 		}
 	}
-	
+
+	//------------Generate a html table for the assignment operators--------------------
 	public void generateAssignmentOpTable() throws IOException {
 		List<String> arithOpL = new ArrayList<String>();
 		List<String> arithOpP = new ArrayList<String>();
-		
+
 		List<String> bitwiseOpL = new ArrayList<String>();
 		List<String> bitwiseOpP = new ArrayList<String>();
-		
+
 		List<String> shiftOpL = new ArrayList<String>();
 		List<String> shiftOpP = new ArrayList<String>();
-		
+
+		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		AssignmentOpStorage aos = new AssignmentOpStorage();
 		arithOpL = aos.returnArithAssignOpList();
 		arithOpP = aos.retriveArithAssignmentProcessList();
-		
 		bitwiseOpL = aos.returnBitwiseAssignOpList();
 		bitwiseOpP = aos.retriveBitwiseAssignmentProcessList();
-		
 		shiftOpL = aos.returnShiftAssignOpList();
 		shiftOpP = aos.retriveShiftAssignmentProcessList();
-		
+
+		//---------------------Generating the required html table for arithmeticassignment operators--------------------
 		if(arithOpL.isEmpty() == false) {
 			FileWriter aaw = new FileWriter("htmlreport.html", true);
 			BufferedWriter aabw = new BufferedWriter(aaw);
 			PrintWriter aapw = new PrintWriter(aabw);
 			aapw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			aapw.println();
 			aapw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -685,28 +541,26 @@ public class GenerateHtmlTable {
 			int arithAssignCounter = 1;
 			for(int i=0;i<arithOpP.size();i++) {
 				if(i!=0 && i % 5 == 0) {
-					//System.out.println(i);
 					arithAssignPointer++;
-					//System.out.println(pointer);
 				}
 				String s = arithOpL.get(arithAssignPointer);
 				aapw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",arithAssignCounter, s, arithOpP.get(i));
 				arithAssignCounter++;
-		}
-		
+			}
+
 			aapw.println("</TABLE>");
 			aapw.println("<br>");
 			aapw.close();
-		     aabw.close();
-		     aaw.close();
+			aabw.close();
+			aaw.close();
 		}
-		
+
+		//---------------------Generating the required html table for bitwiseassignment operators--------------------
 		if(bitwiseOpL.isEmpty() == false) {
 			FileWriter baw = new FileWriter("htmlreport.html", true);
 			BufferedWriter babw = new BufferedWriter(baw);
 			PrintWriter bapw = new PrintWriter(babw);
 			bapw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			bapw.println();
 			bapw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -746,28 +600,26 @@ public class GenerateHtmlTable {
 			int bitwiseAssignCounter = 1;
 			for(int i=0;i<bitwiseOpP.size();i++) {
 				if(i!=0 && i % 2 == 0) {
-					//System.out.println(i);
 					bitwiseAssignPointer++;
-					//System.out.println(pointer);
 				}
 				String s = bitwiseOpL.get(bitwiseAssignPointer);
 				bapw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",bitwiseAssignCounter, s, bitwiseOpP.get(i));
 				bitwiseAssignCounter++;
-		}
-		
+			}
+
 			bapw.println("</TABLE>");
 			bapw.println("<br>");
 			bapw.close();
-		     babw.close();
-		     baw.close();
+			babw.close();
+			baw.close();
 		}
-		
+
+		//---------------------Generating the required html table for shiftassignment operators--------------------
 		if(shiftOpL.isEmpty() == false) {
 			FileWriter ssw = new FileWriter("htmlreport.html", true);
 			BufferedWriter ssbw = new BufferedWriter(ssw);
 			PrintWriter sspw = new PrintWriter(ssbw);
 			sspw.println("<br>");
-			//spw.println("---------------Shift Operator Mutants----------------");
 			sspw.println();
 			sspw.println("<html>\r\n" + 
 					"<head>\r\n" + 
@@ -807,20 +659,18 @@ public class GenerateHtmlTable {
 			int shiftAssignCounter = 1;
 			for(int i=0;i<shiftOpP.size();i++) {
 				if(i!=0 && i % 1 == 0) {
-					//System.out.println(i);
 					shiftAssignPointer++;
-					//System.out.println(pointer);
 				}
 				String s = shiftOpL.get(shiftAssignPointer);
 				sspw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",shiftAssignCounter, s, shiftOpP.get(i));
 				shiftAssignCounter++;
-		}
-		
+			}
+
 			sspw.println("</TABLE>");
 			sspw.println("<br>");
 			sspw.close();
-		     ssbw.close();
-		     ssw.close();
+			ssbw.close();
+			ssw.close();
 		}
 
 	}

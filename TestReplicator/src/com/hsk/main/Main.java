@@ -1,5 +1,11 @@
+package com.hsk.main;
+import com.hsk.*;
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.hsk.testreplicator.TestReplicatorDependentClass;
+import com.hsk.testreplicator.TestReplicatorTry;
+import com.hsk.userinputs.UserInputs;
 
 public class Main {
 	

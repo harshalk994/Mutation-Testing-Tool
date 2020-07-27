@@ -1,3 +1,5 @@
+//	This class is created to generated increment/decrement operator mutants of the original class
+
 package com.hsk.operatormutation;
 import com.hsk.*;
 import java.io.BufferedReader;
@@ -13,142 +15,82 @@ import com.hsk.operatorstorage.IncrementDecrementOpStorage;
 import com.hsk.userinputs.SetClassNameProperty;
 
 public class IncrementDecrementOperatorMutation {
-	
+
 	private static String mPath;
 	private static String className;
-	
+
+	//----------Method to get the mutant folder path-----------------
 	public void getPath(String mutantFilePath) {
 		mPath = mutantFilePath;
 	}
-	
-public void generateIncDecOpMutantFiles() throws IOException {
-	
+
+	//----------Method to generate inc/dec operator mutants--------------	
+	public void generateIncDecOpMutantFiles() throws IOException {
+
+		//-------Get the class name (Temp)------------------
 		SetClassNameProperty scp = new SetClassNameProperty();
 		className = scp.getCName();
-			
+
 		String tempFileName = mPath+"\\Temp.java";
 		String mutantFileName = mPath+"\\MuIncDecOp";
 		List<String> incDecOpL = new ArrayList<String>();
 		List<String> incDecOpP = new ArrayList<String>();
-		
+
 		int count = 0;
 		int pointer = 0;
-		
+
+		//-------------------Retrieve the assignment operators that are captured from original class----------------------
 		IncrementDecrementOpStorage ios = new IncrementDecrementOpStorage();
 		ios.processOp();
 		incDecOpL = ios.returnOpList();
-		//ios.printIncDecList();
 		ios.processList(incDecOpL);
 		incDecOpP = ios.retriveProcessList();
-		
-		
+
+
 		FileReader source = null;
 		BufferedReader br = null;
 		FileWriter targetFile = null;
 		BufferedWriter bw = null;
 
+		//-----------proceed with generating mutants----------------
 		for(int i=0;i<incDecOpP.size();i++) {
 			count++;
 			if(i!=0 && i % 1 == 0) {
-				//System.out.println(i);
 				pointer++;
-				//System.out.println(pointer);
 			}
 			String s = incDecOpL.get(pointer);
-			//System.out.println(opL.get(pointer));
 			source = new FileReader(tempFileName);
 			br = new BufferedReader(source);
 			targetFile = new FileWriter(mutantFileName + count + ".java");
 			bw = new BufferedWriter(targetFile);
 			String line; 
-			//String[] text = new String[opL.size()];
-			
-
-				while((line = br.readLine()) != null) {
-				//	System.out.println("Here1");
-					
-					if(line.contains(className)) {
-						
-						
-						String newLine = line.replaceAll(className, "MuIncDecOp"+count);
-						//scp.setCName(updateCName);
-						bw.write(newLine);
-						bw.newLine();
-						
-					}
-					
-//					if(line.contains(className)) {
-//						String[] words = line.split(" ");
-//						//String[] brackets = line.split("");
-//						for(int k=0;k<words.length;k++) {
-//							if(words[k].contains(className)) {
-//								String temp = "MuIncDecOp"+count;
-//								words[k] = temp;
-//								//scp.setCName(temp);
-////								System.out.println("Final Class Name is: " + scp.getClassName());
-//							}
-//						}
-//						String newLine = String.join(" ", words);
-//						//String secondLine = String.join("", brackets);
-//						
-//						bw.write(newLine);
-//						//bw.write(secondLine);
-//						bw.newLine();
-//					}
-//					if(line.contains("class") && !(line.contains("(")) && !(line.contains(")"))) {
-//						String[] words = line.split(" ");
-//						for(int k=0; k<words.length; k++) {
-//							
-//							String replaceW = line.substring(line.indexOf("s ")+1, line.indexOf('{'));
-//							String newW = replaceW.trim();
-//							
-//							if(words[k].contains(newW)) {
-//																
-//								String temp = "MuIncDecOp"+count;
-//								words[k] = temp;
-//								//System.out.println(words[k]);
-//							}
-//						}
-//						String newLine = String.join(" ", words);
-//						
-//						
-//						
-//						bw.write(newLine);
-//						bw.newLine();
-//					
-//					}
-					else if(line.equalsIgnoreCase(s)) {
-						
-						
-						String newLine = line.replace(line, incDecOpP.get(i));
-						bw.write(newLine);
-						bw.newLine();
-						continue;
-//						if(i!=0 && i % 3 == 0) {
-//							pointer++;
-//							System.out.println(i);
-//						//	System.out.println(pointer);
-//						}
+			while((line = br.readLine()) != null) {
+				if(line.contains(className)) {
+					String newLine = line.replaceAll(className, "MuIncDecOp"+count);
+					bw.write(newLine);
+					bw.newLine();					
 				}
-					
-					
-					
-				
-					else {
-						bw.write(line);
-						bw.newLine();
-					}
+				else if(line.equalsIgnoreCase(s)) {
+					String newLine = line.replace(line, incDecOpP.get(i));
+					bw.write(newLine);
+					bw.newLine();
+					continue;
+				}
+				else {
+					bw.write(line);
+					bw.newLine();
+				}
 
 			}
-				br.close();
-				bw.close();	
+			br.close();
+			bw.close();	
 		}
-		
+
 
 		source.close();
 		targetFile.close();
 		System.out.println("Increment/Decrement Op Mutants generated: " + count);
-		
+
 	}
 
 }

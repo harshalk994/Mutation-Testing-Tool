@@ -1,3 +1,5 @@
+package com.hsk.userinputs;
+import com.hsk.*;
 
 public class SetClassNameProperty {
 	
