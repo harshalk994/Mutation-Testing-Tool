@@ -77,7 +77,6 @@ public class UserInputs {
 				appendTPath = testPName.replace(".", "\\");
 				mTestPath = testPath + "\\" + appendTPath;
 				reportsPath = rPath + "\\" + appendTPath;
-				//reportsPath = rPath + "\\" + appendTPath;	
 			}else {
 				mTestPath = testPath+"\\"+testPName;
 				reportsPath = rPath + "\\" + testPName;
@@ -87,7 +86,6 @@ public class UserInputs {
 		
 	//-------Method to return the Generated Mutants folder path----------	
 	public String returnMutantPath() {
-		//System.out.println("Mutant path is: " + mutantPath);
 		return mutantPath;
 	}
 	
