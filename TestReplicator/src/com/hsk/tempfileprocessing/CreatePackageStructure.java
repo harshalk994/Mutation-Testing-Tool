@@ -1,3 +1,5 @@
+//	This class is created to create a package directory structure in the Generated Test Copies folder
+
 package com.hsk.tempfileprocessing;
 import com.hsk.*;
 import java.io.IOException;
@@ -11,32 +13,17 @@ public class CreatePackageStructure {
 	private static String pName;
 	private static String finalPath;
 	
+	//----------Method to get the test folder path-----------------
 	public void getPath(String testFilePath) {
 		mPath = testFilePath;
 	}
 	
-	
+	//----------Method to get the test package name-----------------
 	public void getPName(String packageName) {
 		pName = packageName;
 	}
 	
-//	public void createPackageDirectory() throws IOException {
-//		String packageNameFolder1 = "com";
-//		String packageNameFolder2 = "try";
-//		String appendFolder1 = mPath+"\\"+packageNameFolder1;
-//		String appendFolder2 = appendFolder1+"\\"+packageNameFolder2;
-//		
-//		Path path = Paths.get(appendFolder2);
-//		
-//		if(!Files.exists(path)){
-//			Files.createDirectories(path);
-//			System.out.println("Driectory structure created");
-//		}else {
-//			System.out.println("Directory already exists");
-//		}
-//		
-//	}
-	
+	//----------Method to create the package directory structure in the Generated Test Copies folder-----------
 	public void createPackageDirectory() throws IOException {
 		String appendPath;
 		if(pName.contains(".")) {
@@ -57,6 +44,7 @@ public class CreatePackageStructure {
 		
 	}
 	
+	//----------Method to return the package path---------------
 	public String getPackagedPath() {
 		return finalPath;
 	}

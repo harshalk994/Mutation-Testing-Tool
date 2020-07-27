@@ -1,3 +1,5 @@
+//	Main class/Entry point of TestReplicatorWindows JAR executable
+
 package com.hsk.main;
 import com.hsk.*;
 import java.io.IOException;
@@ -8,22 +10,19 @@ import com.hsk.testreplicator.TestReplicatorTry;
 import com.hsk.userinputs.UserInputs;
 
 public class Main {
-	
+
 	private static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) throws IOException {
 		String originalTestLocation;
 		String testCopyLocation;;
-		//String updatedTestFileLocation=null;;
-		//String packageName="";
 		String nameOfClassUnderTest;
 		String mutantPath;
 		String dName;
 		String oCName;
-		//String nameOfClassUnderTest;
 		char testChoice;
 		boolean flag=true;
-		//FileDetailsStorage fds = new FileDetailsStorage();
-		
+
+		//----------reading config file and retrieving the required user inputs-------------
 		UserInputs ui = new UserInputs();
 		ui.readProperties();
 		originalTestLocation = ui.returnOPath();
@@ -33,13 +32,8 @@ public class Main {
 		testChoice = ui.returnDClassChoice();
 		dName = ui.returnDClassName();
 		oCName = ui.returnOriginalClassName();
-		
-//		CreateTempTest ct = new CreateTempTest();
-//		ct.getFPath(originalTestLocation);
-//		ct.getPath(testCopyLocation);
-//		ct.getClassName(nameOfClassUnderTest);
-//		ct.createTempCopy();
-		
+
+		//----------If testdependentclass flag is set to y, execute the below if block for creating copies of the dependent class tests, otherwise execute the else block to create copies of the original class tests---------------
 		if(testChoice=='y') {
 			//System.out.println("HERE");
 			TestReplicatorDependentClass trdc = new TestReplicatorDependentClass();
@@ -60,57 +54,6 @@ public class Main {
 			tr.getClassName(nameOfClassUnderTest);
 			tr.testReplicator();
 		}
-	
-		
-//		System.out.println("Enter the location and filename of the test that needs to be tested:");
-//		originalTestLocation = sc.nextLine();
-//		
-//		
-//		System.out.println("Enter the location where you want to store the copy of the test:");
-//		testCopyLocation = sc.nextLine();
-//		
-//		System.out.println("Enter the name of class that is being tested with the test case:");
-//		nameOfClassUnderTest = sc.nextLine();
-//		
-//		System.out.println("Enter the path where the mutants are stored:");
-//		mutantPath = sc.nextLine();
-		
-//		while(flag) {
-//			System.out.println("Does the program contain a package structure? (y/n)");
-//			String choice = sc.nextLine();
-//			if(choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("Y")) {
-//				System.out.println("Please enter the package name: ");
-//				packageName = sc.nextLine();
-//				CreatePackageStructure cps = new CreatePackageStructure();
-//				cps.getPath(testCopyLocation);
-//				cps.getPName(packageName);
-//				cps.createPackageDirectory();
-//				updatedTestFileLocation = cps.getPackagedPath();
-//				flag=false;
-//			}else if(choice.equalsIgnoreCase("n") || choice.equalsIgnoreCase("N")) {
-//				flag=false;
-//				System.out.println("Stopped!!");
-//			}else{
-//				flag=true;	
-//				System.out.println("Continuing");
-//			}
-//		}
-//		
-//		if(updatedTestFileLocation==null) {
-//			CreateTempTest ct = new CreateTempTest();
-//			ct.getFPath(originalTestLocation);
-//			ct.getPath(testCopyLocation);
-//			ct.getClassName(nameOfClassUnderTest);
-//			ct.createTempCopy();
-//			
-//			TestReplicatorTry tr = new TestReplicatorTry();
-//			tr.getTMPath(testCopyLocation);
-//			tr.getMPath(mutantPath);
-//			tr.getClassName(nameOfClassUnderTest);
-//			tr.testReplicator();
-//			
-//			
-//		}
 	}
 
 }
