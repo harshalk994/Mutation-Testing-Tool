@@ -1,3 +1,5 @@
+//	This class is created to read the config file and capture the user inputs from it
+
 package com.hsk.userinputs;
 import com.hsk.*;
 import java.io.File;
@@ -17,8 +19,7 @@ public class UserInputs {
 	private static String mTestPath;
 	private static char deletionChoice;
 	
-	//private static String nameOfTestClass;
-	
+	//------------Method to read the config file and get the user inputs set by the user--------------
 	public void readProperties() {
 		File configFile = new File("config.properties");
 		 
@@ -35,30 +36,32 @@ public class UserInputs {
 		    String rPath = props.getProperty("reportspath");
 		    String deleteChoice = props.getProperty("deletekilledmutants(y/n)");
 		    
-	
+		    //--------------Pass the inputs to the setter method that will store and set the values for all userinputs to be used in the tool-------------
 		    setProperties(mutantsPath, originalClassName, pName, testPath, testPName, rPath, deleteChoice);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	}
 	
+	//-----------Setter method to store and set the userinputs for use by different classes of the tool----------------
 	public void setProperties(String mutantsPath, String orignalCName, String pName, String testPath, String testPName, String rPath, String deleteChoice) throws IOException {
 
 		mutantPath = mutantsPath;
 		nameOfClassUnderTest = orignalCName;
 		mTestPath = testPath;
 		reportsPath = rPath;
+		
 		if(deleteChoice.isBlank()==false) {
 			char dChoice = deleteChoice.charAt(0);
 			if(dChoice == 'y' || dChoice == 'n') {
 				deletionChoice = dChoice;
 			}
 		}
-		
-		//System.out.println("Name of class Under test was: " + nameOfClassUnderTest);
-		//nameOfTestClass = originalTName;
+
 		String appendPath;
 		String appendTPath;
+		
+		//------------If a package name exists for the original class, then create a similar package directory structure in the Generated Mutants folder--------------
 		if(pName!=null) {
 			if(pName.contains(".")) {
 				appendPath = pName.replace(".", "\\");
@@ -68,6 +71,7 @@ public class UserInputs {
 			}
 		}
 			
+		//------------If a package name exists for the test class, then append test path with the package name--------------
 		if(testPName!=null) {
 			if(testPName.contains(".")) {
 				appendTPath = testPName.replace(".", "\\");
@@ -81,33 +85,30 @@ public class UserInputs {
 		}
 	}
 		
-	
-
-	
+	//-------Method to return the Generated Mutants folder path----------	
 	public String returnMutantPath() {
 		//System.out.println("Mutant path is: " + mutantPath);
 		return mutantPath;
 	}
 	
+	//-------Method to return the original class name----------
 	public String returnOriginalCName() {
 		return nameOfClassUnderTest;
 	}
 	
+	//-------Method to return the Generated Test Copies path----------
 	public String returnMTestPath() {
-		//System.out.println("Test Path is: " + mTestPath);
 		return mTestPath;
 	}
 	
+	//-------Method to return the reports\html path----------
 	public String returnReportsPath() {
-		//System.out.println("Reports path is: " + reportsPath);
 		return reportsPath;
 	}
 	
+	//-------Method to return the delete mutants flag----------
 	public char returnDeleteChoice() {
 		return deletionChoice;
 	}
-	
-//	public String returnOriginalTName() {
-//		return nameOfTestClass;
-//	}
+
 }
