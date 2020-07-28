@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
     <jar path="E:/softwares/Mutant Generator Ant/TestReplicatorWindows.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/TestReplicator/TestReplicatorWindows.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Test Replicator for Windows/TestReplicatorWindows.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=TestReplicator/src&lt;com.hsk.main{Main.java[Main" manifestLocation="/TestReplicator/TestReplicatorWindowsManifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+    <manifest generateManifest="true" mainClassHandleIdentifier="=Test Replicator for Windows/src&lt;com.hsk.main{Main.java[Main" manifestLocation="/Test Replicator for Windows/TestReplicatorWindowsManifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <javaElement handleIdentifier="=TestReplicator/src"/>
-        <file path="/TestReplicator/.classpath"/>
-        <file path="/TestReplicator/.project"/>
+        <javaElement handleIdentifier="=Test Replicator for Windows/src"/>
+        <file path="/Test Replicator for Windows/.classpath"/>
+        <file path="/Test Replicator for Windows/.project"/>
     </selectedElements>
 </jardesc>
