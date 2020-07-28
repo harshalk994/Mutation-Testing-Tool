@@ -63,6 +63,9 @@ public class RelationalOpStorage {
 
 			if(line.contains("'>'") || line.contains("'<'") || line.contains("'=='") || line.contains("'!='") || line.contains("'>='") || line.contains("'<='"))
 				continue;
+			
+			if(line.contains("->") || line.contains("<-") || line.contains("=>"))
+				continue;
 
 			if(line.contains(">") && !(line.contains("\">\"")) && !(line.contains(">=")) && !(line.contains("\">=\"")) && !(line.contains(">>")) && !(line.contains("\">>\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains("\">>>\""))){
 				conditionOpL.add(line);
