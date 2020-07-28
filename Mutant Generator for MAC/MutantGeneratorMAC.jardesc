@@ -12,8 +12,7 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=Mutant Generator for MAC/src"/>
-        <file path="/Mutant Generator for MAC/.gitignore"/>
-        <file path="/Mutant Generator for MAC/.project"/>
         <file path="/Mutant Generator for MAC/.classpath"/>
+        <file path="/Mutant Generator for MAC/.project"/>
     </selectedElements>
 </jardesc>
