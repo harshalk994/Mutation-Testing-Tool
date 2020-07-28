@@ -1,3 +1,19 @@
+/* 
+	   Copyright 2020 Dr. Klaas-Jan Stol, Harshal Kasle
+	
+	   Licensed under the Apache License, Version 2.0 (the "License");
+	   you may not use this file except in compliance with the License.
+	   You may obtain a copy of the License at
+	
+	       http://www.apache.org/licenses/LICENSE-2.0
+	
+	   Unless required by applicable law or agreed to in writing, software
+	   distributed under the License is distributed on an "AS IS" BASIS,
+	   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	   See the License for the specific language governing permissions and
+	   limitations under the License.
+ */
+
 package com.hsk.htmlfilegenerator;
 import com.hsk.*;
 import java.io.BufferedWriter;
@@ -15,6 +31,10 @@ import com.hsk.operatorstorage.IncrementDecrementOpStorage;
 import com.hsk.operatorstorage.RelationalOpStorage;
 import com.hsk.operatorstorage.ShiftOpStorage;
 
+/* 
+ * This class is created to generate an HTML table that will display 
+ * each mutation of the original line of code that was generated in the mutant generation process
+ */
 public class GenerateHtmlTable {
 
 	//------------Generate a html table for the arithmetic operators--------------------
