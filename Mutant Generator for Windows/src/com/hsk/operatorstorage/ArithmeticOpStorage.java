@@ -52,6 +52,9 @@ public class ArithmeticOpStorage {
 		while((line = br.readLine()) != null) {
 			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")) || (line.contains("\"") && line.contains("*")) || (line.contains("\"") && line.contains("/")) || (line.contains("\"") && line.contains("-")) || (line.contains("\"") && line.contains("%")))
 				continue;
+			
+			if(line.contains("@"))
+				continue;
 
 			if(line.contains("case"))
 				continue;

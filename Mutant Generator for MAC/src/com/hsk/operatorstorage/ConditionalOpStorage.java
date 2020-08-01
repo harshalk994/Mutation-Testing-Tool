@@ -47,6 +47,9 @@ public class ConditionalOpStorage {
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 
+			if(line.contains("@"))
+				continue;
+			
 			if(line.contains("'&&'") || line.contains("'||'"))
 				continue;
 

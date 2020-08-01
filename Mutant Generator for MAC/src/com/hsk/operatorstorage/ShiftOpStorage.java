@@ -51,6 +51,9 @@ public class ShiftOpStorage {
 			if(line.contains("'>>'") || line.contains("'<<'") || line.contains("'>>>'"))
 				continue;
 
+			if(line.contains("@"))
+				continue;
+			
 			if(line.contains(">>") && !(line.contains("\">>\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains("\">>>\"")) && !(line.contains(">>>=")) && !(line.contains("\">>>=\""))){
 				shiftOpL.add(line);
 			}else if(line.contains("<<") && !(line.contains("\"<<\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\""))) {
