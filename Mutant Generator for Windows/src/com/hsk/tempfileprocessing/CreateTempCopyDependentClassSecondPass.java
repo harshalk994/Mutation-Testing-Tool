@@ -107,18 +107,28 @@ public class CreateTempCopyDependentClassSecondPass {
 
 				fr = new FileReader(mPath+"\\"+dClassName+"FirstTemp"+count+".java");
 				br = new BufferedReader(fr);
-				fw = new FileWriter(mPath+"\\"+dClassName+"SecondTemp"+count+".java");
+				fw = new FileWriter(mPath+"\\"+dClassName+"Copy"+count+".java");
 				bw = new BufferedWriter(fw);
 
 				String line; 
 
 				while((line = br.readLine()) != null) {
-					if(line.contains(dClassName)) {
-						String newLine = line.replaceAll(dClassName, dClassName+"SecondTemp"+count);
+					if(line.contains(dClassName) && !(line.contains(".") && line.contains(dClassName+"(")) && !(line.contains("."+dClassName))
+							&& !(line.contains("int") && line.contains(dClassName+"(")) && !(line.contains("void") && line.contains(dClassName+"("))
+							&& !(line.contains("float") && line.contains(dClassName+"(")) && !(line.contains("String") && line.contains(dClassName+"("))
+							&& !(line.contains("double") && line.contains(dClassName+"(")) && !(line.contains("char") && line.contains(dClassName+"("))
+							&& !(line.contains("short") && line.contains(dClassName+"(")) && !(line.contains("long") && line.contains(dClassName+"("))
+							) {
+						String newLine = line.replaceAll(dClassName, dClassName+"Copy"+count);
 						bw.write(newLine);
 						bw.newLine();
 					}
-					else if(line.contains(oClassName)) {
+					else if(line.contains(oClassName) && !(line.contains(".") && line.contains(oClassName+"(")) && !(line.contains("."+oClassName))
+							&& !(line.contains("int") && line.contains(oClassName+"(")) && !(line.contains("void") && line.contains(oClassName+"("))
+							&& !(line.contains("float") && line.contains(oClassName+"(")) && !(line.contains("String") && line.contains(oClassName+"("))
+							&& !(line.contains("double") && line.contains(oClassName+"(")) && !(line.contains("char") && line.contains(oClassName+"("))
+							&& !(line.contains("short") && line.contains(oClassName+"(")) && !(line.contains("long") && line.contains(oClassName+"("))
+							) {
 						String newLine = line.replaceAll(oClassName, dependentList.get(k));
 						bw.write(newLine);
 						bw.newLine();

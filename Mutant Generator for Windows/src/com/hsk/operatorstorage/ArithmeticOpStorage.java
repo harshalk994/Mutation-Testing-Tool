@@ -53,6 +53,15 @@ public class ArithmeticOpStorage {
 			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")) || (line.contains("\"") && line.contains("*")) || (line.contains("\"") && line.contains("/")) || (line.contains("\"") && line.contains("-")) || (line.contains("\"") && line.contains("%")))
 				continue;
 			
+			if(line.contains("System.exit"))
+				continue;
+			
+			if(line.contains("getKeyChar()"))
+				continue;
+			
+			if(line.contains("out.println"))
+				continue;
+			
 			if(line.contains("@"))
 				continue;
 

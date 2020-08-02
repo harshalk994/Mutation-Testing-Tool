@@ -63,7 +63,12 @@ public class TempFileProcessorSecondPass {
 
 		while((line = br.readLine()) != null) {
 
-			if(line.contains(className)) {
+			if(line.contains(className) && !(line.contains(".") && line.contains(className+"(")) && !(line.contains("."+className))
+					&& !(line.contains("int") && line.contains(className+"(")) && !(line.contains("void") && line.contains(className+"("))
+					&& !(line.contains("float") && line.contains(className+"(")) && !(line.contains("String") && line.contains(className+"("))
+					&& !(line.contains("double") && line.contains(className+"(")) && !(line.contains("char") && line.contains(className+"("))
+					&& !(line.contains("short") && line.contains(className+"(")) && !(line.contains("long") && line.contains(className+"("))
+					) {
 				String newLine = line.replaceAll(className, updateCName);
 				scp.setCName(updateCName);
 				bw.write(newLine);

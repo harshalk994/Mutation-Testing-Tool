@@ -56,6 +56,9 @@ public class AssignmentOpStorage {
 			if(line.contains("System.out.println") && line.contains("+"))
 				continue;
 
+			if(line.contains("out.println"))
+				continue;
+			
 			if(line.contains("@"))
 				continue;
 			

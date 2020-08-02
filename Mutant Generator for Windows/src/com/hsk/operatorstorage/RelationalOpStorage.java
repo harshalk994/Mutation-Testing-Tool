@@ -30,6 +30,7 @@ public class RelationalOpStorage {
 	private static List<String> conditionOpP = new ArrayList<String>();
 	private static List<String> conditionOpLNotEqual = new ArrayList<String>();
 	private static List<String> conditionOpPNotEqual = new ArrayList<String>();
+	
 	private static String mPath;
 
 	//----------Method to get the mutant folder path-----------------
@@ -39,7 +40,6 @@ public class RelationalOpStorage {
 
 	//----------Method to store relational operators found in original class--------------
 	public void processOp() throws IOException{
-
 		String tempFileName = mPath+"\\Temp.java";
 		FileReader fr = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(fr);
@@ -49,19 +49,31 @@ public class RelationalOpStorage {
 			if(line.contains("System.out.println"))
 				continue; 
 
+			if(line.contains("out.println"))
+				continue;
+			
 			if(line.contains("@"))
+				continue;
+			
+			if(line.contains("<Temp>"))
+				continue;
+			
+			if(line.contains("\""))
 				continue;
 			
 			if(line.contains("List") || line.contains("ArrayList") || line.contains("LinkedList") || line.contains("Vector") || line.contains("Stack"))
 				continue;
 
-			if(line.contains("Set") || line.contains("HashSet") || line.contains("TreeSet") || line.contains("LinkedHashSet") || line.contains("EnumSet") || line.contains("CopyOnWriteArraySet"))
+			if(line.contains("Set") || line.contains("HashSet") || line.contains("Hashtable") || line.contains("TreeSet") || line.contains("LinkedHashSet") || line.contains("EnumSet") || line.contains("CopyOnWriteArraySet"))
 				continue;
 
-			if(line.contains("Queue") || line.contains("Class") || line.contains("PriorityQueue") || line.contains("Collection") || line.contains("Function") || line.contains("Iterable") || line.contains("Publisher") || line.contains("Flowable") || line.contains("Observable") || line.contains("Single") || line.contains("Maybe") || line.contains("Iterator") || line.contains("Comparator") || line.contains("LinkedBlockingQueue") || line.contains("ArrayBlockingQueue") || line.contains("PriorityBlockingQueue") || line.contains("DelayQueue") || line.contains("SynchronousQueue") || line.contains("BlockingQueue") || line.contains("TransferQueue") || line.contains("LinkedTransferQueue") || line.contains("LinkedQueue"))
+			if(line.contains("Queue") || line.contains("Class<") || line.contains("PriorityQueue") || line.contains("Collection") || line.contains("Function") || line.contains("Iterable") || line.contains("Publisher") || line.contains("Flowable") || line.contains("Observable") || line.contains("Single") || line.contains("Maybe") || line.contains("Iterator") || line.contains("Comparator") || line.contains("LinkedBlockingQueue") || line.contains("ArrayBlockingQueue") || line.contains("PriorityBlockingQueue") || line.contains("DelayQueue") || line.contains("SynchronousQueue") || line.contains("BlockingQueue") || line.contains("TransferQueue") || line.contains("LinkedTransferQueue") || line.contains("LinkedQueue"))
 				continue;
 
 			if(line.contains("<String>") || line.contains("<Integer>") || line.contains("<Character>") || line.contains("<Boolean>") || line.contains("<Byte>") || line.contains("<Float>") || line.contains("<Long>") || line.contains("<Short>") || line.contains("<Double>"))
+				continue;
+			
+			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap"))
 				continue;
 
 			if(line.contains("'>'") || line.contains("'<'") || line.contains("'=='") || line.contains("'!='") || line.contains("'>='") || line.contains("'<='"))
@@ -74,13 +86,13 @@ public class RelationalOpStorage {
 				conditionOpL.add(line);
 			}else if(line.contains("<") && !(line.contains("\"<\"")) && !(line.contains("<=")) && !(line.contains("\"<=\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\"")) && !(line.contains("<<")) && !(line.contains("\"<<\""))) {
 				conditionOpL.add(line);
-			}else if(line.contains("==") && !(line.contains("\"==\"")) && line.contains("null")) {
+			}else if(line.contains("==") && (line.contains("null") || line.contains(".")) && !(line.contains("\"==\""))) {
 				conditionOpLNotEqual.add(line);
-			}else if(line.contains("==") && !(line.contains("\"==\"")) && !(line.contains("null"))) {
+			}else if(line.contains("==") && !(line.contains("\"==\"")) && !(line.contains("null") || line.contains("."))) {
 				conditionOpL.add(line);
-			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && line.contains("null")) {
+			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && (line.contains("null") || line.contains("."))) {
 				conditionOpLNotEqual.add(line);
-			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && !(line.contains("null"))) {
+			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && !(line.contains("null") || line.contains("."))) {
 				conditionOpL.add(line);
 			}else if(line.contains(">=") && !(line.contains("\">=\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\""))) {
 				conditionOpL.add(line);

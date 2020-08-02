@@ -85,7 +85,12 @@ public class RelationalOperatorMutation {
 				bw = new BufferedWriter(targetFile);
 				String line; 
 				while((line = br.readLine()) != null) {
-					if(line.contains(className)) {	
+					if(line.contains(className) && !(line.contains(".") && line.contains(className+"(")) && !(line.contains("."+className))
+							&& !(line.contains("int") && line.contains(className+"(")) && !(line.contains("void") && line.contains(className+"("))
+							&& !(line.contains("float") && line.contains(className+"(")) && !(line.contains("String") && line.contains(className+"("))
+							&& !(line.contains("double") && line.contains(className+"(")) && !(line.contains("char") && line.contains(className+"("))
+							&& !(line.contains("short") && line.contains(className+"(")) && !(line.contains("long") && line.contains(className+"("))
+							) {	
 						String newLine = line.replaceAll(className, "MuRelOp"+count);
 						bw.write(newLine);
 						bw.newLine();						
@@ -106,7 +111,7 @@ public class RelationalOperatorMutation {
 			}
 		}
 
-		//-----------if op ist is not empty, proceed with generating mutants----------------
+		//-----------if op list is not empty, proceed with generating mutants----------------
 		if(opLNotEq.isEmpty() == false) {
 			for(int i=0;i<opPNotEq.size();i++) {
 				count++;
@@ -121,7 +126,12 @@ public class RelationalOperatorMutation {
 				bw = new BufferedWriter(targetFile);
 				String line; 
 				while((line = br.readLine()) != null) {
-					if(line.contains(className)) {
+					if(line.contains(className) && !(line.contains(".") && line.contains(className+"(")) && !(line.contains("."+className))
+							&& !(line.contains("int") && line.contains(className+"(")) && !(line.contains("void") && line.contains(className+"("))
+							&& !(line.contains("float") && line.contains(className+"(")) && !(line.contains("String") && line.contains(className+"("))
+							&& !(line.contains("double") && line.contains(className+"(")) && !(line.contains("char") && line.contains(className+"("))
+							&& !(line.contains("short") && line.contains(className+"(")) && !(line.contains("long") && line.contains(className+"("))
+							) {
 						String newLine = line.replaceAll(className, "MuRelOp"+count);
 						bw.write(newLine);
 						bw.newLine();					

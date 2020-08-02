@@ -51,7 +51,40 @@ public class ShiftOpStorage {
 			if(line.contains("'>>'") || line.contains("'<<'") || line.contains("'>>>'"))
 				continue;
 
+			if(line.contains("out.println"))
+				continue;
+			
 			if(line.contains("@"))
+				continue;
+			
+			if(line.contains("<Temp>"))
+				continue;
+			
+			if(line.contains("\""))
+				continue;
+			
+			if(line.contains("List") || line.contains("ArrayList") || line.contains("LinkedList") || line.contains("Vector") || line.contains("Stack"))
+				continue;
+
+			if(line.contains("Set") || line.contains("HashSet") || line.contains("Hashtable") || line.contains("TreeSet") || line.contains("LinkedHashSet") || line.contains("EnumSet") || line.contains("CopyOnWriteArraySet"))
+				continue;
+
+			if(line.contains("Queue") || line.contains("Class<") || line.contains("PriorityQueue") || line.contains("Collection") || line.contains("Function") || line.contains("Iterable") || line.contains("Publisher") || line.contains("Flowable") || line.contains("Observable") || line.contains("Single") || line.contains("Maybe") || line.contains("Iterator") || line.contains("Comparator") || line.contains("LinkedBlockingQueue") || line.contains("ArrayBlockingQueue") || line.contains("PriorityBlockingQueue") || line.contains("DelayQueue") || line.contains("SynchronousQueue") || line.contains("BlockingQueue") || line.contains("TransferQueue") || line.contains("LinkedTransferQueue") || line.contains("LinkedQueue"))
+				continue;
+
+			if(line.contains("<String>") || line.contains("<Integer>") || line.contains("<Character>") || line.contains("<Boolean>") || line.contains("<Byte>") || line.contains("<Float>") || line.contains("<Long>") || line.contains("<Short>") || line.contains("<Double>"))
+				continue;
+			
+			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap"))
+				continue;
+
+			if(line.contains("'>'") || line.contains("'<'") || line.contains("'=='") || line.contains("'!='") || line.contains("'>='") || line.contains("'<='"))
+				continue;
+
+			if(line.contains("'>>'") || line.contains("'<<'") || line.contains("'>>>'") || line.contains("'>>='") || line.contains("'<<='"))
+				continue;
+			
+			if(line.contains("->") || line.contains("<-") || line.contains("=>"))
 				continue;
 			
 			if(line.contains(">>") && !(line.contains("\">>\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains("\">>>\"")) && !(line.contains(">>>=")) && !(line.contains("\">>>=\""))){

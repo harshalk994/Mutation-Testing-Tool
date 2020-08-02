@@ -173,7 +173,12 @@ public class TestReplicatorDependentClass {
 					bw.write(newLine);
 					bw.newLine();
 				}
-				else if(line.contains(dependentClassName)) {		
+				else if(line.contains(dependentClassName) && !(line.contains(".") && line.contains(dependentClassName+"(")) && !(line.contains("."+dependentClassName))
+						&& !(line.contains("int") && line.contains(dependentClassName+"(")) && !(line.contains("void") && line.contains(dependentClassName+"("))
+						&& !(line.contains("float") && line.contains(dependentClassName+"(")) && !(line.contains("String") && line.contains(dependentClassName+"("))
+						&& !(line.contains("double") && line.contains(dependentClassName+"(")) && !(line.contains("char") && line.contains(dependentClassName+"("))
+						&& !(line.contains("short") && line.contains(dependentClassName+"(")) && !(line.contains("long") && line.contains(dependentClassName+"("))
+						) {		
 					String newLine = line.replaceAll(dependentClassName, trimmedStr[k]);
 					bw.write(newLine);
 					bw.newLine();	

@@ -154,7 +154,12 @@ public class TestReplicatorTry {
 					bw.write(newLine);
 					bw.newLine();
 				}
-				else if(line.contains(nameOfClassUnderTest)) {
+				else if(line.contains(nameOfClassUnderTest) && !(line.contains(".") && line.contains(nameOfClassUnderTest+"(")) && !(line.contains("."+nameOfClassUnderTest))
+						&& !(line.contains("int") && line.contains(nameOfClassUnderTest+"(")) && !(line.contains("void") && line.contains(nameOfClassUnderTest+"("))
+						&& !(line.contains("float") && line.contains(nameOfClassUnderTest+"(")) && !(line.contains("String") && line.contains(nameOfClassUnderTest+"("))
+						&& !(line.contains("double") && line.contains(nameOfClassUnderTest+"(")) && !(line.contains("char") && line.contains(nameOfClassUnderTest+"("))
+						&& !(line.contains("short") && line.contains(nameOfClassUnderTest+"(")) && !(line.contains("long") && line.contains(nameOfClassUnderTest+"("))
+						) {
 					String newLine = line.replaceAll(nameOfClassUnderTest, trimmedStr[k]);
 					bw.write(newLine);
 					bw.newLine();	
