@@ -75,6 +75,7 @@ public class TempFileProcessorSecondPass {
 				bw.newLine();				
 			}
 			else if((!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("*")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("+")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("/")) || (!(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("\"")) && line.contains("-") && line.contains("%"))){
+				
 				String[] words = line.split("");
 				for(int k=0;k<words.length;k++) {
 					if(!(words[k].contains("+") && (words[k+1].contains("+"))) || !(words[k].contains("-") && (words[k+1].contains("-")))) {
@@ -83,23 +84,23 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+") || words[k+1].contains("="))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-") || words[k+1].contains("="))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-						if(words[k].contains("*")) {
+						if(words[k].contains("*") && !(words[k+1].contains("*") || words[k+1].contains("="))) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-						if(words[k].contains("/")) {
+						if(words[k].contains("/") && !(words[k+1].contains("/") || words[k+1].contains("="))) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-						if(words[k].contains("%")) {
+						if(words[k].contains("%") && !(words[k+1].contains("%") || words[k+1].contains("="))) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
@@ -111,6 +112,7 @@ public class TempFileProcessorSecondPass {
 				bw.newLine();
 			}
 			else if((!(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("+")) || (!(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("-")) || (!(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) && !(line.contains("\"")) && line.contains("*") && line.contains("/")) || (!(line.contains("*=")) && !(line.contains("=*")) && !(line.contains("= *")) &&  !(line.contains("\"")) && line.contains("*") && line.contains("%"))){
+					
 				String[] words = line.split("");
 				for(int k=0;k<words.length;k++) {
 					if(!(words[k].contains("+") && (words[k+1].contains("+"))) || !(words[k].contains("-") && (words[k+1].contains("-")))) {
@@ -119,23 +121,23 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+") || words[k+1].contains("="))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-") || words[k+1].contains("="))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-						if(words[k].contains("*")) {
+						if(words[k].contains("*") && !(words[k+1].contains("*") || words[k+1].contains("="))) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-						if(words[k].contains("/")) {
+						if(words[k].contains("/") && !(words[k+1].contains("/") || words[k+1].contains("="))) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-						if(words[k].contains("%")) {
+						if(words[k].contains("%") && !(words[k+1].contains("%") || words[k+1].contains("="))) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
@@ -147,6 +149,7 @@ public class TempFileProcessorSecondPass {
 				bw.newLine();
 			}
 			else if((!(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("*")) || (!(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("-")) || (!(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("+")) || (!(line.contains("/=")) && !(line.contains("=/")) && !(line.contains("= /")) && !(line.contains("\"")) && line.contains("/") && line.contains("%"))){
+				
 				String[] words = line.split("");
 				for(int k=0;k<words.length;k++) {
 					if(!(words[k].contains("+") && (words[k+1].contains("+"))) || !(words[k].contains("-") && (words[k+1].contains("-")))) {
@@ -155,23 +158,23 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+") || words[k+1].contains("="))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-") || words[k+1].contains("="))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-						if(words[k].contains("*")) {
+						if(words[k].contains("*") && !(words[k+1].contains("*") || words[k+1].contains("="))) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-						if(words[k].contains("/")) {
+						if(words[k].contains("/") && !(words[k+1].contains("/") || words[k+1].contains("="))) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-						if(words[k].contains("%")) {
+						if(words[k].contains("%") && !(words[k+1].contains("%") || words[k+1].contains("="))) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
@@ -183,6 +186,7 @@ public class TempFileProcessorSecondPass {
 				bw.newLine();
 			}
 			else if((!(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("*")) || (!(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("-")) || (!(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("/")) || (!(line.contains("%=")) && !(line.contains("=%")) && !(line.contains("= %")) && !(line.contains("\"")) && line.contains("%") && line.contains("+"))){
+				
 				String[] words = line.split("");
 				for(int k=0;k<words.length;k++) {
 					if(!(words[k].contains("+") && (words[k+1].contains("+"))) || !(words[k].contains("-") && (words[k+1].contains("-")))) {
@@ -191,23 +195,23 @@ public class TempFileProcessorSecondPass {
 						String replaceC = "*" + System.lineSeparator();
 						String replaceD = "/" + System.lineSeparator();
 						String replaceE = "%" + System.lineSeparator();
-						if(words[k].contains("+") && !(words[k+1].contains("+"))) {
+						if(words[k].contains("+") && !(words[k+1].contains("+") || words[k+1].contains("="))) {
 							String temp = replaceA;
 							words[k] = temp;
 						}
-						if(words[k].contains("-") && !(words[k+1].contains("-"))) {
+						if(words[k].contains("-") && !(words[k+1].contains("-") || words[k+1].contains("="))) {
 							String temp = replaceB;
 							words[k] = temp;
 						}
-						if(words[k].contains("*")) {
+						if(words[k].contains("*") && !(words[k+1].contains("*") || words[k+1].contains("="))) {
 							String temp = replaceC;
 							words[k] = temp;
 						}
-						if(words[k].contains("/")) {
+						if(words[k].contains("/") && !(words[k+1].contains("/") || words[k+1].contains("="))) {
 							String temp = replaceD;
 							words[k] = temp;
 						}
-						if(words[k].contains("%")) {
+						if(words[k].contains("%") && !(words[k+1].contains("%") || words[k+1].contains("="))) {
 							String temp = replaceE;
 							words[k] = temp;
 						}
@@ -215,6 +219,25 @@ public class TempFileProcessorSecondPass {
 				}
 
 				String newLine = String.join("", words);
+				bw.write(newLine);
+				bw.newLine();
+			}
+			else if((line.contains("|") && line.contains("&")) && !(line.contains("||") && line.contains("&&"))) {				
+				String[] words = line.split("");
+				String replaceOR = "|" + System.lineSeparator();
+				String replaceAND = "&" + System.lineSeparator();
+				for(int k=0;k<words.length;k++) {
+					if(words[k].contains("|")) {
+						String temp = replaceOR;
+						words[k] = temp;
+					}
+					if(words[k].contains("&")) {
+						String temp = replaceAND;
+						words[k] = temp;
+					}
+				}
+				
+				String newLine = String.join("", words);		
 				bw.write(newLine);
 				bw.newLine();
 			}

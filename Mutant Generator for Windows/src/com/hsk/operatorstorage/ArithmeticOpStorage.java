@@ -53,6 +53,21 @@ public class ArithmeticOpStorage {
 			if((line.contains("System.out.println") && line.contains("\"")) || (line.contains("\"") && line.contains("+")) || (line.contains("\"") && line.contains("*")) || (line.contains("\"") && line.contains("/")) || (line.contains("\"") && line.contains("-")) || (line.contains("\"") && line.contains("%")))
 				continue;
 			
+			if(line.contains("System.lineSeparator") && line.contains("+"))
+				continue;
+			
+			if(line.contains("String") && line.contains("+"))
+				continue;
+			
+			if(line.contains("toString") && line.contains("+"))
+				continue;
+				
+			if(line.contains("replace") && line.contains("+"))
+				continue;
+			
+			if(line.contains("Buffer") && line.contains("+"))
+				continue;
+			
 			if(line.contains("System.exit"))
 				continue;
 			
@@ -75,6 +90,9 @@ public class ArithmeticOpStorage {
 				continue;
 
 			if(line.contains("import"))
+				continue;
+			
+			if(line.contains("throw") || line.contains("throws"))
 				continue;
 
 			if(line.contains("\"+\"") || line.contains("\"-\"") || line.contains("\"*\"") || line.contains("\"/\"") || line.contains("\"%\""))
@@ -110,11 +128,19 @@ public class ArithmeticOpStorage {
 
 	//-------Method to return the arithmetic operator list generated using operators found in original class-------------
 	public List<String> returnOpList(){
+//		System.out.println("========PRINTING LIST=========");
+//		for(int i=0;i<opList.size();i++) {
+//			System.out.println(opList.get(i));
+//		}
 		return opList;
 	}
 
 	//-------Method to return the arithmetic operator list generated using operators found in original class-------------
 	public List<String> returnOpTwoList(){
+//		System.out.println("========PRINTING LIST=========");
+//		for(int i=0;i<opTwoL.size();i++) {
+//			System.out.println(opTwoL.get(i));
+//		}
 		return opTwoL;
 	}
 

@@ -119,7 +119,7 @@ public class RelationalOperatorMutation {
 					pointerTwo++;
 				}
 				String s = opLNotEq.get(pointerTwo);
-				System.out.println(opLNotEq.get(pointerTwo));
+				//System.out.println(opLNotEq.get(pointerTwo));
 				source = new FileReader(tempFileName);
 				br = new BufferedReader(source);
 				targetFile = new FileWriter(mutantFileName + count + ".java");

@@ -73,9 +73,18 @@ public class RelationalOpStorage {
 			if(line.contains("<String>") || line.contains("<Integer>") || line.contains("<Character>") || line.contains("<Boolean>") || line.contains("<Byte>") || line.contains("<Float>") || line.contains("<Long>") || line.contains("<Short>") || line.contains("<Double>"))
 				continue;
 			
-			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap"))
+			if(line.contains("ThreadLocal"))
+				continue;
+			
+			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap") || line.contains("EnumMap"))
+				continue;
+			
+			if(line.contains("Constructor"))
 				continue;
 
+			if(line.contains("implements") || line.contains("extends") || line.contains("public") || line.contains("private") || line.contains("protected") || line.contains("this"))
+				continue;
+			
 			if(line.contains("'>'") || line.contains("'<'") || line.contains("'=='") || line.contains("'!='") || line.contains("'>='") || line.contains("'<='"))
 				continue;
 			
@@ -83,18 +92,60 @@ public class RelationalOpStorage {
 				continue;
 
 			if(line.contains(">") && !(line.contains("\">\"")) && !(line.contains(">=")) && !(line.contains("\">=\"")) && !(line.contains(">>")) && !(line.contains("\">>\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains("\">>>\""))){
-				conditionOpL.add(line);
+				String[] words = line.split("");
+				for(int i=0;i<words.length;i++) {
+					if(words[i].contains(">") && !(words[i+1].contains(">"))){
+						String newLine = String.join("", words);
+						conditionOpL.add(newLine);
+					}
+				}
 			}else if(line.contains("<") && !(line.contains("\"<\"")) && !(line.contains("<=")) && !(line.contains("\"<=\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\"")) && !(line.contains("<<")) && !(line.contains("\"<<\""))) {
-				conditionOpL.add(line);
-			}else if(line.contains("==") && (line.contains("null") || line.contains(".")) && !(line.contains("\"==\""))) {
-				conditionOpLNotEqual.add(line);
-			}else if(line.contains("==") && !(line.contains("\"==\"")) && !(line.contains("null") || line.contains("."))) {
-				conditionOpL.add(line);
-			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && (line.contains("null") || line.contains("."))) {
-				conditionOpLNotEqual.add(line);
-			}else if(line.contains("!=") && !(line.contains("\"!=\"")) && !(line.contains("null") || line.contains("."))) {
-				conditionOpL.add(line);
-			}else if(line.contains(">=") && !(line.contains("\">=\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\""))) {
+				String[] words = line.split("");
+				for(int i=0;i<words.length;i++) {
+					if(words[i].contains("<") && !(words[i+1].contains("<"))){
+						String newLine = String.join("", words);
+						conditionOpL.add(newLine);
+					}
+				}
+			}else if(line.contains("==") && !(line.contains("\"==\"") || line.contains(">>>") || line.contains(">>") || line.contains(">>>=") || line.contains(">>=") || line.contains("<<") || line.contains("<<=")) && (line.contains("null") || line.contains("getKey") || line.contains("getValue") || line.contains("this")) ) {
+				conditionOpLNotEqual.add(line);		
+			}else if(line.contains("==") && !(line.contains("\"==\"") || line.contains(">>>") || line.contains(">>") || line.contains(">>>=") || line.contains(">>=") || line.contains("<<") || line.contains("<<=")) && !(line.contains("null"))) {
+				//System.out.println(line);
+				String[] words = line.split("");
+				//String regex = ".*[A-Z].*";
+				for(int i=0;i<words.length;i++) {
+					if(words[i].contains("=") && words[i+1].contains("=")) {
+						boolean hasUppercase = !words[i+2].equals(words[i+2].toLowerCase());
+						boolean hasUppercaseTwo = !words[i+3].equals(words[i+3].toLowerCase());
+						if(words[i+2].isBlank() == false && (!hasUppercase)) {
+							String newLine = String.join("", words);
+							conditionOpL.add(newLine);
+						}else if(words[i+3].isBlank() == false && (!hasUppercaseTwo)) {
+							String newLine = String.join("", words);
+							conditionOpL.add(newLine);
+						}
+					}
+				}
+			}else if(line.contains("!=") && !(line.contains("\"!=\"") || line.contains(">>>") || line.contains(">>") || line.contains(">>>=") || line.contains(">>=") || line.contains("<<") || line.contains("<<=")) && (line.contains("null") || line.contains("getKey") || line.contains("getValue") ||line.contains("this"))) {
+				conditionOpLNotEqual.add(line);	
+			}else if(line.contains("!=") && !(line.contains("\"!=\"") || line.contains(">>>") || line.contains(">>") || line.contains(">>>=") || line.contains(">>=") || line.contains("<<") || line.contains("<<=")) && !(line.contains("null"))) {
+				//System.out.println(line);
+				String[] words = line.split("");
+				//String regex = ".*[A-Z].*";
+				for(int i=0;i<words.length;i++) {
+					if(words[i].contains("!") && words[i+1].contains("=")) {
+						boolean hasUppercase = !words[i+2].equals(words[i+2].toLowerCase());
+						boolean hasUppercaseTwo = !words[i+3].equals(words[i+3].toLowerCase());
+						if(words[i+2].isBlank() == false && (!hasUppercase)) {
+							String newLine = String.join("", words);
+							conditionOpL.add(newLine);
+						}else if(words[i+3].isBlank() == false && (!hasUppercaseTwo)) {
+							String newLine = String.join("", words);
+							conditionOpL.add(newLine);
+						}
+					}
+				}
+			}else if(line.contains(">=") && !(line.contains("\">=\"")) && !(line.contains(">>=")) && !(line.contains("\">>=\"")) && !(line.contains(">>>")) && !(line.contains(">>>="))) {
 				conditionOpL.add(line);
 			}else if(line.contains("<=") && !(line.contains("\"<=\"")) && !(line.contains("<<=")) && !(line.contains("\"<<=\""))) {
 				conditionOpL.add(line);
@@ -107,9 +158,13 @@ public class RelationalOpStorage {
 
 	//-------Method to return the relational operator list generated using operators found in original class-------------
 	public List<String> returnRelOpList(){
+//		System.out.println("========= PRINTING THE LIST ===============");
+//		for(int i=0;i<conditionOpL.size();i++) {
+//			System.out.println(conditionOpL.get(i));
+//		}
 		return conditionOpL;
 	}
-
+	
 	//-------Method to return the relational operator list generated using operators found in original class-------------
 	public List<String> returnRelOpListNotEqual(){
 		return conditionOpLNotEqual;

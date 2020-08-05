@@ -75,7 +75,16 @@ public class ShiftOpStorage {
 			if(line.contains("<String>") || line.contains("<Integer>") || line.contains("<Character>") || line.contains("<Boolean>") || line.contains("<Byte>") || line.contains("<Float>") || line.contains("<Long>") || line.contains("<Short>") || line.contains("<Double>"))
 				continue;
 			
-			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap"))
+			if(line.contains("ThreadLocal"))
+				continue;
+			
+			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap") || line.contains("EnumMap"))
+				continue;
+			
+			if(line.contains("Constructor"))
+				continue;
+
+			if(line.contains("implements") || line.contains("extends") || line.contains("public") || line.contains("private") || line.contains("protected"))
 				continue;
 
 			if(line.contains("'>'") || line.contains("'<'") || line.contains("'=='") || line.contains("'!='") || line.contains("'>='") || line.contains("'<='"))
