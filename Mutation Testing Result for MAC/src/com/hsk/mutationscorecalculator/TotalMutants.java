@@ -56,6 +56,7 @@ public class TotalMutants {
 			if(contents[l].contains("Temp")) 
 				continue;
 
+			if(contents[l].contains("Mu") && contents[l].contains("Op"))
 			mutants[m++] = contents[l];    	  
 		}
 
