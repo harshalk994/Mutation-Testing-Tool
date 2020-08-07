@@ -77,6 +77,9 @@ public class ArithmeticOpStorage {
 			if(line.contains("out.println"))
 				continue;
 			
+			if(line.contains("File"))
+				continue;
+			
 			if(line.contains("@"))
 				continue;
 
@@ -110,8 +113,22 @@ public class ArithmeticOpStorage {
 				}
 			}
 
-			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("--")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++"))) || (line.contains("-") && !(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")))  || (line.contains("*") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("/=")) || (line.contains("%") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("%=")))) {
-				opList.add(line);
+			if((line.contains("+") && !(line.contains("+=")) && !(line.contains("=+")) && !(line.contains("= +")) && !(line.contains("++")) && !(line.contains("--")) && !(line.contains("return+")) && !(line.contains("return +")) && !(line.contains("return++")) && !(line.contains("return ++")) && !(line.contains("e+")) && !(line.contains("Double") && line.contains("+")) && !(line.contains("Float") && line.contains("+"))) || (line.contains("-") && !(line.contains("++")) && !(line.contains("-=")) && !(line.contains("=-")) && !(line.contains("= -")) && !(line.contains("--")) && !(line.contains("return-")) && !(line.contains("return -")) && !(line.contains("return--")) && !(line.contains("return --")) && !(line.contains("e-")) && !(line.contains("Double") && line.contains("-")) && !(line.contains("Float") && line.contains("-")))  || (line.contains("*") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("*="))) || (line.contains("/")) && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("/=")) || (line.contains("%") && !(line.contains("--")) && !(line.contains("++")) && !(line.contains("%=")))) {
+				if((line.contains("+") || line.contains("-")) && (line.contains("L"+";") || line.contains("L"+")"))) {
+					String[] words = line.split("");
+					for(int i=0;i<words.length-1;i++) {
+						if(words[i].contains("+") || words[i].contains("-")) {
+							for(int j=i+1;j<words.length;j++) {
+								if(words[j].contains("L") && (words[j+1].contains(";") || words[j+1].contains(")"))) {
+									String newLine=String.join("", words);
+									opTwoL.add(newLine);
+								}
+							}
+						}
+					}
+				}else {
+					opList.add(line);
+				}
 			}
 
 			if(line.contains("=+") || line.contains("= +")) {
@@ -119,6 +136,10 @@ public class ArithmeticOpStorage {
 			}
 
 			if(line.contains("=-") || line.contains("= -")) {
+				opTwoL.add(line);
+			}
+			
+			if(line.contains("e+") || line.contains("e-") || (line.contains("Double") && (line.contains("+") || line.contains("-"))) || (line.contains("Float") && (line.contains("+") || line.contains("-")))) {
 				opTwoL.add(line);
 			}
 		}
@@ -137,7 +158,7 @@ public class ArithmeticOpStorage {
 
 	//-------Method to return the arithmetic operator list generated using operators found in original class-------------
 	public List<String> returnOpTwoList(){
-//		System.out.println("========PRINTING LIST=========");
+//		System.out.println("========PRINTING LIST TWO=========");
 //		for(int i=0;i<opTwoL.size();i++) {
 //			System.out.println(opTwoL.get(i));
 //		}
@@ -194,11 +215,19 @@ public class ArithmeticOpStorage {
 
 	//----------Return the operator list that stores mutants of operators found in original class------------
 	public List<String> retriveProcessList(){
+//		System.out.println("===========PRINT MODIFIED LIST============");
+//		for(int i=0;i<opP.size();i++) {
+//			System.out.println(opP.get(i));
+//		}
 		return opP;
 	}
 
 	//----------Return the operator list that stores mutants of operators found in original class------------
 	public List<String> retriveProcessTwoList(){
+//		System.out.println("===========PRINT MODIFIED LIST TWO============");
+//		for(int i=0;i<opTwoP.size();i++) {
+//			System.out.println(opTwoP.get(i));
+//		}
 		return opTwoP;
 	}
 }

@@ -44,6 +44,7 @@ public class RelationalOpStorage {
 		FileReader fr = new FileReader(tempFileName);
 		BufferedReader br = new BufferedReader(fr);
 		String line;
+		String check = "="+System.lineSeparator();
 
 		while((line = br.readLine()) != null) {
 			if(line.contains("System.out.println"))
@@ -74,6 +75,12 @@ public class RelationalOpStorage {
 				continue;
 			
 			if(line.contains("ThreadLocal"))
+				continue;
+			
+			if(line.contains("DirectoryStream"))
+				continue;
+			
+			if(line.contains("Comparator"))
 				continue;
 			
 			if(line.contains("Map") || line.contains("HashMap") || line.contains("TreeMap") || line.contains("EnumMap"))
@@ -115,6 +122,9 @@ public class RelationalOpStorage {
 				//String regex = ".*[A-Z].*";
 				for(int i=0;i<words.length;i++) {
 					if(words[i].contains("=") && words[i+1].contains("=")) {
+//						System.out.println(words[i]);
+//						System.out.println(words[i+1]);
+//						System.out.println(words[i+2]);
 						boolean hasUppercase = !words[i+2].equals(words[i+2].toLowerCase());
 						boolean hasUppercaseTwo = !words[i+3].equals(words[i+3].toLowerCase());
 						if(words[i+2].isBlank() == false && (!hasUppercase)) {
