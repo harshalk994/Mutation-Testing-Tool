@@ -23,10 +23,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 /*
  * This class is created to delete files that were generated from the previous project that was run using the tool
  * to avoid manual deletion of files everytime a project is run by the tool
-*/ 
+ */
+
 public class PreProcessDeleteFiles {
 
 	//method delete files that are generated from previous project

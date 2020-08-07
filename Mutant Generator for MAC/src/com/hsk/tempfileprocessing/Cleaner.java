@@ -25,8 +25,8 @@ import java.util.List;
 import java.io.BufferedReader;    
 
 /*
- * This class is created to first temp file generated line by line and process it to 
- * remove comments if present on any line
+ * This class is created to first temp file generated line by line and process it to remove comments 
+ * if present on any line
  */
 public class Cleaner{    
 

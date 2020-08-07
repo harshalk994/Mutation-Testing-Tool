@@ -13,7 +13,7 @@
 	   See the License for the specific language governing permissions and
 	   limitations under the License.
  */
-
+ 
 
 package com.hsk.operatormutation;
 import com.hsk.*;
@@ -31,10 +31,7 @@ import com.hsk.operatorstorage.RelationalOpStorage;
 import com.hsk.operatorstorage.ShiftOpStorage;
 import com.hsk.userinputs.UserInputs;
 
-/*
- * This class is created to apply the different types of operator mutation rules based on 
- * operators captured from the original program
- */
+//This class is created to apply the different types of operator mutation rules based on operators captured from the original program
 public class OperatorMutation {
 
 	//--------------Method to apply required mutation rules to operatores captured in the original program---------------------

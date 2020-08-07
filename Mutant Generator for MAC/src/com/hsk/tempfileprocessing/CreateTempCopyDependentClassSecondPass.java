@@ -28,8 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * This class is created to generate a copy of the dependent class 
- * (this is the second pass for processing the dependent class)
+ * This class is created to generate a copy of the dependent class (this is the second pass for
+ * processing the dependent class)
  */
 public class CreateTempCopyDependentClassSecondPass {
 
@@ -99,6 +99,7 @@ public class CreateTempCopyDependentClassSecondPass {
 		BufferedWriter bw = null;
 		int count = 0;
 
+		
 		//--------------If the arraylist is not empty, proceed and create equal number of copies of dependent class as there are mutant classes-----------------
 		if(dependentMList.isEmpty() == false) {
 
@@ -107,18 +108,36 @@ public class CreateTempCopyDependentClassSecondPass {
 
 				fr = new FileReader(mPath+"/"+dClassName+"FirstTemp"+count+".java");
 				br = new BufferedReader(fr);
-				fw = new FileWriter(mPath+"/"+dClassName+"SecondTemp"+count+".java");
+				fw = new FileWriter(mPath+"/"+dClassName+"Copy"+count+".java");
 				bw = new BufferedWriter(fw);
 
 				String line; 
 
 				while((line = br.readLine()) != null) {
-					if(line.contains(dClassName)) {
-						String newLine = line.replaceAll(dClassName, dClassName+"SecondTemp"+count);
+					if((line.contains(dClassName) || line.contains("public"+" "+dClassName+"(") || line.contains("private"+" "+dClassName+"(")) && !(line.contains("."+dClassName+"(")) && !(line.contains(".") && line.contains(dClassName+"(")) && !(line.contains("void") && line.contains("main"))
+							&& !((line.contains("public"+" "+"int") || line.contains("private"+" "+"int") || line.contains("protected"+" "+"int")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"void") || line.contains("private"+" "+"void") || line.contains("protected"+" "+"void")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"float") || line.contains("private"+" "+"float") || line.contains("protected"+" "+"float")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"String") || line.contains("private"+" "+"String") || line.contains("protected"+" "+"String")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"double") || line.contains("private"+" "+"double") || line.contains("protected"+" "+"double")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"char") || line.contains("private"+" "+"char") || line.contains("protected"+" "+"char")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"short") || line.contains("private"+" "+"short") || line.contains("protected"+" "+"short")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"long") || line.contains("private"+" "+"long") || line.contains("protected"+" "+"long")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"int") || line.contains("private"+" "+"static"+" "+"int") || line.contains("protected"+" "+"static"+" "+"int")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"void") || line.contains("private"+" "+"static"+" "+"void") || line.contains("protected"+" "+"static"+" "+"void")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"float") || line.contains("private"+" "+"static"+" "+"float") || line.contains("protected"+" "+"static"+" "+"float")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"String") || line.contains("private"+" "+"static"+" "+"String") || line.contains("protected"+" "+"static"+" "+"String")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"double") || line.contains("private"+" "+"static"+" "+"double") || line.contains("protected"+" "+"static"+" "+"double")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"char") || line.contains("private"+" "+"static"+" "+"char") || line.contains("protected"+" "+"static"+" "+"char")) && line.contains(dClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"short") || line.contains("private"+" "+"static"+" "+"short") || line.contains("protected"+" "+"static"+" "+"short")) && line.contains(dClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"long") || line.contains("private"+" "+"static"+" "+"long") || line.contains("protected"+" "+"static"+" "+"long")) && line.contains(dClassName+"("))
+							) {
+						String newLine = line.replaceAll(dClassName, dClassName+"Copy"+count);
 						bw.write(newLine);
 						bw.newLine();
 					}
-					else if(line.contains(oClassName)) {
+					else if((line.contains(oClassName) || line.contains("public"+" "+oClassName+"(") || line.contains("private"+" "+oClassName+"(")) && !(line.contains("."+oClassName)) && !(line.contains("void") && line.contains("main"))
+							&& !((line.contains("public"+" "+"int") || line.contains("private"+" "+"int") || line.contains("protected"+" "+"int")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"void") || line.contains("private"+" "+"void") || line.contains("protected"+" "+"void")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"float") || line.contains("private"+" "+"float") || line.contains("protected"+" "+"float")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"String") || line.contains("private"+" "+"String") || line.contains("protected"+" "+"String")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"double") || line.contains("private"+" "+"double") || line.contains("protected"+" "+"double")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"char") || line.contains("private"+" "+"char") || line.contains("protected"+" "+"char")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"short") || line.contains("private"+" "+"short") || line.contains("protected"+" "+"short")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"long") || line.contains("private"+" "+"long") || line.contains("protected"+" "+"long")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"int") || line.contains("private"+" "+"static"+" "+"int") || line.contains("protected"+" "+"static"+" "+"int")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"void") || line.contains("private"+" "+"static"+" "+"void") || line.contains("protected"+" "+"static"+" "+"void")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"float") || line.contains("private"+" "+"static"+" "+"float") || line.contains("protected"+" "+"static"+" "+"float")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"String") || line.contains("private"+" "+"static"+" "+"String") || line.contains("protected"+" "+"static"+" "+"String")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"double") || line.contains("private"+" "+"static"+" "+"double") || line.contains("protected"+" "+"static"+" "+"double")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"char") || line.contains("private"+" "+"static"+" "+"char") || line.contains("protected"+" "+"static"+" "+"char")) && line.contains(oClassName+"("))
+							&& !((line.contains("public"+" "+"static"+" "+"short") || line.contains("private"+" "+"static"+" "+"short") || line.contains("protected"+" "+"static"+" "+"short")) && line.contains(oClassName+"(")) && !((line.contains("public"+" "+"static"+" "+"long") || line.contains("private"+" "+"static"+" "+"long") || line.contains("protected"+" "+"static"+" "+"long")) && line.contains(oClassName+"("))
+							) {
 						String newLine = line.replaceAll(oClassName, dependentList.get(k));
 						bw.write(newLine);
 						bw.newLine();

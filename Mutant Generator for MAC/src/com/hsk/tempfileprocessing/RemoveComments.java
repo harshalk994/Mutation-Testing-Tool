@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * This class is created to process the original class and remove comments 
- * from the file so that the size of the file can be reduced
-*/ 
+ * This class is created to process the original class and remove comments from the file so that 
+ * the size of the file can be reduced
+ */
 public class RemoveComments {
 	
 	private static String mPath;

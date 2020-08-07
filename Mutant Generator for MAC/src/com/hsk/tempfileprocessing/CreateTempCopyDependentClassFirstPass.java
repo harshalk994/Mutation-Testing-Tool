@@ -28,8 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * This class is created to generate a copy of the dependent class 
- * (this is the first pass for processing the dependent class)
+ * This class is created to generate a copy of the dependent class (this is the first pass for 
+ * processing the dependent class)
  */
 public class CreateTempCopyDependentClassFirstPass {
 
