@@ -95,7 +95,7 @@ public class GenerateHtmlTable {
 			apw.println("<table id=\"t01\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Arithmetic Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -112,7 +112,7 @@ public class GenerateHtmlTable {
 						arithOpPointer++;
 					}
 					String s = arithOpList.get(arithOpPointer);
-					apw.format("<TR ALIGN=CENTER><TD>%d<TD>%s<TD>%s%n",arithOpCounter, s, processedArithOpList.get(i));
+					apw.format("<TR ALIGN=CENTER><TD>%s<TD>%s<TD>%s%n","MuArithOp"+arithOpCounter, s, processedArithOpList.get(i));
 					arithOpCounter++;
 				}
 
@@ -124,8 +124,8 @@ public class GenerateHtmlTable {
 						arithOpTwoPointer++;
 					}
 					String s2 = arithOpTwoList.get(arithOpTwoPointer);
-					apw.format("<TR ALIGN=CENTER><TD>%d<TD>%s<TD>%s%n",arithOpTwoCounter, s2, processedArithOpTwoList.get(j));
-					arithOpTwoCounter++;
+					apw.format("<TR ALIGN=CENTER><TD>%s<TD>%s<TD>%s%n","MuArithOp"+arithOpCounter, s2, processedArithOpTwoList.get(j));
+					arithOpCounter++;
 				}
 			}
 
@@ -189,7 +189,7 @@ public class GenerateHtmlTable {
 			spw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Shift Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -200,7 +200,7 @@ public class GenerateHtmlTable {
 					shiftPointer++;
 				}
 				String s = shiftOpList.get(shiftPointer);
-				spw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",shiftCounter, s, processedShiftOpList.get(i));
+				spw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuShiftOp"+shiftCounter, s, processedShiftOpList.get(i));
 				shiftCounter++;
 			}
 
@@ -260,7 +260,7 @@ public class GenerateHtmlTable {
 			bpw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Bitwise Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -271,7 +271,7 @@ public class GenerateHtmlTable {
 					bitwisePointer++;
 				}
 				String s = bitwiseOpList.get(bitwisePointer);
-				bpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",bitwiseCounter, s, processedBitwiseOpList.get(i));
+				bpw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuBitwiseOp"+bitwiseCounter, s, processedBitwiseOpList.get(i));
 				bitwiseCounter++;
 			}
 
@@ -332,7 +332,7 @@ public class GenerateHtmlTable {
 			cpw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Conditional Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -343,7 +343,7 @@ public class GenerateHtmlTable {
 					conditionalPointer++;
 				}
 				String s = conditionalOpList.get(conditionalPointer);
-				cpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",conditionalCounter, s, processedConditionalOpList.get(i));
+				cpw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuConditionOp"+conditionalCounter, s, processedConditionalOpList.get(i));
 				conditionalCounter++;
 			}
 
@@ -359,14 +359,18 @@ public class GenerateHtmlTable {
 	public void generateRelationalOpTable() throws IOException {
 		List<String> relationalOpList = new ArrayList<String>();
 		List<String> processedRelationalOpList = new ArrayList<String>();
+		List<String> relationalNotEqOpList = new ArrayList<String>();
+		List<String> processedRelationalNotEqOpList = new ArrayList<String>();
 
 		//-------------------Retrieve operators stored and their respective generated mutants----------------------
 		RelationalOpStorage rs = new RelationalOpStorage();
 		relationalOpList = rs.returnRelOpList();
 		processedRelationalOpList = rs.retriveRelProcessList();
+		relationalNotEqOpList = rs.returnRelOpListNotEqual();
+		processedRelationalNotEqOpList = rs.retriveRelProcessListNotEq();
 
 		//---------------------Generating the required html table for relational operators--------------------
-		if(relationalOpList.isEmpty() == false) {
+		if(relationalOpList.isEmpty() == false || relationalNotEqOpList.isEmpty() == false) {
 			FileWriter rw = new FileWriter("htmlreport.html", true);
 			BufferedWriter rbw = new BufferedWriter(rw);
 			PrintWriter rpw = new PrintWriter(rbw);
@@ -402,20 +406,36 @@ public class GenerateHtmlTable {
 			rpw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Relational Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
 			int relationalPointer = 0;
+			int relationalNotEqPointer = 0;
 			int relationalCounter = 1;
-			for(int i=0;i<processedRelationalOpList.size();i++) {
-				if(i!=0 && i % 5 == 0) {
-					relationalPointer++;
+			
+			if(relationalOpList.isEmpty() == false) {
+				for(int i=0;i<processedRelationalOpList.size();i++) {
+					if(i!=0 && i % 5 == 0) {
+						relationalPointer++;
+					}
+					String s = relationalOpList.get(relationalPointer);
+					rpw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuRelOp"+relationalCounter, s, processedRelationalOpList.get(i));
+					relationalCounter++;
 				}
-				String s = relationalOpList.get(relationalPointer);
-				rpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",relationalCounter, s, processedRelationalOpList.get(i));
-				relationalCounter++;
 			}
+			
+			if(relationalNotEqOpList.isEmpty() == false) {
+				for(int j=0;j<processedRelationalNotEqOpList.size();j++) {
+					if(j!=0 && j % 1 == 0) {
+						relationalNotEqPointer++;
+					}
+					String s2 = relationalNotEqOpList.get(relationalNotEqPointer);
+					rpw.format("<TR ALIGN=CENTER><TD>%s<TD>%s<TD>%s%n","MuRelOp"+relationalCounter, s2, processedRelationalNotEqOpList.get(j));
+					relationalCounter++;
+				}
+			}
+			
 
 			rpw.println("</TABLE>");
 			rpw.println("<br>");
@@ -474,7 +494,7 @@ public class GenerateHtmlTable {
 			idpw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Increment/Decrement Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -485,7 +505,7 @@ public class GenerateHtmlTable {
 					incDecPointer++;
 				}
 				String s = incDecOpList.get(incDecPointer);
-				idpw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",incDecCounter, s, processedIncDecOpList.get(i));
+				idpw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuIncDecOp"+incDecCounter, s, processedIncDecOpList.get(i));
 				incDecCounter++;
 			}
 
@@ -554,7 +574,7 @@ public class GenerateHtmlTable {
 			aapw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Arithmetic Assignment Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -565,7 +585,7 @@ public class GenerateHtmlTable {
 					arithAssignPointer++;
 				}
 				String s = arithOpL.get(arithAssignPointer);
-				aapw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",arithAssignCounter, s, arithOpP.get(i));
+				aapw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuAssignmentOp"+arithAssignCounter, s, arithOpP.get(i));
 				arithAssignCounter++;
 			}
 
@@ -613,7 +633,7 @@ public class GenerateHtmlTable {
 			bapw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Bitwise Assignment Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -624,7 +644,7 @@ public class GenerateHtmlTable {
 					bitwiseAssignPointer++;
 				}
 				String s = bitwiseOpL.get(bitwiseAssignPointer);
-				bapw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",bitwiseAssignCounter, s, bitwiseOpP.get(i));
+				bapw.format("<TR ALIGN=RIGHT><TD>%s<TD>%s<TD>%s%n","MuAssignmentOp"+bitwiseAssignCounter, s, bitwiseOpP.get(i));
 				bitwiseAssignCounter++;
 			}
 
@@ -672,7 +692,7 @@ public class GenerateHtmlTable {
 			sspw.println("<table id=\"t02\">"
 					+ "<tr><th colspan=3 style=\"text-align:center\">Shift Assignment Operator Mutants</th></tr>"
 					+ "<tr>\r\n" + 
-					"    <th style=\"text-align:center\">Index</th>\r\n" + 
+					"    <th style=\"text-align:center\">Filename</th>\r\n" + 
 					"    <th style=\"text-align:center\">Original Stamement</th> \r\n" + 
 					"    <th style=\"text-align:center\">Mutation</th>\r\n" + 
 					"  </tr>");
@@ -683,7 +703,7 @@ public class GenerateHtmlTable {
 					shiftAssignPointer++;
 				}
 				String s = shiftOpL.get(shiftAssignPointer);
-				sspw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n",shiftAssignCounter, s, shiftOpP.get(i));
+				sspw.format("<TR ALIGN=RIGHT><TD>%d<TD>%s<TD>%s%n","MuAssignmentOp"+shiftAssignCounter, s, shiftOpP.get(i));
 				shiftAssignCounter++;
 			}
 
